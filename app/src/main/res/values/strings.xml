@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AmazingCart</string>
+    <string name="search_title">Search</string>
+
+    <string name="menu_item_shop">Store Home</string>
+    <string name="menu_item_profile">Profile</string>
+    <string name="menu_item_cart">Cart</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="network_error">Problem has occurred when loading data. Check your network connection</string>
+
+    <string name="tab_item_explore">Explore</string>
+    <string name="tab_item_categories">Categories</string>
+    <string name="tab_item_featured">Featured</string>
+</resources>

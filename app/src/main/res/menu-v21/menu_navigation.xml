@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/actionExploreItem"
+        android:orderInCategory="1"
+        android:title="@string/menu_item_shop"
+        android:icon="@drawable/book_open"
+        />
+    <item
+        android:id="@+id/actionProfileItem"
+        android:orderInCategory="2"
+        android:title="@string/menu_item_profile"
+        android:icon="@drawable/account"
+        />
+    <item
+        android:id="@+id/actionCartItem"
+        android:orderInCategory="3"
+        android:title="@string/menu_item_cart"
+        android:icon="@drawable/cart"
+        />
+
+</menu>
