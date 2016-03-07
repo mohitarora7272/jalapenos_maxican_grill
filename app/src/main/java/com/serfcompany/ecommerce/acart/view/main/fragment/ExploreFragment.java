@@ -104,7 +104,7 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-//              test area
+//              test_cart_preview area
                 return null;
             }
         }.execute();

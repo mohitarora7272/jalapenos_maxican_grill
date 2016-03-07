@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,12 +29,14 @@ import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
 import com.serfcompany.ecommerce.acart.view.SignInActivity;
 import com.squareup.picasso.Picasso;
 
+import java.util.Map;
+
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by serfcompany on 01.03.16.
  */
-public class MyProfileFragment extends AbstractTabFragment{
+public class MyProfileFragment extends AbstractTabFragment implements OnClickListener{
     private static final int LAYOUT = R.layout.fragment_my_profile;
     private Profile profile;
     private SharedPreferences loginPrefs;
@@ -149,6 +152,12 @@ public class MyProfileFragment extends AbstractTabFragment{
             profileNickname.setText(user.getUserNickname());
             profileEmail.setText(user.getEmail());
 
+            Button changePassword = (Button) view.findViewById(R.id.profileChangePassword);
+            changePassword.setOnClickListener(this);
+            Button updateProfile = (Button) view.findViewById(R.id.profileUpdateButton);
+            updateProfile.setOnClickListener(this);
+            Button updateBilling = (Button) view.findViewById(R.id.billingUpdateButton);
+            updateBilling.setOnClickListener(this);
             BillingAddress billing = user.getBillingAddress();
 
             billingFirstName.setText(billing.getBillingFirstName());
@@ -171,5 +180,33 @@ public class MyProfileFragment extends AbstractTabFragment{
                     .error(R.drawable.account)
                     .into(profileAvatar);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.profileChangePassword :
+                Log.i("LOG", "Change password button was clicked");
+                break;
+            case R.id.profileUpdateButton :
+                Log.i("LOG", "Update profile button was clicked");
+                break;
+            case R.id.billingUpdateButton :
+                Log.i("LOG", "Billing update button was added");
+                break;
+            default: break;
+        }
+    }
+
+    private void changePassword(){
+
+    }
+
+    private void updateProfile(Map<String, String> map){
+
+    }
+
+    private void updateBilling(Map<String, String> map){
+
     }
 }

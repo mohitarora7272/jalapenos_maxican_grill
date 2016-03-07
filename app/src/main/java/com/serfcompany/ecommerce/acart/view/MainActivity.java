@@ -92,6 +92,14 @@ public class MainActivity extends AbstractActivity{
             editor.commit();
             Log.i("LOG", "Login preferences deleted");
         }
+
+        SharedPreferences cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor cartEditor = cartPrefs.edit();
+        if (!cartPrefs.getAll().isEmpty()) {
+            cartEditor.clear();
+            cartEditor.commit();
+            Log.i("LOG", "Cart preferences deleted");
+        }
         getBaseContext().getResources().flushLayoutCache();
         super.onDestroy();
     }

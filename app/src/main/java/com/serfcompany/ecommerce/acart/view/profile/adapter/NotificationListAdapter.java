@@ -1,16 +1,20 @@
 package com.serfcompany.ecommerce.acart.view.profile.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.model.notification.NotificationData;
 import com.serfcompany.ecommerce.acart.presenter.profile.MyNotificationFragmentPresenter;
+import com.serfcompany.ecommerce.acart.view.OrderActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +28,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     List<NotificationData> notificationList;
     private Context context;
     private MyNotificationFragmentPresenter fragmentPresenter;
+
 
     public NotificationListAdapter(Context context, MyNotificationFragmentPresenter fragmentPresenter){
         this.context = context;
@@ -40,10 +45,21 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     @Override
     public void onBindViewHolder(NotificationsViewHolder holder, int position) {
-        NotificationData data = getItem(position);
+        final NotificationData data = getItem(position);
+        final int orderID = Integer.valueOf(data.getObjectID());
         holder.daysAgo.setText(data.getAgo());
         holder.message.setText(data.getPushedMessage());
         holder.date.setText(data.getDateTime());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(context, OrderActivity.class);
+                intent.putExtra(Constants.ORDER_ID, String.valueOf(orderID));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
