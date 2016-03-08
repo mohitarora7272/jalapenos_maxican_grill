@@ -14,11 +14,16 @@
         <activity android:name=".view.MainActivity"
             android:label="MainActivity"
             android:launchMode="singleTop">
+
+        </activity>
+
+        <activity android:name=".view.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".view.ProductActivity"
             android:parentActivityName=".view.MainActivity">
 
@@ -42,7 +47,11 @@
 
         <activity android:name=".view.OrderActivity"
             android:parentActivityName=".view.ProfileActivity">
+        </activity>
 
+        <activity android:name=".view.CartActivity"
+            android:label="CART"
+            android:parentActivityName=".view.MainActivity">
         </activity>
 
     </application>

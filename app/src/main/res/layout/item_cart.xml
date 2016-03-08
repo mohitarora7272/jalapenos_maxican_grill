@@ -4,8 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="-1dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp">
 
@@ -13,7 +13,7 @@
         android:id="@+id/cartItemCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card:cardElevation="2dp"
+        card:cardElevation="1dp"
         card:cardUseCompatPadding="true">
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_height="match_parent">
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="70dp"
                     android:layout_weight="4"
                     android:id="@+id/cartItemImage" />
                 <LinearLayout

@@ -1,10 +1,13 @@
 package com.serfcompany.ecommerce.acart.presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
+import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.HTTPHolders.CheckCartHTTP;
 import com.serfcompany.ecommerce.acart.event.CheckCartEvent;
+import com.serfcompany.ecommerce.acart.event.ClearCartEvent;
 import com.serfcompany.ecommerce.acart.model.cart.Cart;
 import com.serfcompany.ecommerce.acart.parser.CartParser;
 
@@ -21,11 +24,12 @@ public class CartActivityPresenter extends AbstractPresenter{
     Cart cart;
     CheckCartEvent cartEvent;
 
+
     public CartActivityPresenter(Context context){
         this.context = context;
     }
 
-    public void checkCart(final String username, final String password, final Map<Integer, Integer> idQuant, final Map<String, String> coupons){
+    public void checkCart(final String username, final String password, final Map<String, String> idQuant, final Map<String, String> coupons){
         if (isNetworkAvailable(this.context)){
             new AsyncTask<Void, Void, Void>() {
                 @Override
@@ -43,6 +47,15 @@ public class CartActivityPresenter extends AbstractPresenter{
                 }
             }.execute();
         }
+    }
+
+    public void clearCart(){
+        SharedPreferences cartPreferences = context.getSharedPreferences(Constants.CART_PREFS, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = cartPreferences.edit();
+        editor.clear();
+        editor.apply();
+        ClearCartEvent cartEvent = new ClearCartEvent();
+        EventBus.getDefault().post(cartEvent);
     }
 
     public Cart getCart() {

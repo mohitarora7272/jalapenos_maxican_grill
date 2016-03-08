@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
@@ -102,7 +103,7 @@ public class ProductActivity extends AbstractActivity {
         for (int i = 0; i < quantity; i++){
             arr.add(i, i+1);
         }
-        ArrayAdapter<Integer> quantityAdapter = new ArrayAdapter<Integer>(this,
+        ArrayAdapter<Integer> quantityAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, arr);
         quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         quantitySpinner.setAdapter(quantityAdapter);
@@ -116,13 +117,18 @@ public class ProductActivity extends AbstractActivity {
                 String checkQuantity = cartPreferences.getString(String.valueOf(id), null);
                 if (cartPreferences.getString(Constants.CURRENCY, null) == null){
                     editor.putString(Constants.CURRENCY, product.getGeneral().getPricing().getCurrency());
+                    editor.commit();
                 }
                 if (checkQuantity != null){
                     editor.putString(String.valueOf(id), String.valueOf(Integer.parseInt(checkQuantity)+quatity));
+                    Toast.makeText(getBaseContext(), product.getGeneral().getTitle()+" was added to cart",
+                            Toast.LENGTH_SHORT).show();
                     Log.i("LOG", "Product #"+id+" quantity was increased to "+ checkQuantity +" + " + quatity);
                     editor.commit();
                 } else {
                     editor.putString(String.valueOf(id), String.valueOf(quatity));
+                    Toast.makeText(getBaseContext(), product.getGeneral().getTitle()+" was added to cart",
+                            Toast.LENGTH_SHORT).show();
                     Log.i("LOG", "Product #" + id + " was added with quantity " + quatity);
                     editor.commit();
                 }

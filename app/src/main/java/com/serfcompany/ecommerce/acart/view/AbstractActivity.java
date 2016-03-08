@@ -40,9 +40,8 @@ public abstract class AbstractActivity extends AppCompatActivity {
                                 showProfileActivity(viewPager);
                                 break;
                             case R.id.actionCartItem:
-//                                Intent intent = new Intent();
-//                                intent.setClass(getBaseContext(), CartActivity.class);
-//                                startActivity(intent);
+                                showCartActivity();
+                                break;
                         }
                         return false;
                     }
@@ -115,5 +114,9 @@ public abstract class AbstractActivity extends AppCompatActivity {
 
 
 
-    public void showCartActivity(){}
+    public void showCartActivity(){
+        Intent intent = new Intent();
+        intent.setClass(getBaseContext(), CartActivity.class);
+        startActivity(intent);
+    }
 }

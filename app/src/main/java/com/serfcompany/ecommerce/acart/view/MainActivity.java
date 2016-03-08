@@ -83,26 +83,26 @@ public class MainActivity extends AbstractActivity{
 
 
 
-    @Override
-    protected void onDestroy() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.LOGIN_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        if (!sharedPreferences.getBoolean(Constants.REMEMBER, false)){
-            editor.clear();
-            editor.commit();
-            Log.i("LOG", "Login preferences deleted");
-        }
 
-        SharedPreferences cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor cartEditor = cartPrefs.edit();
-        if (!cartPrefs.getAll().isEmpty()) {
-            cartEditor.clear();
-            cartEditor.commit();
-            Log.i("LOG", "Cart preferences deleted");
-        }
-        getBaseContext().getResources().flushLayoutCache();
-        super.onDestroy();
-    }
+//    @Override
+//    protected void onDestroy() {
+//        SharedPreferences cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
+//        SharedPreferences.Editor cartEditor = cartPrefs.edit();
+//        cartEditor.clear();
+//        cartEditor.apply();
+//
+//        SharedPreferences sharedPreferences = getSharedPreferences(Constants.LOGIN_PREFS, MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        if (!sharedPreferences.getBoolean(Constants.REMEMBER, false)){
+//            editor.clear();
+//            editor.apply();
+//            Log.i("LOG", "Login preferences deleted");
+//        }
+//        Log.i("LOG", "Cart preferences deleted");
+//
+//        getBaseContext().getResources().flushLayoutCache();
+//        super.onDestroy();
+//    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

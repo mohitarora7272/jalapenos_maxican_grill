@@ -21,7 +21,7 @@ public class CheckCartHTTP {
             "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=cart-api";
 
     public String loadCart(String username, String password,
-                            Map<Integer, Integer> idQuantityMap, Map<String, String> couponCode){
+                            Map<String, String> idQuantityMap, Map<String, String> couponCode){
         try {
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -60,10 +60,10 @@ public class CheckCartHTTP {
         return null;
     }
 
-    private String getProdIDJsonFromMap (Map<Integer, Integer> map){
+    private String getProdIDJsonFromMap (Map<String, String> map){
         StringBuilder sb = new StringBuilder();
         sb.append("{");
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()){
+        for (Map.Entry entry : map.entrySet()){
             sb.append("\"");
             sb.append(entry.getKey());
             sb.append("\":\"");
