@@ -53,7 +53,10 @@
             android:label="CART"
             android:parentActivityName=".view.MainActivity">
         </activity>
-
+        
+        <activity android:name=".view.CartBillingActivity"
+            android:parentActivityName=".view.CartActivity">
+        </activity>
     </application>
 
 </manifest>

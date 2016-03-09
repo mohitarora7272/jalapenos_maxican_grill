@@ -33,16 +33,22 @@ public class CategoryFragmentPresenter extends AbstractPresenter {
 
                 @Override
                 protected Void doInBackground(Void... params) {
-                    GetCategoriesHTTP con = new GetCategoriesHTTP();
-                    CategoriesParser parser = new CategoriesParser();
-                    setCategories(parser.parseCategories(con.loadCategories()));
-                    getDataEvent = new CategoryFragmentGetDataEvent(getCategories());
+                    try {
+                        GetCategoriesHTTP con = new GetCategoriesHTTP();
+                        CategoriesParser parser = new CategoriesParser();
+                        setCategories(parser.parseCategories(con.loadCategories()));
+                        getDataEvent = new CategoryFragmentGetDataEvent(getCategories());
+                    } catch (Exception e){
+                        EventBus.getDefault().post(new NetworkConnectionProblemEvent());
+                    }
                     return null;
                 }
 
                 @Override
                 protected void onPostExecute(Void aVoid) {
-                    EventBus.getDefault().post(getDataEvent);
+                    if (getDataEvent != null) {
+                        EventBus.getDefault().post(getDataEvent);
+                    }
                 }
             }.execute();
         } else {

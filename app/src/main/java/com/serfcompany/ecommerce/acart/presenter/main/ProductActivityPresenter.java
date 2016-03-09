@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetProductByIdHTTP;
+import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.event.ProductByIdEvent;
 import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.parser.ProductsParser;
@@ -28,16 +29,22 @@ public class ProductActivityPresenter {
             ProductByIdEvent productEvent;
             @Override
             protected Void doInBackground(Void... params) {
-                GetProductByIdHTTP con = new GetProductByIdHTTP();
-                SingleProductParser parser = new SingleProductParser();
-                product = parser.parseSingleProduct(con.loadProductByID(id));
-                productEvent = new ProductByIdEvent(product);
+                try {
+                    GetProductByIdHTTP con = new GetProductByIdHTTP();
+                    SingleProductParser parser = new SingleProductParser();
+                    product = parser.parseSingleProduct(con.loadProductByID(id));
+                    productEvent = new ProductByIdEvent(product);
+                } catch (Exception e){
+                    EventBus.getDefault().post(new NetworkConnectionProblemEvent());
+                }
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                EventBus.getDefault().post(productEvent);
+                if (productEvent != null) {
+                    EventBus.getDefault().post(productEvent);
+                }
             }
         }.execute();
     }

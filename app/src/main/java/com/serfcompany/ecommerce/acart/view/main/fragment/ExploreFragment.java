@@ -30,6 +30,7 @@ import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
 import com.serfcompany.ecommerce.acart.view.main.adapter.ProductsListAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -130,15 +131,22 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
 
     // EventBus Subscribe
     public void onEvent(ExploreFragmentGetDatasEvent getDatasEvent){
-        if (getDatasEvent != null && getDatasEvent.getDatas() != null && getDatasEvent.getDatas().size() > 0) {
-            mAdapter.setDatas(getDatasEvent.getDatas());
-            mAdapter.notifyDataSetChanged();
+        try {
+            if (getDatasEvent != null && getDatasEvent.getDatas() != null && getDatasEvent.getDatas().size() > 0) {
+                mAdapter.setDatas(getDatasEvent.getDatas());
+                mAdapter.notifyDataSetChanged();
+                loadingFrame.setVisibility(View.GONE);
+                FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
+                fl.setVisibility(View.GONE);
+
+                modelForFilter.clear();
+                modelForFilter.addAll(getDatasEvent.getDatas());
+            }
+        } catch (Exception e){
+            mAdapter.setDatas(Collections.<Product>emptyList());
             loadingFrame.setVisibility(View.GONE);
             FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
-            fl.setVisibility(View.GONE);
-
-            modelForFilter.clear();
-            modelForFilter.addAll(getDatasEvent.getDatas());
+            fl.setVisibility(View.VISIBLE);
         }
     }
 

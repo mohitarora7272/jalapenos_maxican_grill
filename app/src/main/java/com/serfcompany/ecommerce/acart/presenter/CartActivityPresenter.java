@@ -58,6 +58,10 @@ public class CartActivityPresenter extends AbstractPresenter{
         EventBus.getDefault().post(cartEvent);
     }
 
+    public void loadProduct(){
+
+    }
+
     public Cart getCart() {
         return cart;
     }

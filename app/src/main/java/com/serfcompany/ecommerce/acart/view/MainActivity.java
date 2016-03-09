@@ -18,6 +18,8 @@ import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.view.main.adapter.TabMainAdapter;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * Created by serfcompany on 29.02.16.
  */

@@ -221,6 +221,20 @@ public class SignUpActivity extends AbstractActivity{
         }
     }
 
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+        super.onResume();
+    }
+
     private class OnSignUpClick implements View.OnClickListener {
 
         @Override

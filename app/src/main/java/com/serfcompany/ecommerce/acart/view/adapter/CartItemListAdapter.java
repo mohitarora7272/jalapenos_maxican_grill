@@ -1,6 +1,7 @@
 package com.serfcompany.ecommerce.acart.view.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -11,12 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.HTTPHolders.GetProductByIdHTTP;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.model.cart.CartItem;
+import com.serfcompany.ecommerce.acart.model.product.Product;
+import com.serfcompany.ecommerce.acart.parser.SingleProductParser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * Created by serfcompany on 08.03.16.
@@ -24,6 +27,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapter.CartItemViewHolder>{
 
     private List<CartItem> cartItems;
+    private Product product;
     private Context context;
 
     public CartItemListAdapter(Context context, List<CartItem> cartItems){
@@ -39,22 +43,42 @@ public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapte
     }
 
     @Override
-    public void onBindViewHolder(CartItemViewHolder holder, int position) {
-        CartItem item = cartItems.get(position);
-        holder.productTitle.setText(String.valueOf(item.getId()));
+    public void onBindViewHolder(final CartItemViewHolder holder, int position) {
+        final CartItem item = cartItems.get(position);
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    GetProductByIdHTTP con = new GetProductByIdHTTP();
+                    SingleProductParser parser = new SingleProductParser();
+                    product = parser.parseSingleProduct(con.loadProductByID(item.getId()));
+                } catch (Exception e){
+
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                holder.productTitle.setText(String.valueOf(product.getGeneral().getTitle()));
+                Picasso.with(context)
+                        .load(product.getProductGallery().getFeaturedImages())
+                        .fit()
+                        .centerInside()
+                        .placeholder(R.drawable.empty_photo)
+                        .error(R.drawable.default_product)
+                        .into(holder.productImage);
+            }
+        }.execute();
+
         String currency = context.getSharedPreferences(
                 Constants.CART_PREFS, Context.MODE_PRIVATE).getString(Constants.CURRENCY, "");
-        holder.productPrice.setText(Html.fromHtml(currency+" "+item.getProductPrice()));
+        holder.productPrice.setText(Html.fromHtml(currency + " " + item.getProductPrice()));
         holder.productQuantity.setText(item.getQuantity());
         holder.itemTotalPrice.setText(Html.fromHtml(currency + " " + item.getTotalPrice()));
 
-//        Picasso.with(context)
-//                .load("")
-//                .fit()
-//                .centerInside()
-//                .placeholder(R.drawable.empty_photo)
-//                .error(R.drawable.default_product)
-//                .into(holder.productImage);
+
     }
 
     @Override

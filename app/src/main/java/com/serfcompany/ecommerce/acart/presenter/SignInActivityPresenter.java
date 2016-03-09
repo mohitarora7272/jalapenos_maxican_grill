@@ -43,7 +43,7 @@ public class SignInActivityPresenter {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                if (getProfile() == null){
+                if (getProfile().getStatus() != 0){
                     failureEvent = new SignInFailureEvent("Invalid login/email/password");
                     EventBus.getDefault().post(failureEvent);
                     Log.i("LOG", "SignIn failure");

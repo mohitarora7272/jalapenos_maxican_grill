@@ -42,10 +42,14 @@ public class FeaturedFragmentPresenter extends AbstractPresenter implements IExp
 
                 @Override
                 protected Void doInBackground(Void... params) {
-                    GetFeaturedProductsHTTP con = new GetFeaturedProductsHTTP();
-                    ProductsParser parser = new ProductsParser();
-                    setDatas(parser.parseProducts(con.loadFeatured()));
-                    getDataEvent = new FeaturedFragmentGetDataEvent(getDatas());
+                    try {
+                        GetFeaturedProductsHTTP con = new GetFeaturedProductsHTTP();
+                        ProductsParser parser = new ProductsParser();
+                        setDatas(parser.parseProducts(con.loadFeatured()));
+                        getDataEvent = new FeaturedFragmentGetDataEvent(getDatas());
+                    } catch (Exception e){
+
+                    }
                     return null;
                 }
 

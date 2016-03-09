@@ -42,6 +42,7 @@ public class GetOrderByIdHTTP {
                 result.append(line);
             }
             rd.close();
+            Log.i("LOG", result.toString());
             return result.toString();
         } catch (MalformedURLException e) {
             e.printStackTrace();

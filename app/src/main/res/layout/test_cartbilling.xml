@@ -2,6 +2,7 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/cartBillingDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -33,19 +34,25 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"/>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/billingFirstNameLayout"
                         android:layout_weight="1">
-                        <EditText
+                        <android.support.v7.widget.AppCompatEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="First name"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="Oleg"
-                            android:id="@+id/billingFirstName"/>
+                            android:id="@+id/billingFirstName"
+                            android:nextFocusUp="@id/billingFirstName"
+                            android:nextFocusLeft="@id/billingFirstName"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -58,7 +65,6 @@
                             android:hint="Last name"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="Drozdov"
                             android:id="@+id/billingLastName"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -76,7 +82,6 @@
                             android:hint="Company"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="Foocompany LTD"
                             android:id="@+id/billingCompanyName"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -94,7 +99,6 @@
                             android:hint="Address Line 1"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="p-t. Ludwiga Svobodi 40b"
                             android:id="@+id/billingAddress1Text"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -129,7 +133,6 @@
                             android:hint="Post code"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="630015"
                             android:id="@+id/billingPostCodeText"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -143,7 +146,6 @@
                             android:hint="City"
                             android:textSize="16sp"
                             android:singleLine="true"
-                            android:text="Kharkiv"
                             android:id="@+id/billingCityText"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -160,7 +162,6 @@
                             android:layout_height="wrap_content"
                             android:hint="Country"
                             android:singleLine="true"
-                            android:text="Ukraine"
                             android:textSize="16sp"
                             android:id="@+id/billingCountryText"/>
                     </android.support.design.widget.TextInputLayout>
@@ -196,7 +197,6 @@
                             android:hint="Phone"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="+380 95 198 23 12"
                             android:id="@+id/billingPhoneText"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -210,15 +210,16 @@
                             android:hint="Email"
                             android:textSize="16sp"
                             android:singleLine="true"
-                            android:text="oleg.drozdov@gmail.com"
-                            android:id="@+id/billingEmailText"/>
+                            android:id="@+id/billingEmailText"
+                            android:inputType="textEmailAddress"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="NEXT"
-                    android:textColor="@color/colorTextIcons"/>
+                    android:textColor="@color/colorTextIcons"
+                    android:layout_marginBottom="16dp"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

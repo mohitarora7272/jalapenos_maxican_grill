@@ -41,6 +41,8 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     private Profile profile;
     private SharedPreferences loginPrefs;
     private SharedPreferences.Editor loginPrefsEditor;
+    private SharedPreferences cartPrefs;
+    private SharedPreferences.Editor cartPrefsEditor;
 
     public static MyProfileFragment getInstance(Context context){
         Bundle args = new Bundle();
@@ -58,6 +60,10 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
         loginPrefs = inflater.getContext()
                 .getSharedPreferences(Constants.LOGIN_PREFS, Context.MODE_PRIVATE);
         loginPrefsEditor = loginPrefs.edit();
+        cartPrefs = inflater.getContext()
+                .getSharedPreferences(Constants.CART_PREFS, Context.MODE_PRIVATE);
+        cartPrefsEditor = cartPrefs.edit();
+
         return view;
     }
 
@@ -94,8 +100,10 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.actionLogout :
+                cartPrefsEditor.clear();
+                cartPrefsEditor.apply();
                 loginPrefsEditor.clear();
-                loginPrefsEditor.commit();
+                loginPrefsEditor.apply();
                 Intent intent = new Intent();
                 intent.setClass(getContext(), SignInActivity.class);
                 getActivity().finish();

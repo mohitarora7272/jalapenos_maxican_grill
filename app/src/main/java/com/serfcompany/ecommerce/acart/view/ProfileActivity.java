@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.view.profile.adapter.TabProfileAdapter;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * Created by serfcompany on 01.03.16.
  */

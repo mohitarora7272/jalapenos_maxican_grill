@@ -13,8 +13,8 @@ import java.net.URL;
  */
 public class GetProductByIdHTTP {
     String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=single-product&id=";
-    public String loadProductByID(int id){
-        try {
+    public String loadProductByID(int id) throws IOException{
+
             URL url = new URL(urlString+id);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -27,13 +27,5 @@ public class GetProductByIdHTTP {
             }
             rd.close();
             return result.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

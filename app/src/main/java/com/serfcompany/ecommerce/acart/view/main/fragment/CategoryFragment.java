@@ -66,8 +66,14 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
     }
 
     public void onEvent(CategoryFragmentGetDataEvent getDataEvent){
-        if (getDataEvent!=null && getDataEvent.getDatas()!=null && getDataEvent.getDatas().size()>0){
-            mAdapter.setDatas(getDataEvent.getDatas());
+        try {
+            if (getDataEvent != null && getDataEvent.getDatas() != null && getDataEvent.getDatas().size() > 0) {
+                mAdapter.setDatas(getDataEvent.getDatas());
+            }
+        }catch (Exception e){
+            mAdapter.setDatas(Collections.<Category>emptyList());
+            FrameLayout fl = (FrameLayout) view.findViewById(R.id.categoryConnectionError);
+            fl.setVisibility(View.VISIBLE);
         }
     }
 

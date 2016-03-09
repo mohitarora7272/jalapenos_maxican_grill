@@ -13,8 +13,7 @@ import java.net.URL;
  */
 public class GetFeaturedProductsHTTP {
     String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=get-featured-product";
-    public String loadFeatured(){
-        try {
+    public String loadFeatured() throws IOException{
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -27,13 +26,5 @@ public class GetFeaturedProductsHTTP {
             }
             rd.close();
             return result.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

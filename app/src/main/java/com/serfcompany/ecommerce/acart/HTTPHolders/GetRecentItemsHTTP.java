@@ -12,12 +12,12 @@ public class GetRecentItemsHTTP {
 
     String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=get-recent-items";
 
-    public String loadProducts(){
+    public String loadProducts() throws IOException {
         return loadProducts(1);
     }
 
-    public String loadProducts(int currentPage){
-        try {
+    public String loadProducts(int currentPage) throws IOException {
+
             URL url = new URL(urlString+"&current_page="+currentPage);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -30,13 +30,5 @@ public class GetRecentItemsHTTP {
             }
             rd.close();
             return result.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

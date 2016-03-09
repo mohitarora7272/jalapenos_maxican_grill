@@ -20,6 +20,7 @@ import com.serfcompany.ecommerce.acart.model.orders.MyOrder;
 import com.serfcompany.ecommerce.acart.presenter.OrderActivityPresenter;
 import com.serfcompany.ecommerce.acart.view.adapter.OrderItemListAdapter;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -123,10 +124,10 @@ public class OrderActivity extends AbstractActivity{
         OrderItemListAdapter adapter = new OrderItemListAdapter(this, orderItems);
         orderRecView.getLayoutParams().height = (orderItems.size()+1)*80;
         orderRecView.setAdapter(adapter);
-        orderSubtotal.setText(Html.fromHtml(orderCurrency + String.valueOf(order.getSubtotalWithTax())));
-        orderShipping.setText(Html.fromHtml(orderCurrency + String.valueOf(order.getShippingCost())));
-        orderDiscount.setText(Html.fromHtml(orderCurrency + String.valueOf(order.getDiscountTotal())));
-        orderTotal.setText(Html.fromHtml(orderCurrency + String.valueOf(order.getOrderTotal())));
+        orderSubtotal.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getSubtotalWithTax()))));
+        orderShipping.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getShippingCost()))));
+        orderDiscount.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getDiscountTotal()))));
+        orderTotal.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getOrderTotal()))));
     }
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.orderToolbar);
@@ -152,5 +153,18 @@ public class OrderActivity extends AbstractActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+    @Override
+    protected void onResume() {
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+        super.onResume();
     }
 }

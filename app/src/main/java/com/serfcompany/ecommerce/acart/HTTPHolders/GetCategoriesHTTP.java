@@ -25,8 +25,7 @@ public class GetCategoriesHTTP {
     private static final String urlString =
             "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=product-categories";
 
-    public String loadCategories() {
-        try{
+    public String loadCategories() throws IOException {
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -40,13 +39,6 @@ public class GetCategoriesHTTP {
             }
             rd.close();
             return result.toString();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+
     }
 }

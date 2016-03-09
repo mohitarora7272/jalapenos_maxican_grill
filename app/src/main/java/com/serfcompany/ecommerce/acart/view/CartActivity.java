@@ -1,15 +1,13 @@
 package com.serfcompany.ecommerce.acart.view;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.AvoidXfermode;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,8 +25,7 @@ import com.serfcompany.ecommerce.acart.model.cart.CartItem;
 import com.serfcompany.ecommerce.acart.presenter.CartActivityPresenter;
 import com.serfcompany.ecommerce.acart.view.adapter.CartItemListAdapter;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,8 +46,11 @@ public class CartActivity extends AbstractActivity{
     private TextView total, subtotal, discount, tax;
     private EditText couponCode;
     private FrameLayout noItemsLayout;
+    private FrameLayout notAuthorized;
+    private FrameLayout cartContentLayout;
     private FrameLayout couponStatusLayout;
     private CartActivityPresenter presenter;
+    Map<String, String> products;
     CartItemListAdapter adapter;
 
 
@@ -68,7 +68,7 @@ public class CartActivity extends AbstractActivity{
         drawerLayout = (DrawerLayout) findViewById(R.id.cart_drawer_layout);
         cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
         loginPrefs = getSharedPreferences(Constants.LOGIN_PREFS, MODE_PRIVATE);
-        Map<String, String> products = (Map<String, String>) cartPrefs.getAll();
+        products = (Map<String, String>) cartPrefs.getAll();
         products.remove(Constants.CURRENCY);
 
         presenter = new CartActivityPresenter(this);
@@ -91,9 +91,9 @@ public class CartActivity extends AbstractActivity{
 
 
     public void onEvent(CheckCartEvent checkCartEvent){
-        if (checkCartEvent != null && checkCartEvent.getCart() != null){
+        if (checkCartEvent != null){
             fillFields(checkCartEvent.getCart());
-            adapter.notifyDataSetChanged();
+
         }
     }
 
@@ -104,23 +104,85 @@ public class CartActivity extends AbstractActivity{
     }
 
     public void fillFields(Cart cart){
-        List<CartItem> cartItems = cart.getCart();
-        recView = (RecyclerView) findViewById(R.id.cartItemRecyclerView);
-        recView.setLayoutManager(new LinearLayoutManager(this));
-        recView.getLayoutParams().height = (cartItems.size()+1)*80;
-        adapter = new CartItemListAdapter(this, cart.getCart());
-        recView.setAdapter(adapter);
 
-        total = (TextView) findViewById(R.id.cartCartTotal);
-        subtotal = (TextView) findViewById(R.id.cartSubtotal);
-        discount = (TextView) findViewById(R.id.cartDiscount);
-        tax = (TextView) findViewById(R.id.cartTotalTax);
+        notAuthorized = (FrameLayout) findViewById(R.id.cartNotAuthorisedFrame);
+        cartContentLayout = (FrameLayout) findViewById(R.id.cartContentFrame);
+        noItemsLayout = (FrameLayout) findViewById(R.id.cartNoProductsInCart);
 
-        String currency = cartPrefs.getString(Constants.CURRENCY, "");
-        total.setText(Html.fromHtml(currency+" "+cart.getGrandTotal()));
-        subtotal.setText(Html.fromHtml(currency + " " + cart.getCartSubtotal()));
-        discount.setText(Html.fromHtml(currency+" "+cart.getDiscount()));
-        tax.setText(Html.fromHtml(currency+" "+cart.getCartTaxTotal()));
+        if (!loginPrefs.getBoolean(Constants.AUTHORISED, false)){
+            notAuthorized.setVisibility(View.VISIBLE);
+            noItemsLayout.setVisibility(View.GONE);
+            cartContentLayout.setVisibility(View.GONE);
+        } else {
+            if (cart.getCart() == null || cart.getCart().size() == 0){
+                noItemsLayout.setVisibility(View.VISIBLE);
+                cartContentLayout.setVisibility(View.GONE);
+            } else {
+                notAuthorized.setVisibility(View.GONE);
+                noItemsLayout.setVisibility(View.GONE);
+                cartContentLayout.setVisibility(View.VISIBLE);
+                List<CartItem> cartItems = cart.getCart();
+                recView = (RecyclerView) findViewById(R.id.cartItemRecyclerView);
+                recView.setLayoutManager(new LinearLayoutManager(this));
+                recView.getLayoutParams().height = (cartItems.size()+1)*80;
+                adapter = new CartItemListAdapter(this, cart.getCart());
+                adapter.notifyDataSetChanged();
+                recView.setAdapter(adapter);
+                total = (TextView) findViewById(R.id.cartCartTotal);
+                subtotal = (TextView) findViewById(R.id.cartSubtotal);
+                discount = (TextView) findViewById(R.id.cartDiscount);
+                tax = (TextView) findViewById(R.id.cartTotalTax);
+
+                String currency = cartPrefs.getString(Constants.CURRENCY, "");
+                total.setText(Html.fromHtml(currency + " " + cart.getGrandTotal()));
+                subtotal.setText(Html.fromHtml(currency + " " + cart.getCartSubtotal()));
+                discount.setText(Html.fromHtml(currency+" "+cart.getDiscount()));
+                tax.setText(Html.fromHtml(currency + " " + cart.getCartTaxTotal()));
+            }
+        }
+
+        TextView signIn = (TextView) findViewById(R.id.cartPleaseSignIn);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getBaseContext(), SignInActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button next = (Button) findViewById(R.id.cartNextToBillingButton);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getBaseContext(), CartBillingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final EditText couponText = (EditText) findViewById(R.id.cartCouponCode);
+        Button applyCoupon = (Button) findViewById(R.id.cartApplyCouponButton);
+        applyCoupon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> coupon = new HashMap<String, String>();
+                coupon.put(String.valueOf(couponText.getText().hashCode()), String.valueOf(couponText.getText()));
+                coupon.put("", "");
+                presenter.checkCart(loginPrefs.getString(Constants.USERNAME, null),
+                        loginPrefs.getString(Constants.PASSWORD, null), products, coupon);
+            }
+        });
+
+        Button launchButton = (Button) findViewById(R.id.cartLaunchProducts);
+        launchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(getBaseContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -148,5 +210,18 @@ public class CartActivity extends AbstractActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+    @Override
+    protected void onResume() {
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+        super.onResume();
     }
 }

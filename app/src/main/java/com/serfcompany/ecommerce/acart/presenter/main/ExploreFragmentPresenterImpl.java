@@ -42,18 +42,22 @@ public class ExploreFragmentPresenterImpl extends AbstractPresenter implements I
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... params) {
-                    GetRecentItemsHTTP con = new GetRecentItemsHTTP();
-                    ProductsParser parser = new ProductsParser();
-                    setDatas(parser.parseProducts(con.loadProducts()));
-
+                    try {
+                        GetRecentItemsHTTP con = new GetRecentItemsHTTP();
+                        ProductsParser parser = new ProductsParser();
+                        setDatas(parser.parseProducts(con.loadProducts()));
+                        getDatasEvent = new ExploreFragmentGetDatasEvent(getDatas());
+                    } catch (Exception e){
+                        EventBus.getDefault().post(new NetworkConnectionProblemEvent());
+                    }
                     return null;
                 }
 
                 @Override
                 protected void onPostExecute(Void aVoid) {
-                    getDatasEvent = new ExploreFragmentGetDatasEvent(getDatas());
-                    EventBus.getDefault().post(getDatasEvent);
-
+                    if (getDatasEvent != null) {
+                        EventBus.getDefault().post(getDatasEvent);
+                    }
                 }
             }.execute();
         } else {

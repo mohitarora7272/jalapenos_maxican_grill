@@ -174,4 +174,17 @@ public class ProductActivity extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+    @Override
+    protected void onResume() {
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+        super.onResume();
+    }
 }
