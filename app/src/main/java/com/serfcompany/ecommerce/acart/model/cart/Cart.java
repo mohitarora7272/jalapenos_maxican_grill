@@ -11,7 +11,7 @@ public class Cart {
 
     @SerializedName("cart")
     @Expose
-    private List<CartItem> cart = new ArrayList<CartItem>();
+    private List<Item> cart = new ArrayList<Item>();
     @SerializedName("coupon")
     @Expose
     private Coupon coupon;
@@ -57,7 +57,7 @@ public class Cart {
      * @return
      *     The cart
      */
-    public List<CartItem> getCart() {
+    public List<Item> getCart() {
         return cart;
     }
 
@@ -66,7 +66,7 @@ public class Cart {
      * @param cart
      *     The cart
      */
-    public void setCart(List<CartItem> cart) {
+    public void setCart(List<Item> cart) {
         this.cart = cart;
     }
 

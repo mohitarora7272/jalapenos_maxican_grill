@@ -3,6 +3,7 @@ package com.serfcompany.ecommerce.acart.view.main.fragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import com.serfcompany.ecommerce.acart.HTTPHolders.GetNotificationsHTTP;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetDatasEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
+import com.serfcompany.ecommerce.acart.event.ScreenRotateEvent;
 import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.presenter.main.ExploreFragmentPresenterImpl;
 import com.serfcompany.ecommerce.acart.presenter.main.IExploreFragmentPresenter;
@@ -34,6 +36,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
+import de.greenrobot.event.SubscriberExceptionEvent;
 
 public class ExploreFragment extends AbstractTabFragment implements IFragmentView, android.support.v7.widget.SearchView.OnQueryTextListener{
 
@@ -82,15 +85,21 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         //init
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
         iFragmentPresenter = new ExploreFragmentPresenterImpl(this);
-        if (mAdapter == null){
-            Log.i("LOG", "Loading new data to explore");
-            modelForFilter = new ArrayList<>();
-            iFragmentPresenter.loadDatas();
-            mAdapter = new ProductsListAdapter(getContext(), iFragmentPresenter);
-        } else {
-            loadingFrame.setVisibility(View.GONE);
-            Log.i("LOG", "Loading old data to explore");
-        }
+
+//        if (savedInstanceState != null){
+//            Log.i("LOG", "Loading old data to explore when screen rotating");
+//            loadingFrame.setVisibility(View.GONE);
+//        }else {
+            if (mAdapter == null) {
+                Log.i("LOG", "Loading new data to explore");
+                modelForFilter = new ArrayList<>();
+                iFragmentPresenter.loadDatas();
+                mAdapter = new ProductsListAdapter(getContext(), iFragmentPresenter);
+            } else {
+                loadingFrame.setVisibility(View.GONE);
+                Log.i("LOG", "Loading old data to explore");
+            }
+//        }
         rView.setAdapter(mAdapter);
 
 
@@ -127,6 +136,22 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
                 return false;
             }
         });
+    }
+
+    public void onEvent(SubscriberExceptionEvent exceptionEvent){
+        mAdapter.setDatas(Collections.<Product>emptyList());
+        loadingFrame.setVisibility(View.GONE);
+        FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
+        fl.setVisibility(View.VISIBLE);
+    }
+
+    // EventBus Subscribe
+    public void onEvent(ScreenRotateEvent getDatasEvent){
+        mAdapter.setDatas(getDatasEvent.getDatas());
+        mAdapter.notifyDataSetChanged();
+        loadingFrame.setVisibility(View.GONE);
+        FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
+        fl.setVisibility(View.GONE);
     }
 
     // EventBus Subscribe
@@ -191,11 +216,14 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
             iFragmentPresenter.loadSearchData(query);
         }
         InputMethodManager inputManager =
-                (InputMethodManager) context.
+                (InputMethodManager) getActivity().
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputManager.hideSoftInputFromWindow(
-                getActivity().getCurrentFocus().getWindowToken(),
-                InputMethodManager.HIDE_NOT_ALWAYS);
+        View focus = getActivity().getCurrentFocus();
+        if (inputManager != null && focus != null) {
+            inputManager.hideSoftInputFromWindow(
+                    focus.getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
         return true;
     }
 
@@ -208,5 +236,9 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
 
     }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("saved", true);
+    }
 }

@@ -6,6 +6,7 @@ import com.serfcompany.ecommerce.acart.HTTPHolders.GetProductByKeywordHTTP;
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetRecentItemsHTTP;
 import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetDatasEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
+import com.serfcompany.ecommerce.acart.event.ScreenRotateEvent;
 import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.parser.ProductsParser;
 import com.serfcompany.ecommerce.acart.presenter.AbstractPresenter;
@@ -91,6 +92,12 @@ public class ExploreFragmentPresenterImpl extends AbstractPresenter implements I
             NetworkConnectionProblemEvent networkEvent = new NetworkConnectionProblemEvent();
             EventBus.getDefault().post(networkEvent);
         }
+    }
+
+    @Override
+    public void returnSavedDatas(){
+        ScreenRotateEvent screenRotateEvent = new ScreenRotateEvent(getDatas());
+        EventBus.getDefault().post(screenRotateEvent);
     }
 
     @Override

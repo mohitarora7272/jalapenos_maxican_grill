@@ -34,6 +34,11 @@ public class FeaturedFragmentPresenter extends AbstractPresenter implements IExp
     }
 
     @Override
+    public void returnSavedDatas() {
+
+    }
+
+    @Override
     public void loadDatas(){
         clearDatas();
         if (this.isNetworkAvailable(fragmentView.getActivity().getBaseContext())) {

@@ -12,4 +12,5 @@ public interface IExploreFragmentPresenter {
     List<Product> getData();
     void loadSearchData(String keyword);
     void clearDatas();
+    public void returnSavedDatas();
 }

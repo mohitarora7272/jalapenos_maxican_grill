@@ -4,7 +4,7 @@ package com.serfcompany.ecommerce.acart.model.cart;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CartItem {
+public class Item {
 
     @SerializedName("id")
     @Expose

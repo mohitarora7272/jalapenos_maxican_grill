@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".view.MainActivity"
             android:label="MainActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize">
 
         </activity>
 
@@ -25,7 +26,8 @@
         </activity>
 
         <activity android:name=".view.ProductActivity"
-            android:parentActivityName=".view.MainActivity">
+            android:parentActivityName=".view.MainActivity"
+            android:configChanges="orientation|screenSize">
 
         </activity>
 
@@ -41,7 +43,8 @@
 
         <activity android:name=".view.ProfileActivity"
             android:label="PROFILE"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:configChanges="orientation|screenSize">
 
         </activity>
 

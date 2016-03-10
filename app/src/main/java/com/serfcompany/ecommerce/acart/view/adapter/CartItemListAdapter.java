@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetProductByIdHTTP;
 import com.serfcompany.ecommerce.acart.R;
-import com.serfcompany.ecommerce.acart.model.cart.CartItem;
+import com.serfcompany.ecommerce.acart.model.cart.Item;
 import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.parser.SingleProductParser;
 import com.squareup.picasso.Picasso;
@@ -26,11 +26,11 @@ import java.util.List;
  */
 public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapter.CartItemViewHolder>{
 
-    private List<CartItem> cartItems;
+    private List<Item> cartItems;
     private Product product;
     private Context context;
 
-    public CartItemListAdapter(Context context, List<CartItem> cartItems){
+    public CartItemListAdapter(Context context, List<Item> cartItems){
         this.context = context;
         this.cartItems = cartItems;
     }
@@ -44,7 +44,7 @@ public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapte
 
     @Override
     public void onBindViewHolder(final CartItemViewHolder holder, int position) {
-        final CartItem item = cartItems.get(position);
+        final Item item = cartItems.get(position);
 
         new AsyncTask<Void, Void, Void>() {
             @Override

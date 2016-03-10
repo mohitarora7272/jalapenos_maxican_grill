@@ -58,6 +58,7 @@
                         android:layout_height="200dp"
                         android:id="@+id/productActivityImage"
                         android:layout_gravity="top"
+                        android:background="@android:color/white"
                         />
                 </RelativeLayout>
                 <LinearLayout
@@ -93,7 +94,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/productPageTitle"
-                        android:text="Amazing Cart Brown Skin for Native IOS"
                         android:textSize="20dp"
                         android:textAlignment="center"/>
 
@@ -108,7 +108,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/productsInStock"
-                        android:text="51 in stock"
                         android:textSize="16sp"/>
                 </LinearLayout>
                 <LinearLayout

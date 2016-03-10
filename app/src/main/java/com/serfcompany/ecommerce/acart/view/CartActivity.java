@@ -21,10 +21,11 @@ import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.event.CheckCartEvent;
 import com.serfcompany.ecommerce.acart.event.ClearCartEvent;
 import com.serfcompany.ecommerce.acart.model.cart.Cart;
-import com.serfcompany.ecommerce.acart.model.cart.CartItem;
+import com.serfcompany.ecommerce.acart.model.cart.Item;
 import com.serfcompany.ecommerce.acart.presenter.CartActivityPresenter;
 import com.serfcompany.ecommerce.acart.view.adapter.CartItemListAdapter;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -121,7 +122,7 @@ public class CartActivity extends AbstractActivity{
                 notAuthorized.setVisibility(View.GONE);
                 noItemsLayout.setVisibility(View.GONE);
                 cartContentLayout.setVisibility(View.VISIBLE);
-                List<CartItem> cartItems = cart.getCart();
+                List<Item> cartItems = cart.getCart();
                 recView = (RecyclerView) findViewById(R.id.cartItemRecyclerView);
                 recView.setLayoutManager(new LinearLayoutManager(this));
                 recView.getLayoutParams().height = (cartItems.size()+1)*80;
@@ -168,7 +169,6 @@ public class CartActivity extends AbstractActivity{
             public void onClick(View v) {
                 Map<String, String> coupon = new HashMap<String, String>();
                 coupon.put(String.valueOf(couponText.getText().hashCode()), String.valueOf(couponText.getText()));
-                coupon.put("", "");
                 presenter.checkCart(loginPrefs.getString(Constants.USERNAME, null),
                         loginPrefs.getString(Constants.PASSWORD, null), products, coupon);
             }
