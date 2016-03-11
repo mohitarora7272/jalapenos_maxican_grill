@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,139 +27,161 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="0dp"
-            android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:gravity="center_vertical"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
-
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="SIGN UP"
-                android:textSize="28sp"
-                android:gravity="center_horizontal"
-                android:textColor="@color/colorAccent"/>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/signUpLoginTextInputLayout"
-                android:theme="@style/AppDefault"
-                android:layout_marginTop="8dp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/signUpLoginEditTextField"
-                    android:hint="USERNAME"/>
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/signUpEmailTextInputLayout"
-                android:theme="@style/AppDefault"
-                android:layout_marginTop="8dp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/signUpEmailEditTextField"
-                    android:hint="EMAIL"
-                    android:inputType="textEmailAddress"/>
-            </android.support.design.widget.TextInputLayout>
-
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/signUpFirstNameTextInputLayout"
-                    android:theme="@style/AppDefault"
-                    android:layout_weight="1"
-                    >
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/signUpFirstNameEditTextField"
-                        android:hint="FIRST NAME"
-                        />
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/signUpLastNameTextInputLayout"
-                    android:theme="@style/AppDefault"
-                    android:layout_weight="1">
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/signUpLastNameEditTextField"
-                        android:hint="LAST NAME"
-                        />
-                </android.support.design.widget.TextInputLayout>
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:gravity="center_vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/signUpPasswordTextInputLayout"
-                android:theme="@style/AppDefault">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/signUpPasswordEditTextField"
-                    android:inputType="textPassword"
-                    android:hint="PASSWORD"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/signUpRetypePasswordTextInputLayout"
-                android:theme="@style/AppDefault">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/signUpRetypePasswordEditTextField"
-                    android:inputType="textPassword"
-                    android:hint="RE-TYPE PASSWORD"
-                    />
-            </android.support.design.widget.TextInputLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/signUpProgressBarFrame"
-                android:visibility="gone">
-                <ProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/signUp_progressBar"
-                    android:visibility="visible"
-                    android:layout_gravity="center_horizontal"/>
-            </FrameLayout>
 
-            <LinearLayout android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/signUpButton"
                     android:text="SIGN UP"
-                    android:layout_weight="1"
-                    android:textColorHighlight="@color/colorPrimary"
-                    android:textColor="@color/colorTextIcons"/>
+                    android:textSize="28sp"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorAccent"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signUpLoginTextInputLayout"
+                    android:theme="@style/AppDefault"
+                    android:layout_marginTop="8dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUpLoginEditTextField"
+                        android:hint="USERNAME"
+                        android:singleLine="true"
+                        android:textSize="16sp"/>
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signUpEmailTextInputLayout"
+                    android:theme="@style/AppDefault"
+                    android:layout_marginTop="8dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUpEmailEditTextField"
+                        android:hint="EMAIL"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:inputType="textEmailAddress"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUpFirstNameTextInputLayout"
+                        android:theme="@style/AppDefault"
+                        android:layout_weight="1"
+
+                        >
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/signUpFirstNameEditTextField"
+                            android:hint="FIRST NAME"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            android:nextFocusDown="@+id/signUpLastNameEditTextField"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUpLastNameTextInputLayout"
+                        android:theme="@style/AppDefault"
+                        android:layout_weight="1">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/signUpLastNameEditTextField"
+                            android:hint="LAST NAME"
+                            android:singleLine="true"
+                            android:textSize="16sp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signUpPasswordTextInputLayout"
+                    android:theme="@style/AppDefault">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUpPasswordEditTextField"
+                        android:inputType="textPassword"
+                        android:hint="PASSWORD"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signUpRetypePasswordTextInputLayout"
+                    android:theme="@style/AppDefault">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUpRetypePasswordEditTextField"
+                        android:inputType="textPassword"
+                        android:hint="RE-TYPE PASSWORD"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/signUpProgressBarFrame"
+                    android:visibility="gone">
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUp_progressBar"
+                        android:visibility="visible"
+                        android:layout_gravity="center_horizontal"/>
+                </FrameLayout>
+
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/signUpButton"
+                        android:text="SIGN UP"
+                        android:layout_weight="1"
+                        android:textColorHighlight="@color/colorPrimary"
+                        android:textColor="@color/colorTextIcons"/>
+                </LinearLayout>
+
             </LinearLayout>
-        </LinearLayout>
+        </ScrollView>
+
+
     </LinearLayout>
     <include layout="@layout/navigation_view"></include>
 </android.support.v4.widget.DrawerLayout>

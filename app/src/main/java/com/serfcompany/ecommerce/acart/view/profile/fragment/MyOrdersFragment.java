@@ -62,7 +62,7 @@ public class MyOrdersFragment extends AbstractTabFragment{
         String username = loginPrefs.getString(Constants.USERNAME, "");
         String password = loginPrefs.getString(Constants.PASSWORD, "");
 
-        Log.i("LOG", "Getting orders for : "+username+" with password : "+password);
+
 
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
         fragmentPresenter = new MyOrdersFragmentPresenter(this);

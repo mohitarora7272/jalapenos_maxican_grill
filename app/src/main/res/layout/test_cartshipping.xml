@@ -2,6 +2,7 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/cartShippingDrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -41,11 +42,10 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Write notes to your order"
+                            android:hint="Notes about your order. E.g special note for delivery"
                             android:lines="4"
                             android:gravity="top|left"
-                            android:textSize="16sp"
-                            android:text="Foocompany LTD"
+                            android:textSize="14sp"
                             android:id="@+id/orderNoteText"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -68,7 +68,6 @@
                             android:hint="First name"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="Oleg"
                             android:id="@+id/shippingFirstName"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -82,7 +81,6 @@
                             android:hint="Last name"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="Drozdov"
                             android:id="@+id/shippingLastName"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -100,7 +98,6 @@
                             android:hint="Company"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="Foocompany LTD"
                             android:id="@+id/shippingCompanyName"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -118,7 +115,6 @@
                             android:hint="Address Line 1"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="p-t. Ludwiga Svobodi 40b"
                             android:id="@+id/shippingAddress1Text"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -153,7 +149,6 @@
                             android:hint="Post code"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="630015"
                             android:id="@+id/shippingPostCodeText"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -167,7 +162,6 @@
                             android:hint="City"
                             android:textSize="16sp"
                             android:singleLine="true"
-                            android:text="Kharkiv"
                             android:id="@+id/shippingCityText"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -184,7 +178,6 @@
                             android:layout_height="wrap_content"
                             android:hint="Country"
                             android:singleLine="true"
-                            android:text="Ukraine"
                             android:textSize="16sp"
                             android:id="@+id/shippingCountryText"/>
                     </android.support.design.widget.TextInputLayout>
@@ -220,7 +213,6 @@
                             android:hint="Phone"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:text="+380 95 198 23 12"
                             android:id="@+id/shippingPhoneText"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -234,13 +226,19 @@
                             android:hint="Email"
                             android:textSize="16sp"
                             android:singleLine="true"
-                            android:text="oleg.drozdov@gmail.com"
                             android:id="@+id/shippingEmailText"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="APPLY CHANGES"
+                    android:textColor="@color/colorTextIcons"/>
 
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
+    <include layout="@layout/navigation_view"/>
 </android.support.v4.widget.DrawerLayout>

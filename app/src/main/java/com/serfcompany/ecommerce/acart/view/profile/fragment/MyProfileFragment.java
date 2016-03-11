@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,14 +18,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
+import com.serfcompany.ecommerce.acart.event.BillingUpdateEvent;
+import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.event.SignInSuccessEvent;
 import com.serfcompany.ecommerce.acart.model.user.BillingAddress;
 import com.serfcompany.ecommerce.acart.model.user.Profile;
 import com.serfcompany.ecommerce.acart.model.user.User;
 import com.serfcompany.ecommerce.acart.presenter.SignInActivityPresenter;
+import com.serfcompany.ecommerce.acart.presenter.profile.UpdateProfilePresenter;
 import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
 import com.serfcompany.ecommerce.acart.view.SignInActivity;
 import com.squareup.picasso.Picasso;
@@ -43,6 +48,19 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     private SharedPreferences.Editor loginPrefsEditor;
     private SharedPreferences cartPrefs;
     private SharedPreferences.Editor cartPrefsEditor;
+    EditText billingFirstName;
+    EditText billingLastName;
+    EditText billingCompany;
+    EditText billingAddress1;
+    EditText billingAddress2;
+    EditText billingPostCode;
+    EditText billingCity;
+    EditText billingCountry;
+    EditText billingState;
+    EditText billingPhone;
+    EditText billingEmail;
+    String username, password;
+
 
     public static MyProfileFragment getInstance(Context context){
         Bundle args = new Bundle();
@@ -56,6 +74,12 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //register
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+
         view = inflater.inflate(LAYOUT, container, false);
         loginPrefs = inflater.getContext()
                 .getSharedPreferences(Constants.LOGIN_PREFS, Context.MODE_PRIVATE);
@@ -63,6 +87,9 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
         cartPrefs = inflater.getContext()
                 .getSharedPreferences(Constants.CART_PREFS, Context.MODE_PRIVATE);
         cartPrefsEditor = cartPrefs.edit();
+
+        username = loginPrefs.getString(Constants.USERNAME, "");
+        password = loginPrefs.getString(Constants.PASSWORD, "");
 
         return view;
     }
@@ -72,17 +99,22 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
 
-        //register
-        if (!EventBus.getDefault().isRegistered(this)){
-            EventBus.getDefault().register(this);
-        }
+        billingFirstName = (EditText) view.findViewById(R.id.billingFirstName);
+        billingLastName = (EditText) view.findViewById(R.id.billingLastName);
+        billingCompany = (EditText) view.findViewById(R.id.billingCompanyName);
+        billingAddress1 = (EditText) view.findViewById(R.id.billingAddressLine1);
+        billingAddress2 = (EditText) view.findViewById(R.id.billingAddressLine2);
+        billingPostCode = (EditText) view.findViewById(R.id.billingPostCode);
+        billingCity = (EditText) view.findViewById(R.id.billingCity);
+        billingCountry = (EditText) view.findViewById(R.id.billingCountry);
+        billingState = (EditText) view.findViewById(R.id.billingState);
+        billingPhone = (EditText) view.findViewById(R.id.billingPhone);
+        billingEmail = (EditText) view.findViewById(R.id.billingEmail);
 
-        Button updateProfile = (Button) view.findViewById(R.id.profileUpdateButton);
-        Button updateBilling = (Button) view.findViewById(R.id.billingUpdateButton);
         if (profile == null) {
             Log.i("LOG", "Loading new profile data");
             SignInActivityPresenter presenter = new SignInActivityPresenter(getContext());
-            presenter.signIn(loginPrefs.getString(Constants.USERNAME, ""), loginPrefs.getString(Constants.PASSWORD, ""));
+            presenter.signIn(username, password);
         } else {
             Log.i("LOG", "Displaying old profile data");
             fillData(profile);
@@ -121,6 +153,19 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
         }
     }
 
+    public void onEvent(BillingUpdateEvent event){
+        if (event != null && event.getResponse()!=null){
+            String toToast = event.getResponse().getReason();
+            Toast.makeText(getContext(), toToast, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void onEvent(NetworkConnectionProblemEvent event){
+        if (event != null){
+            Toast.makeText(getContext(), "Error. Try again later.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -132,6 +177,8 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
         this.context = context;
     }
 
+
+
     public void fillData(Profile profile){
         User user = profile.getUser();
         if (user != null) {
@@ -142,18 +189,6 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
             AppCompatEditText profileLastName = (AppCompatEditText) view.findViewById(R.id.profileLastName);
             EditText profileNickname = (EditText) view.findViewById(R.id.profileNickname);
             EditText profileEmail = (EditText) view.findViewById(R.id.profileEmail);
-
-            EditText billingFirstName = (EditText) view.findViewById(R.id.billingFirstName);
-            EditText billingLastName = (EditText) view.findViewById(R.id.billingLastName);
-            EditText billingCompany = (EditText) view.findViewById(R.id.billingCompanyName);
-            EditText billingAddress1 = (EditText) view.findViewById(R.id.billingAddressLine1);
-            EditText billingAddress2 = (EditText) view.findViewById(R.id.billingAddressLine2);
-            EditText billingPostCode = (EditText) view.findViewById(R.id.billingPostCode);
-            EditText billingCity = (EditText) view.findViewById(R.id.billingCity);
-            EditText billingCountry = (EditText) view.findViewById(R.id.billingCountry);
-            EditText billingState = (EditText) view.findViewById(R.id.billingState);
-            EditText billingPhone = (EditText) view.findViewById(R.id.billingPhone);
-            EditText billingEmail = (EditText) view.findViewById(R.id.billingEmail);
 
             profileFirstName.setText(user.getFirstName());
             profileLastName.setText(user.getLastName());
@@ -201,7 +236,7 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
                 break;
             case R.id.billingUpdateButton :
                 Log.i("LOG", "Billing update button was added");
-                break;
+                updateBilling();
             default: break;
         }
     }
@@ -214,7 +249,32 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
 
     }
 
-    private void updateBilling(Map<String, String> map){
+    private void updateBilling(){
+        String firstName = getFromEditable(billingFirstName.getText());
+        String lastName = getFromEditable(billingLastName.getText());
+        String companyName = getFromEditable(billingCompany.getText());
+        String address1 = getFromEditable(billingAddress1.getText());
+        String address2 = getFromEditable(billingAddress2.getText());
+        String cityName = getFromEditable(billingCity.getText());
+        String postcode = getFromEditable(billingPostCode.getText());
+        String stateName = getFromEditable(billingState.getText());
+        String country = getFromEditable(billingCountry.getText());
+        String phone = getFromEditable(billingPhone.getText());
+        String email = getFromEditable(billingEmail.getText());
 
+        UpdateProfilePresenter updateProfilePresenter = new UpdateProfilePresenter(getContext());
+        updateProfilePresenter.updateBilling(username, password, firstName, lastName, companyName, address1,
+                address2, cityName, postcode, stateName, country, phone, email);
+
+    }
+
+
+
+    private String getFromEditable(Editable editable){
+        if (editable == null){
+            return "";
+        } else{
+            return String.valueOf(editable);
+        }
     }
 }

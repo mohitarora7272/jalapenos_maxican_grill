@@ -26,12 +26,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
+     <ScrollView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:scrollbars="none">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:paddingTop="0dp"
+        android:paddingTop="16dp"
         android:orientation="vertical"
         android:paddingBottom="16dp"
         android:gravity="center_vertical"
@@ -71,20 +75,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/loginEditTextField"
-                android:hint="USERNAME"/>
+                android:maxWidth="240dp"
+                android:singleLine="true"
+                android:hint="USERNAME"
+                android:textSize="16sp"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/passwordTextInputLayout"
-            android:theme="@style/AppDefault">
+            android:theme="@style/AppDefault"
+            android:gravity="center">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:id="@+id/passwordEditTextField"
                 android:inputType="textPassword"
                 android:hint="PASSWORD"
+                android:textSize="16sp"
                 />
         </android.support.design.widget.TextInputLayout>
         <LinearLayout android:layout_width="match_parent"
@@ -130,6 +140,7 @@
         </LinearLayout>
 
     </LinearLayout>
+     </ScrollView>
  </LinearLayout>
     <include layout="@layout/navigation_view"></include>
 </android.support.v4.widget.DrawerLayout>

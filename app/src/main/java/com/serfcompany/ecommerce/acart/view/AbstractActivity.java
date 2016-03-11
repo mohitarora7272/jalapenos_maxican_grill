@@ -22,8 +22,8 @@ public abstract class AbstractActivity extends AppCompatActivity {
     public void initNavigationView(final DrawerLayout drawerLayout, final ViewPager viewPager) {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         SharedPreferences cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
+        MenuItem cart = navigationView.getMenu().findItem(R.id.actionCartItem);
         if (!cartPrefs.getAll().isEmpty()){
-            MenuItem cart = (MenuItem) navigationView.getMenu().findItem(R.id.actionCartItem);
             cart.setTitle("Cart +");
         }
 

@@ -218,10 +218,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="NEXT"
+                    android:id="@+id/cartBillingNextButton"
                     android:textColor="@color/colorTextIcons"
                     android:layout_marginBottom="16dp"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+    <include layout="@layout/navigation_view"/>
 
 </android.support.v4.widget.DrawerLayout>

@@ -37,7 +37,7 @@ public class CartActivityPresenter extends AbstractPresenter{
                 protected Void doInBackground(Void... params) {
                     CheckCartHTTP con = new CheckCartHTTP();
                     CartParser parser = new CartParser();
-                    Map<String, String> qou = new HashMap<String, String>();
+//                    Map<String, String> qou = new HashMap<String, String>();
 //                    qou.put("2016map", "2016map");
 //                    qou.put("2016foo", "2016foo");
                     setCart(parser.parse(con.loadCart(username, password, idQuant, coupons)));

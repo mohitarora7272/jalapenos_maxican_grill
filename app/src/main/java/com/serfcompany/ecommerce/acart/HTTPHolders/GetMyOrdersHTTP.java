@@ -17,7 +17,7 @@ import java.net.URL;
  */
 public class GetMyOrdersHTTP {
 
-    String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=&type=get-my-order";
+    String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=get-my-order";
 
     public String getMyOrders(String username, String password, String filter){
         try {
@@ -40,6 +40,7 @@ public class GetMyOrdersHTTP {
             while ((line = rd.readLine()) != null){
                 result.append(line);
             }
+            Log.i("LOG", "Getting orders for : "+username+" with password : "+password);
             rd.close();
             Log.i("ORDER", result.toString());
             return result.toString();

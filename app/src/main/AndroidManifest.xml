@@ -49,16 +49,24 @@
         </activity>
 
         <activity android:name=".view.OrderActivity"
-            android:parentActivityName=".view.ProfileActivity">
+            android:parentActivityName=".view.ProfileActivity"
+            android:configChanges="orientation|screenSize">
         </activity>
 
         <activity android:name=".view.CartActivity"
             android:label="CART"
-            android:parentActivityName=".view.MainActivity">
+            android:parentActivityName=".view.MainActivity"
+            android:configChanges="orientation|screenSize">
         </activity>
         
         <activity android:name=".view.CartBillingActivity"
-            android:parentActivityName=".view.CartActivity">
+            android:parentActivityName=".view.CartActivity"
+            android:configChanges="orientation|screenSize">
+        </activity>
+
+        <activity android:name=".view.CartShippingActivity"
+            android:parentActivityName=".view.CartBillingActivity"
+            android:configChanges="orientation|screenSize">
         </activity>
     </application>
 
