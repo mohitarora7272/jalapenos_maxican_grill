@@ -96,8 +96,11 @@ public class ProductActivity extends AbstractActivity {
         } else {
             regularPrice.setText(Html.fromHtml(regPriceString));
         }
+        int quantity = 0;
         productTitle.setText(product.getGeneral().getTitle());
-        final int quantity = product.getInventory().getQuantity();
+        if (product.getInventory().getQuantity() != null) {
+            quantity = product.getInventory().getQuantity();
+        }
         inStock.setText(String.valueOf(quantity)+" in stock");
         List<Integer> arr = new ArrayList<>();
         for (int i = 0; i < quantity; i++){

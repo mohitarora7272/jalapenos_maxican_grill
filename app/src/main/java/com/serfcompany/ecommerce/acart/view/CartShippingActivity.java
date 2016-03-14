@@ -1,19 +1,27 @@
 package com.serfcompany.ecommerce.acart.view;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
+import com.serfcompany.ecommerce.acart.event.ProfileUpdateEvent;
 import com.serfcompany.ecommerce.acart.event.SignInSuccessEvent;
+import com.serfcompany.ecommerce.acart.model.user.BillingAddress;
 import com.serfcompany.ecommerce.acart.model.user.Profile;
 import com.serfcompany.ecommerce.acart.model.user.ShippingAddress;
 import com.serfcompany.ecommerce.acart.presenter.SignInActivityPresenter;
+import com.serfcompany.ecommerce.acart.presenter.profile.UpdateProfilePresenter;
 
 import de.greenrobot.event.EventBus;
 
@@ -22,11 +30,14 @@ import de.greenrobot.event.EventBus;
  */
 public class CartShippingActivity extends AbstractActivity{
     private static int LAYOUT = R.layout.test_cartshipping;
-    private SignInActivityPresenter presenter;
+    private SignInActivityPresenter signInPresenter;
+    private UpdateProfilePresenter updateProfilePresenter;
     private Toolbar toolbar;
 
     private String username;
     private String password;
+
+    private Profile myProfile;
 
     private EditText orderNotes;
 
@@ -39,8 +50,6 @@ public class CartShippingActivity extends AbstractActivity{
     private EditText shippingCity;
     private EditText shippingCountry;
     private EditText shippingState;
-    private EditText shippingPhone;
-    private EditText shippingEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +64,11 @@ public class CartShippingActivity extends AbstractActivity{
         username = loginPrefs.getString(Constants.USERNAME, null);
         password = loginPrefs.getString(Constants.PASSWORD, null);
         if (username != null && password!= null){
-            presenter = new SignInActivityPresenter(this);
-            presenter.signIn(username, password);
+            signInPresenter = new SignInActivityPresenter(this);
+            signInPresenter.signIn(username, password);
         }
+
+        orderNotes = (EditText) findViewById(R.id.orderNoteText);
 
         shippingFirstName = (EditText) findViewById(R.id.shippingFirstName);
         shippingLastName = (EditText) findViewById(R.id.shippingLastName);
@@ -68,8 +79,28 @@ public class CartShippingActivity extends AbstractActivity{
         shippingCity = (EditText) findViewById(R.id.shippingCityText);
         shippingCountry = (EditText) findViewById(R.id.shippingCountryText);
         shippingState = (EditText) findViewById(R.id.shippingStateText);
-        shippingPhone = (EditText) findViewById(R.id.shippingPhoneText);
-        shippingEmail = (EditText) findViewById(R.id.shippingEmailText);
+
+
+        Button sameAsBilling = (Button) findViewById(R.id.shippingSameAsBillingButton);
+        sameAsBilling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fillSameAsBilling(myProfile);
+            }
+        });
+
+        Button nextButton = (Button) findViewById(R.id.shippingNextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateShipping();
+
+                Intent intent = new Intent();
+                intent.setClass(getBaseContext(), CartCheckoutActivity.class);
+                intent.putExtra(Constants.ORDER_NOTES, getFromEditable(orderNotes.getText()));
+                startActivity(intent);
+            }
+        });
 
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.cartShippingDrawerLayout);
         initNavigationView(drawerLayout, null);
@@ -79,6 +110,16 @@ public class CartShippingActivity extends AbstractActivity{
     public void onEvent(SignInSuccessEvent event){
         if (event != null && event.getProfile()!=null){
             fillFields(event.getProfile());
+            myProfile = event.getProfile();
+        }
+    }
+
+    public void onEvent(ProfileUpdateEvent event){
+        if (event != null && event.getResponse().getStatus()!=null){
+            if (event.getResponse().getStatus().equals("0")){
+            } else {
+                Toast.makeText(this, "Try again later. Something went wrong", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -94,10 +135,46 @@ public class CartShippingActivity extends AbstractActivity{
             shippingCity.setText(shipping.getShippingCity());
             shippingCountry.setText(shipping.getShippingCountry());
             shippingState.setText(shipping.getShippingState());
+        }
+    }
 
-            shippingPhone.setText(profile.getUser().getBillingAddress().getBillingPhone());
-            shippingEmail.setText(profile.getUser().getBillingAddress().getBillingEmail());
+    public void fillSameAsBilling(Profile profile){
+        ShippingAddress shipping = profile.getUser().getShippingAddress();
+        BillingAddress billing = profile.getUser().getBillingAddress();
+        if (shipping != null){
+            shippingFirstName.setText(billing.getBillingFirstName());
+            shippingLastName.setText(billing.getBillingLastName());
+            shippingCompany.setText(billing.getBillingCompany());
+            shippingAddress1.setText(billing.getBillingAddress1());
+            shippingAddress2.setText(billing.getBillingAddress2());
+            shippingPostCode.setText(billing.getBillingPostcode());
+            shippingCity.setText(billing.getBillingCity());
+            shippingCountry.setText(billing.getBillingCountry());
+            shippingState.setText(billing.getBillingState());
+        }
+    }
 
+    public void updateShipping(){
+        String firstName = getFromEditable(shippingFirstName.getText());
+        String lastName = getFromEditable(shippingLastName.getText());
+        String companyName = getFromEditable(shippingCompany.getText());
+        String address1 = getFromEditable(shippingAddress1.getText());
+        String address2 = getFromEditable(shippingAddress2.getText());
+        String cityName = getFromEditable(shippingCity.getText());
+        String postcode = getFromEditable(shippingPostCode.getText());
+        String stateName = getFromEditable(shippingState.getText());
+        String country = getFromEditable(shippingCountry.getText());
+
+        UpdateProfilePresenter updateProfilePresenter = new UpdateProfilePresenter(this);
+        updateProfilePresenter.updateShipping(username, password, firstName, lastName, companyName, address1,
+                address2, cityName, postcode, stateName, country);
+    }
+
+    private String getFromEditable(Editable editable){
+        if (editable == null){
+            return "";
+        } else{
+            return String.valueOf(editable);
         }
     }
 

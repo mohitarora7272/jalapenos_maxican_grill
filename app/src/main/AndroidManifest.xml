@@ -60,13 +60,20 @@
         </activity>
         
         <activity android:name=".view.CartBillingActivity"
+            android:label="BILLING"
             android:parentActivityName=".view.CartActivity"
             android:configChanges="orientation|screenSize">
         </activity>
 
         <activity android:name=".view.CartShippingActivity"
             android:parentActivityName=".view.CartBillingActivity"
+            android:label="SHIPPING"
             android:configChanges="orientation|screenSize">
+        </activity>
+        <activity android:name=".view.CartCheckoutActivity"
+            android:parentActivityName=".view.CartShippingActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="CHECKOUT">
         </activity>
     </application>
 

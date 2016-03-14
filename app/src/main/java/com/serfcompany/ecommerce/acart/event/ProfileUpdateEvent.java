@@ -6,11 +6,11 @@ import com.serfcompany.ecommerce.acart.model.user.Profile;
 /**
  * Created by serfcompany on 11.03.16.
  */
-public class BillingUpdateEvent {
+public class ProfileUpdateEvent {
     private Response response;
     private Profile profile;
 
-    public BillingUpdateEvent(Response response, Profile profile){
+    public ProfileUpdateEvent(Response response, Profile profile){
         this.response = response;
         this.profile = profile;
     }

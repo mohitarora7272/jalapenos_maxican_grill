@@ -5,7 +5,8 @@ import android.os.AsyncTask;
 
 import com.serfcompany.ecommerce.acart.HTTPHolders.SignInRequestHTTP;
 import com.serfcompany.ecommerce.acart.HTTPHolders.UpdateBillingHTTP;
-import com.serfcompany.ecommerce.acart.event.BillingUpdateEvent;
+import com.serfcompany.ecommerce.acart.HTTPHolders.UpdateShippingHTTP;
+import com.serfcompany.ecommerce.acart.event.ProfileUpdateEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.model.response.Response;
 import com.serfcompany.ecommerce.acart.model.user.Profile;
@@ -26,7 +27,7 @@ public class UpdateProfilePresenter extends AbstractPresenter{
     Profile profile;
     Response response;
     NetworkConnectionProblemEvent connectionProblemEvent;
-    BillingUpdateEvent updateEvent;
+    ProfileUpdateEvent updateEvent;
 
     public UpdateProfilePresenter(Context context){
         this.context = context;
@@ -64,7 +65,47 @@ public class UpdateProfilePresenter extends AbstractPresenter{
                 @Override
                 protected void onPostExecute(Void aVoid) {
                     if (getResponse() != null && getProfile() != null){
-                        updateEvent = new BillingUpdateEvent(getResponse(), getProfile());
+                        updateEvent = new ProfileUpdateEvent(getResponse(), getProfile());
+                        EventBus.getDefault().post(updateEvent);
+                    }
+                }
+            }.execute();
+        }
+    }
+
+    public void updateShipping(final String username, final String password, final String firstName,
+                              final String lastName, final String companyName, final String address1,
+                              final String address2, final String cityName, final String postcode,
+                              final String stateName, final String country){
+        if (!isNetworkAvailable(context)){
+            connectionProblemEvent = new NetworkConnectionProblemEvent();
+            EventBus.getDefault().post(connectionProblemEvent);
+        } else {
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    UpdateShippingHTTP con = new UpdateShippingHTTP();
+                    ResponseParser parser = new ResponseParser();
+                    try {
+                        setResponse(parser.parse(con.updateShipping(username, password, firstName, lastName,
+                                companyName, address1, address2, cityName, postcode,
+                                stateName, country)));
+                        SignInRequestHTTP signInCon = new SignInRequestHTTP();
+                        ProfileParser profileParser = new ProfileParser();
+                        setProfile(profileParser.parseProfile(
+                                signInCon.userLogin(username, password, null)));
+
+                    } catch (IOException e) {
+                        connectionProblemEvent = new NetworkConnectionProblemEvent();
+                        EventBus.getDefault().post(connectionProblemEvent);
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    if (getResponse() != null && getProfile() != null){
+                        updateEvent = new ProfileUpdateEvent(getResponse(), getProfile());
                         EventBus.getDefault().post(updateEvent);
                     }
                 }

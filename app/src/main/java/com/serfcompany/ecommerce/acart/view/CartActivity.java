@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 
@@ -51,6 +52,8 @@ public class CartActivity extends AbstractActivity{
     private FrameLayout cartContentLayout;
     private FrameLayout couponStatusLayout;
     private CartActivityPresenter presenter;
+    private SharedPreferences couponPrefs;
+    private SharedPreferences.Editor couponPrefsEditor;
     Map<String, String> products;
     CartItemListAdapter adapter;
 
@@ -139,6 +142,12 @@ public class CartActivity extends AbstractActivity{
                 subtotal.setText(Html.fromHtml(currency + " " + cart.getCartSubtotal()));
                 discount.setText(Html.fromHtml(currency+" "+cart.getDiscount()));
                 tax.setText(Html.fromHtml(currency + " " + cart.getCartTaxTotal()));
+
+//                if (cart.getCoupon().getAppliedCoupon()!=null){
+//                    FrameLayout couponsFrame = (FrameLayout) findViewById(R.id.cartCouponNotificationsFrame);
+//                    couponsFrame.setVisibility(View.VISIBLE);
+//
+//                }
             }
         }
 
@@ -171,6 +180,13 @@ public class CartActivity extends AbstractActivity{
                 coupon.put(String.valueOf(couponText.getText().hashCode()), String.valueOf(couponText.getText()));
                 presenter.checkCart(loginPrefs.getString(Constants.USERNAME, null),
                         loginPrefs.getString(Constants.PASSWORD, null), products, coupon);
+                couponPrefs = getSharedPreferences(Constants.COUPON_PREFS, MODE_PRIVATE);
+//                Set<String> couponSet = couponPrefs.getStringSet("coupons", Collections.<String>emptySet());
+//                couponSet.add(String.valueOf(couponText.getText()));
+                couponPrefsEditor = couponPrefs.edit();
+                couponPrefsEditor.clear();
+                couponPrefsEditor.putString("coupon", String.valueOf(couponText.getText()));
+                couponPrefsEditor.apply();
             }
         });
 

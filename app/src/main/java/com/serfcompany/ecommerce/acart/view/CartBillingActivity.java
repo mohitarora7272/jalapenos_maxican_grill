@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
-import com.serfcompany.ecommerce.acart.event.BillingUpdateEvent;
+import com.serfcompany.ecommerce.acart.event.ProfileUpdateEvent;
 import com.serfcompany.ecommerce.acart.event.SignInSuccessEvent;
 import com.serfcompany.ecommerce.acart.model.user.BillingAddress;
 import com.serfcompany.ecommerce.acart.model.user.Profile;
@@ -85,12 +84,12 @@ public class CartBillingActivity extends AbstractActivity{
         }
     }
 
-    public void onEvent(BillingUpdateEvent event){
+    public void onEvent(ProfileUpdateEvent event){
         if (event != null && event.getResponse().getStatus()!= null){
             if (event.getResponse().getStatus().equals("0")){
                 Toast.makeText(this, "Updated. Go to shipping details", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Check again. something wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Try again later. Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }
     }

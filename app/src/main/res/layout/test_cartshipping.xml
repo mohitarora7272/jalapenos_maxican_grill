@@ -49,11 +49,26 @@
                             android:id="@+id/orderNoteText"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
-                <Button
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="SAME AS BILLING (NEXT)"
-                    android:textColor="@color/colorTextIcons"/>
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/shippingSameAsBillingButton"
+                        android:text="SAME AS BILLING"
+                        android:layout_weight="1"
+                        android:textColor="@color/colorTextIcons"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:id="@+id/shippingNextButton"
+                        android:layout_weight="1"
+                        android:text="NEXT"
+                        android:textColor="@color/colorTextIcons"/>
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -199,44 +214,6 @@
                             android:id="@+id/shippingStateText"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingPhoneLayout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Phone"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingPhoneText"/>
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingEmailLayout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Email"
-                            android:textSize="16sp"
-                            android:singleLine="true"
-                            android:id="@+id/shippingEmailText"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginTop="12dp"
-                    android:text="APPLY CHANGES"
-                    android:textColor="@color/colorTextIcons"/>
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

@@ -2,6 +2,8 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Utils;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -29,8 +31,8 @@ public class CheckCartHTTP {
 
             String params = "&username=" + username +
                     "&password=" + password +
-                    "&productIDJson=" + getProdIDJsonFromMap(idQuantityMap) +
-                    "&couponCodeJson=" + getCouponJsonFromMap(couponCode);
+                    "&productIDJson=" + Utils.getProdIDJsonFromMap(idQuantityMap) +
+                    "&couponCodeJson=" + Utils.getCouponJsonFromMap(couponCode);
 
             Log.i("LOG", "PRE CHECKING CART");
 
@@ -60,46 +62,5 @@ public class CheckCartHTTP {
         return null;
     }
 
-    private String getProdIDJsonFromMap (Map<String, String> map){
-        StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        for (Map.Entry entry : map.entrySet()){
-            sb.append("\"");
-            sb.append(entry.getKey());
-            sb.append("\":\"");
-            sb.append(entry.getValue());
-            sb.append("\"");
-            if (map.entrySet().size() > 1) {sb.append(",");}
-        }
-        if (map.entrySet().size() > 1) {
-            sb.deleteCharAt(sb.length()-1);
-        }
-        sb.append("}");
-        return sb.toString();
-    }
-
-    private String getCouponJsonFromMap (Map<String, String> map) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        if (map == null) {
-            return "";
-        } else {
-            for (Map.Entry<String, String> entry : map.entrySet()) {
-                sb.append("\"");
-                sb.append(entry.getKey());
-                sb.append("\":\"");
-                sb.append(entry.getValue());
-                sb.append("\"");
-                if (map.entrySet().size() > 1) {
-                    sb.append(",");
-                }
-            }
-            if (map.entrySet().size() > 1) {
-                sb.deleteCharAt(sb.length() - 1);
-            }
-            sb.append("}");
-            return sb.toString();
-        }
-    }
 
 }

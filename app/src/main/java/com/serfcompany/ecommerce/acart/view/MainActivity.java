@@ -2,6 +2,7 @@ package com.serfcompany.ecommerce.acart.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -37,6 +38,11 @@ public class MainActivity extends AbstractActivity{
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
+
+        if (getIntent().getStringExtra("REDIRECT") != null){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getIntent().getStringExtra("REDIRECT")));
+            startActivity(browserIntent);
+        }
 
         super.initNavigationView(drawerLayout, viewPager);
         initToolbar();

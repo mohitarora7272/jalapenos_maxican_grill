@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
-import com.serfcompany.ecommerce.acart.event.BillingUpdateEvent;
+import com.serfcompany.ecommerce.acart.event.ProfileUpdateEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.event.SignInSuccessEvent;
 import com.serfcompany.ecommerce.acart.model.user.BillingAddress;
@@ -153,7 +153,7 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
         }
     }
 
-    public void onEvent(BillingUpdateEvent event){
+    public void onEvent(ProfileUpdateEvent event){
         if (event != null && event.getResponse()!=null){
             String toToast = event.getResponse().getReason();
             Toast.makeText(getContext(), toToast, Toast.LENGTH_SHORT).show();
