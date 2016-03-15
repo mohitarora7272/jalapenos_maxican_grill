@@ -41,7 +41,7 @@ public class Cart {
     private Object shippingMethod;
     @SerializedName("discount")
     @Expose
-    private Integer discount;
+    private Double discount;
     @SerializedName("grand-total")
     @Expose
     private Double grandTotal;
@@ -237,7 +237,7 @@ public class Cart {
      * @return
      *     The discount
      */
-    public Integer getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
@@ -246,7 +246,7 @@ public class Cart {
      * @param discount
      *     The discount
      */
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 

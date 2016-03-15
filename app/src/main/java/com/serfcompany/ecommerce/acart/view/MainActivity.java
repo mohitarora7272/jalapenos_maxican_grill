@@ -17,7 +17,9 @@ import android.view.MenuItem;
 
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
+import com.serfcompany.ecommerce.acart.presenter.main.CategoryFragmentPresenter;
 import com.serfcompany.ecommerce.acart.view.main.adapter.TabMainAdapter;
+import com.serfcompany.ecommerce.acart.view.main.fragment.IFragmentView;
 
 import de.greenrobot.event.EventBus;
 
@@ -89,9 +91,6 @@ public class MainActivity extends AbstractActivity{
         tabLayout.setupWithViewPager(viewPager);
     }
 
-
-
-
 //    @Override
 //    protected void onDestroy() {
 //        SharedPreferences cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
@@ -117,7 +116,6 @@ public class MainActivity extends AbstractActivity{
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
                 && keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {
-            Log.d("CDA", "onKeyDown Called");
             onBackPressed();
             return true;
         }
@@ -126,6 +124,22 @@ public class MainActivity extends AbstractActivity{
 
     @Override
     public void onBackPressed() {
+        switch (viewPager.getCurrentItem()){
+            case 0:
+                goHomeDude(); break;
+            case 1:
+                CategoryFragmentPresenter presenter = new CategoryFragmentPresenter(getBaseContext());
+                presenter.loadDatas();
+                break;
+            case 2:
+                goHomeDude(); break;
+            default:
+                viewPager.setCurrentItem(0); break;
+        }
+
+    }
+
+    public void goHomeDude(){
         Log.d("CDA", "onBackPressed Called");
         Intent setIntent = new Intent(Intent.ACTION_MAIN);
         setIntent.addCategory(Intent.CATEGORY_HOME);

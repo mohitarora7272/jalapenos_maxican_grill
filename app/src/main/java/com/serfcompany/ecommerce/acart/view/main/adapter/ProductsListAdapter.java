@@ -37,6 +37,11 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         this.context = context;
     }
 
+    public ProductsListAdapter(Context context){
+        this.datas = new ArrayList<>();
+        this.context = context;
+    }
+
     public void setDatas(List<Product> datas){
         if (datas != null && datas.size() > 0){
             this.datas.clear();

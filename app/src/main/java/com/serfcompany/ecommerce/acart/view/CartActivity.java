@@ -25,11 +25,9 @@ import com.serfcompany.ecommerce.acart.model.cart.Item;
 import com.serfcompany.ecommerce.acart.presenter.CartActivityPresenter;
 import com.serfcompany.ecommerce.acart.view.adapter.CartItemListAdapter;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 
@@ -38,7 +36,7 @@ import de.greenrobot.event.EventBus;
  */
 public class CartActivity extends AbstractActivity{
 
-    private static final int LAYOUT = R.layout.test_cart_preview;
+    private static final int LAYOUT = R.layout.activity_cart_preview;
     private Toolbar toolbar;
     private RecyclerView recView;
     private SharedPreferences loginPrefs;
@@ -56,6 +54,7 @@ public class CartActivity extends AbstractActivity{
     private SharedPreferences.Editor couponPrefsEditor;
     Map<String, String> products;
     CartItemListAdapter adapter;
+    FrameLayout loadingFrame;
 
 
     @Override
@@ -87,6 +86,7 @@ public class CartActivity extends AbstractActivity{
                 presenter.clearCart();
             }
         });
+        loadingFrame = (FrameLayout) findViewById(R.id.progressBarFrame);
 
 
         initToolbar();
@@ -96,13 +96,14 @@ public class CartActivity extends AbstractActivity{
 
     public void onEvent(CheckCartEvent checkCartEvent){
         if (checkCartEvent != null){
+            loadingFrame.setVisibility(View.GONE);
             fillFields(checkCartEvent.getCart());
-
         }
     }
 
     public void onEvent(ClearCartEvent clearCartEvent){
         if (clearCartEvent != null){
+            loadingFrame.setVisibility(View.GONE);
             fillFields(clearCartEvent.getCart());
         }
     }
@@ -128,7 +129,7 @@ public class CartActivity extends AbstractActivity{
                 List<Item> cartItems = cart.getCart();
                 recView = (RecyclerView) findViewById(R.id.cartItemRecyclerView);
                 recView.setLayoutManager(new LinearLayoutManager(this));
-                recView.getLayoutParams().height = (cartItems.size()+1)*80;
+//                recView.getLayoutParams().height = (cartItems.size()+1)*80;
                 adapter = new CartItemListAdapter(this, cart.getCart());
                 adapter.notifyDataSetChanged();
                 recView.setAdapter(adapter);

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ public class CartCheckoutActivity extends AbstractActivity{
     Spinner paymentSpinner;
     List<PaymentMethod> paymentMethods;
     String paymentMethodID;
+    FrameLayout loadingFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,8 @@ public class CartCheckoutActivity extends AbstractActivity{
 
         products = (Map<String, String>) cartPrefs.getAll();
         products.remove(Constants.CURRENCY);
+
+        loadingFrame = (FrameLayout) findViewById(R.id.progressBarFrame);
 
         SharedPreferences couponPrefs = getSharedPreferences(Constants.COUPON_PREFS, MODE_PRIVATE);
         coupons = new HashMap<>();
@@ -116,6 +120,7 @@ public class CartCheckoutActivity extends AbstractActivity{
 
     public void onEvent(CheckCartEvent checkCartEvent){
         if (checkCartEvent != null && checkCartEvent.getCart()!=null){
+            loadingFrame.setVisibility(View.GONE);
             fillFields(checkCartEvent.getCart());
         }
     }
@@ -125,7 +130,7 @@ public class CartCheckoutActivity extends AbstractActivity{
         List<Item> cartItems = cart.getCart();
         recView = (RecyclerView) findViewById(R.id.checkoutItemRecyclerView);
         recView.setLayoutManager(new LinearLayoutManager(this));
-        recView.getLayoutParams().height = (cartItems.size()+1)*80;
+//        recView.getLayoutParams().height = (cartItems.size()+1)*80;
         adapter = new CartItemListAdapter(this, cart.getCart());
         adapter.notifyDataSetChanged();
         recView.setAdapter(adapter);

@@ -11,6 +11,19 @@
 
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/progressBarFrame">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_progressBar"
+            android:visibility="visible"
+            android:layout_gravity="center"/>
+    </FrameLayout>
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +94,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
                 android:orientation="vertical"
                 android:layout_marginTop="6dp">
                 <LinearLayout
@@ -97,7 +109,9 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/profileNickname"/>
+                            android:id="@+id/profileNickname"
+                            android:singleLine="true"
+                            android:editable="false"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -147,6 +161,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:id="@+id/billingFirstName"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -157,6 +172,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:id="@+id/billingLastName"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -167,6 +183,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:id="@+id/billingCompanyName"/>
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
@@ -176,6 +193,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:id="@+id/billingAddressLine1"/>
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
@@ -185,6 +203,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:id="@+id/billingAddressLine2"/>
                 </android.support.design.widget.TextInputLayout>
                 <LinearLayout
@@ -194,6 +213,7 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:hint="POST CODE"
                         android:layout_weight="1">
                         <EditText
@@ -204,11 +224,13 @@
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:hint="CITY"
                         android:layout_weight="1">
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:id="@+id/billingCity"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -219,6 +241,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:id="@+id/billingCountry"/>
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
@@ -228,6 +251,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
                         android:id="@+id/billingState"/>
                 </android.support.design.widget.TextInputLayout>
                 <LinearLayout
@@ -242,6 +266,7 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:id="@+id/billingPhone"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
@@ -252,20 +277,19 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:inputType="textEmailAddress"
                             android:id="@+id/billingEmail"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="UPDATE"
-                    android:id="@+id/billingUpdateButton"
-                    android:textColor="@color/colorTextIcons"/>
-
-
             </LinearLayout>
-
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UPDATE BILLING"
+                android:layout_marginBottom="24dp"
+                android:id="@+id/billingUpdateButton"
+                android:textColor="@color/colorTextIcons"/>
         </LinearLayout>
     </ScrollView>
 

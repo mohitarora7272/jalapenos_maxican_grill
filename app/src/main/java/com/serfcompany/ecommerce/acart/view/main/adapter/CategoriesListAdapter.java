@@ -65,6 +65,12 @@ public class CategoriesListAdapter extends RecyclerView.Adapter<CategoriesListAd
                 .error(R.drawable.default_product)
                 .into(holder.categoryImage);
         holder.productsInCategory.setText("Products: " + category.getPostCount());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryFragmentPresenter.loadSubCategories(String.valueOf(category.getTermId()));
+            }
+        });
     }
 
     @Override

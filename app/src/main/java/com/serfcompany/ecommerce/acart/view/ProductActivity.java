@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.serfcompany.ecommerce.acart.presenter.main.ProductActivityPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -39,6 +41,7 @@ public class ProductActivity extends AbstractActivity {
     private ProductActivityPresenter presenter;
     private SharedPreferences cartPreferences;
     SharedPreferences.Editor editor;
+    FrameLayout loadingFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,8 @@ public class ProductActivity extends AbstractActivity {
         if (!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
+
+        loadingFrame = (FrameLayout) findViewById(R.id.progressBarFrame);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.product_drawer_layout);
 
@@ -100,8 +105,11 @@ public class ProductActivity extends AbstractActivity {
         productTitle.setText(product.getGeneral().getTitle());
         if (product.getInventory().getQuantity() != null) {
             quantity = product.getInventory().getQuantity();
+            inStock.setText(String.valueOf(quantity)+" in stock");
+        } else {
+            inStock.setText("Out of stock");
+            addToCartButton.setEnabled(false);
         }
-        inStock.setText(String.valueOf(quantity)+" in stock");
         List<Integer> arr = new ArrayList<>();
         for (int i = 0; i < quantity; i++){
             arr.add(i, i+1);
@@ -147,8 +155,15 @@ public class ProductActivity extends AbstractActivity {
 
     // EventBus Subscribe
     public void onEvent(ProductByIdEvent getDatasEvent){
-        if (getDatasEvent!=null && getDatasEvent.getProduct()!=null){
-            fillFields(getDatasEvent.getProduct());
+        try {
+            if (getDatasEvent != null && getDatasEvent.getProduct() != null) {
+                loadingFrame.setVisibility(View.GONE);
+                fillFields(getDatasEvent.getProduct());
+            }
+        }catch (Exception e){
+            loadingFrame.setVisibility(View.GONE);
+            FrameLayout fl = (FrameLayout) findViewById(R.id.connectionErrorFrame);
+            fl.setVisibility(View.VISIBLE);
         }
     }
 

@@ -68,7 +68,7 @@ public class FeaturedFragment extends AbstractTabFragment {
             fragmentPresenter = new FeaturedFragmentPresenter(this);
             fragmentPresenter.loadDatas();
             mAdapter = new ProductsListAdapter(getContext(), fragmentPresenter);
-            mAdapter.notifyDataSetChanged();
+
         } else {
             loadingFrame.setVisibility(View.GONE);
             Log.i("LOG", "Loading old data to featured");
@@ -80,9 +80,15 @@ public class FeaturedFragment extends AbstractTabFragment {
 
     // EventBus Subscribe
     public void onEvent(FeaturedFragmentGetDataEvent getDatasEvent){
-        if (getDatasEvent!=null && getDatasEvent.getDatas()!=null && getDatasEvent.getDatas().size()>0){
-            mAdapter.setDatas(getDatasEvent.getDatas());
-            loadingFrame.setVisibility(View.GONE);
+        try {
+            if (getDatasEvent != null && getDatasEvent.getDatas() != null && getDatasEvent.getDatas().size() > 0) {
+                mAdapter.setDatas(getDatasEvent.getDatas());
+                mAdapter.notifyDataSetChanged();
+                loadingFrame.setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
+            fl.setVisibility(View.VISIBLE);
         }
     }
     public void onEvent(NetworkConnectionProblemEvent networkEvent){

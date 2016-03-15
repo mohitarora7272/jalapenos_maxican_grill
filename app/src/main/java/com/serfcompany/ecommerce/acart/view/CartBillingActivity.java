@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.serfcompany.ecommerce.acart.Constants;
@@ -28,7 +29,7 @@ import de.greenrobot.event.EventBus;
  * Created by serfcompany on 09.03.16.
  */
 public class CartBillingActivity extends AbstractActivity{
-    private static int LAYOUT = R.layout.test_cartbilling;
+    private static int LAYOUT = R.layout.activity_cartbilling;
     private SignInActivityPresenter presenter;
     private Toolbar toolbar;
     private String username;
@@ -44,6 +45,7 @@ public class CartBillingActivity extends AbstractActivity{
     private EditText billingState;
     private EditText billingPhone;
     private EditText billingEmail;
+    FrameLayout loadingFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class CartBillingActivity extends AbstractActivity{
                 startActivity(intent);
             }
         });
-
+        loadingFrame = (FrameLayout) findViewById(R.id.progressBarFrame);
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.cartBillingDrawerLayout);
         initNavigationView(drawerLayout, null);
         initToolbar();
@@ -96,6 +98,7 @@ public class CartBillingActivity extends AbstractActivity{
 
     private void fillFields(Profile profile){
         if (profile != null && profile.getUser().getBillingAddress() != null) {
+            loadingFrame.setVisibility(View.GONE);
             BillingAddress billing = profile.getUser().getBillingAddress();
             billingFirstName = (EditText) findViewById(R.id.billingFirstName);
             billingLastName = (EditText) findViewById(R.id.billingLastName);

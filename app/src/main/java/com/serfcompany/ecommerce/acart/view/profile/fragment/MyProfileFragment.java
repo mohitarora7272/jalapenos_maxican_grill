@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     EditText billingPhone;
     EditText billingEmail;
     String username, password;
+    FrameLayout loadingFrame;
 
 
     public static MyProfileFragment getInstance(Context context){
@@ -87,6 +89,7 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
         cartPrefs = inflater.getContext()
                 .getSharedPreferences(Constants.CART_PREFS, Context.MODE_PRIVATE);
         cartPrefsEditor = cartPrefs.edit();
+        loadingFrame = (FrameLayout) view.findViewById(R.id.progressBarFrame);
 
         username = loginPrefs.getString(Constants.USERNAME, "");
         password = loginPrefs.getString(Constants.PASSWORD, "");
@@ -148,6 +151,7 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
 
     public void onEvent(SignInSuccessEvent event){
         if (event != null && event.getProfile()!=null){
+            loadingFrame.setVisibility(View.GONE);
             profile = event.getProfile();
             fillData(event.getProfile());
         }
@@ -229,13 +233,12 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.profileChangePassword :
-                Log.i("LOG", "Change password button was clicked");
+                Toast.makeText(getContext(), "Currently unavailable", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.profileUpdateButton :
                 Log.i("LOG", "Update profile button was clicked");
                 break;
             case R.id.billingUpdateButton :
-                Log.i("LOG", "Billing update button was added");
                 updateBilling();
             default: break;
         }

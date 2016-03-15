@@ -23,9 +23,6 @@ public abstract class AbstractActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         SharedPreferences cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
         MenuItem cart = navigationView.getMenu().findItem(R.id.actionCartItem);
-        if (!cartPrefs.getAll().isEmpty()){
-            cart.setTitle("Cart +");
-        }
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {

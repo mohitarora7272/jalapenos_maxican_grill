@@ -9,14 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.serfcompany.ecommerce.acart.R;
+import com.serfcompany.ecommerce.acart.event.CategoryExploreEvent;
 import com.serfcompany.ecommerce.acart.event.CategoryFragmentGetDataEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.model.category.Category;
+import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.presenter.main.CategoryFragmentPresenter;
 import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
 import com.serfcompany.ecommerce.acart.view.main.adapter.CategoriesListAdapter;
+import com.serfcompany.ecommerce.acart.view.main.adapter.ProductsListAdapter;
 
 import java.util.Collections;
 
@@ -29,8 +34,12 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
 
     private static final int LAYOUT = R.layout.fragment_categories;
     private RecyclerView rView;
+    private RecyclerView prodRecView;
     private CategoryFragmentPresenter presenter;
     private CategoriesListAdapter mAdapter;
+    private ProductsListAdapter prodAdapter;
+    FrameLayout loadingFrame;
+    TextView divider1, divider2;
 
     public static CategoryFragment getInstance(Context context){
         Bundle args = new Bundle();
@@ -46,6 +55,10 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(LAYOUT, container, false);
         rView = (RecyclerView) view.findViewById(R.id.recyclerCategoriesView);
+        prodRecView = (RecyclerView) view.findViewById(R.id.recyclerProductsInCategory);
+        loadingFrame = (FrameLayout) view.findViewById(R.id.progressBarFrame);
+        divider1 = (TextView) view.findViewById(R.id.productDivider);
+        divider2 = (TextView) view.findViewById(R.id.categoryDivider);
         return view;
     }
 
@@ -58,9 +71,14 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
         }
 
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        prodRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
         presenter = new CategoryFragmentPresenter(this);
         presenter.loadDatas();
         mAdapter = new CategoriesListAdapter(getContext(), presenter);
+        prodAdapter = new ProductsListAdapter(getContext());
+        if (prodAdapter.getDatas() != null){
+            prodRecView.setAdapter(prodAdapter);
+        }
         rView.setAdapter(mAdapter);
 
     }
@@ -68,17 +86,44 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
     public void onEvent(CategoryFragmentGetDataEvent getDataEvent){
         try {
             if (getDataEvent != null && getDataEvent.getDatas() != null && getDataEvent.getDatas().size() > 0) {
+                rView.setVisibility(View.VISIBLE);
+                divider1.setVisibility(View.GONE);
+                divider2.setVisibility(View.GONE);
+                prodRecView.setVisibility(View.GONE);
                 mAdapter.setDatas(getDataEvent.getDatas());
+                mAdapter.notifyDataSetChanged();
+                loadingFrame.setVisibility(View.GONE);
             }
         }catch (Exception e){
+
             mAdapter.setDatas(Collections.<Category>emptyList());
             FrameLayout fl = (FrameLayout) view.findViewById(R.id.categoryConnectionError);
+            loadingFrame.setVisibility(View.GONE);
             fl.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void onEvent(CategoryExploreEvent event){
+        if (event != null && event.getCategories()!=null && event.getCategoriesProducts()!=null){
+            loadingFrame.setVisibility(View.GONE);
+            divider1.setVisibility(View.VISIBLE);
+            if (event.getCategories().size() > 0) {
+                divider2.setVisibility(View.VISIBLE);
+                mAdapter.setDatas(event.getCategories());
+                mAdapter.notifyDataSetChanged();
+            } else {
+                divider2.setVisibility(View.GONE);
+                rView.setVisibility(View.GONE);
+            }
+            prodRecView.setVisibility(View.VISIBLE);
+            prodAdapter.setDatas(event.getCategoriesProducts());
+            prodAdapter.notifyDataSetChanged();
         }
     }
 
     public void onEvent(NetworkConnectionProblemEvent networkEvent){
         if (networkEvent != null && networkEvent.getDatas() != null) {
+            loadingFrame.setVisibility(View.GONE);
             mAdapter.setDatas(Collections.<Category>emptyList());
             FrameLayout fl = (FrameLayout) view.findViewById(R.id.categoryConnectionError);
             fl.setVisibility(View.VISIBLE);

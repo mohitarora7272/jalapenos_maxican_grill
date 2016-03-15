@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.serfcompany.ecommerce.acart.Constants;
@@ -29,7 +30,7 @@ import de.greenrobot.event.EventBus;
  * Created by serfcompany on 11.03.16.
  */
 public class CartShippingActivity extends AbstractActivity{
-    private static int LAYOUT = R.layout.test_cartshipping;
+    private static int LAYOUT = R.layout.activity_cartshipping;
     private SignInActivityPresenter signInPresenter;
     private UpdateProfilePresenter updateProfilePresenter;
     private Toolbar toolbar;
@@ -50,6 +51,7 @@ public class CartShippingActivity extends AbstractActivity{
     private EditText shippingCity;
     private EditText shippingCountry;
     private EditText shippingState;
+    FrameLayout loadingFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,7 @@ public class CartShippingActivity extends AbstractActivity{
         shippingCity = (EditText) findViewById(R.id.shippingCityText);
         shippingCountry = (EditText) findViewById(R.id.shippingCountryText);
         shippingState = (EditText) findViewById(R.id.shippingStateText);
-
+        loadingFrame = (FrameLayout) findViewById(R.id.progressBarFrame);
 
         Button sameAsBilling = (Button) findViewById(R.id.shippingSameAsBillingButton);
         sameAsBilling.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +111,7 @@ public class CartShippingActivity extends AbstractActivity{
 
     public void onEvent(SignInSuccessEvent event){
         if (event != null && event.getProfile()!=null){
+            loadingFrame.setVisibility(View.GONE);
             fillFields(event.getProfile());
             myProfile = event.getProfile();
         }
