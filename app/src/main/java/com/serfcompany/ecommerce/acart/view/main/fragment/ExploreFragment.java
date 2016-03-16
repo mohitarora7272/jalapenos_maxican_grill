@@ -18,14 +18,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetNotificationsHTTP;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetDatasEvent;
+import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetMoreDataEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.event.ScreenRotateEvent;
 import com.serfcompany.ecommerce.acart.model.product.Product;
+import com.serfcompany.ecommerce.acart.presenter.EndlessRecyclerViewScrollListener;
 import com.serfcompany.ecommerce.acart.presenter.main.ExploreFragmentPresenterImpl;
 import com.serfcompany.ecommerce.acart.presenter.main.IExploreFragmentPresenter;
 import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
@@ -46,6 +50,7 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
     private ProductsListAdapter mAdapter;
     FrameLayout loadingFrame;
     private List<Product> modelForFilter;
+    private List<Product> model;
 
     public static ExploreFragment getInstance(Context context){
         Bundle args = new Bundle();
@@ -62,6 +67,11 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         view = inflater.inflate(LAYOUT, container, false);
         rView = (RecyclerView) view.findViewById(R.id.recyclerView);
         loadingFrame = (FrameLayout) view.findViewById(R.id.progressBarFrame);
+
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+
         return view;
     }
 
@@ -74,34 +84,29 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        //register
-        if (!EventBus.getDefault().isRegistered(this)){
-            EventBus.getDefault().register(this);
-        }
-
-        //init
-        rView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         iFragmentPresenter = new ExploreFragmentPresenterImpl(this);
-
-//        if (savedInstanceState != null){
-//            Log.i("LOG", "Loading old data to explore when screen rotating");
-//            loadingFrame.setVisibility(View.GONE);
-//        }else {
-            if (mAdapter == null) {
-                Log.i("LOG", "Loading new data to explore");
-                modelForFilter = new ArrayList<>();
-                iFragmentPresenter.loadDatas();
-                mAdapter = new ProductsListAdapter(getContext(), iFragmentPresenter);
-            } else {
-                loadingFrame.setVisibility(View.GONE);
-                Log.i("LOG", "Loading old data to explore");
-            }
-//        }
+        modelForFilter = new ArrayList<>();
+        iFragmentPresenter.loadDatas();
+        mAdapter = new ProductsListAdapter(getContext());
+        mAdapter.setDatas(model);
         rView.setAdapter(mAdapter);
+        rView.setLayoutManager(linearLayoutManager);
 
+
+        rView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(final int page, int totalItemsCount) {
+                if (savedInstanceState == null) {
+                    iFragmentPresenter.loadMoreDatas(page);
+                } else {
+//                    iFragmentPresenter.loadMoreDatas(page);
+                }
+            }
+        });
 
         TextView tryAgain = (TextView) view.findViewById(R.id.exploreTryAgain);
         tryAgain.setOnClickListener(new View.OnClickListener() {
@@ -146,19 +151,12 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
     }
 
     // EventBus Subscribe
-    public void onEvent(ScreenRotateEvent getDatasEvent){
-        mAdapter.setDatas(getDatasEvent.getDatas());
-        mAdapter.notifyDataSetChanged();
-        loadingFrame.setVisibility(View.GONE);
-        FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
-        fl.setVisibility(View.GONE);
-    }
-
-    // EventBus Subscribe
     public void onEvent(ExploreFragmentGetDatasEvent getDatasEvent){
+        Log.i("LOG", "INITIAL GET DATA EVENT");
         try {
             if (getDatasEvent != null && getDatasEvent.getDatas() != null && getDatasEvent.getDatas().size() > 0) {
-                mAdapter.setDatas(getDatasEvent.getDatas());
+                model = getDatasEvent.getDatas();
+                mAdapter.setDatas(model);
                 mAdapter.notifyDataSetChanged();
                 loadingFrame.setVisibility(View.GONE);
                 FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
@@ -172,6 +170,19 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
             loadingFrame.setVisibility(View.GONE);
             FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
             fl.setVisibility(View.VISIBLE);
+        }
+    }
+
+    //on load more products
+    public void onEvent(final ExploreFragmentGetMoreDataEvent event){
+        Log.i("LOG", "INITIAL GET MORE DATA EVENT");
+        if (event != null && event.getDatas()!=null) {
+            int curSize = mAdapter.getItemCount();
+            model.addAll(event.getDatas());
+            modelForFilter = model;
+            Log.i("LOG", "Expecting " + model.size() + " displaying");
+            mAdapter.setDatas(model);
+            mAdapter.notifyItemRangeInserted(curSize, model.size() - 1);
         }
     }
 
@@ -237,8 +248,8 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean("saved", true);
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

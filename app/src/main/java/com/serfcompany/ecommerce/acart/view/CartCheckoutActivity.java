@@ -30,6 +30,7 @@ import com.serfcompany.ecommerce.acart.presenter.CartActivityPresenter;
 import com.serfcompany.ecommerce.acart.presenter.CheckoutActivityPresenter;
 import com.serfcompany.ecommerce.acart.view.adapter.CartItemListAdapter;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,26 +39,20 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by serfcompany on 14.03.16.
+ * Checkout view. Represents cart summary. "Checkout" button do redirect to browser.
  */
 public class CartCheckoutActivity extends AbstractActivity{
     private static int LAYOUT = R.layout.activity_checkout;
-    private CartActivityPresenter cartPresenter;
     private CheckoutActivityPresenter checkoutPresenter;
-    private SharedPreferences loginPrefs;
     private SharedPreferences cartPrefs;
-    private Toolbar toolbar;
     private String username;
     private String password;
-    private RecyclerView recView;
-    CartItemListAdapter adapter;
-    private TextView total, subtotal, discount, tax, shippingCost;
-    Map<String, String> coupons;
-    Map<String, String> products;
-    Spinner paymentSpinner;
-    List<PaymentMethod> paymentMethods;
-    String paymentMethodID;
-    FrameLayout loadingFrame;
+    private Map<String, String> coupons;
+    private Map<String, String> products;
+    private Spinner paymentSpinner;
+    private List<PaymentMethod> paymentMethods;
+    private String paymentMethodID;
+    private FrameLayout loadingFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +78,7 @@ public class CartCheckoutActivity extends AbstractActivity{
         SharedPreferences couponPrefs = getSharedPreferences(Constants.COUPON_PREFS, MODE_PRIVATE);
         coupons = new HashMap<>();
         coupons.put("coupon", couponPrefs.getString("coupon", null));
-        cartPresenter = new CartActivityPresenter(this);
+        CartActivityPresenter cartPresenter = new CartActivityPresenter(this);
         cartPresenter.checkCart(username, password, products, coupons);
 
         Button buttonCheckout = (Button) findViewById(R.id.checkoutButton);
@@ -100,6 +95,10 @@ public class CartCheckoutActivity extends AbstractActivity{
         initToolbar();
     }
 
+    /**
+     * Processing place-an-order response and calling payment-redirect event
+     * @param event
+     */
     public void onEvent(PlaceAnOrderEvent event){
         if (event != null && event.getOrder() != null){
             checkoutPresenter.processPayment(event.getOrder().getOrderKey(), String.valueOf(event.getOrder().getOrderID()), event.getOrder().getPaymentMethodId());
@@ -127,24 +126,21 @@ public class CartCheckoutActivity extends AbstractActivity{
 
     public void fillFields(Cart cart){
 
-        List<Item> cartItems = cart.getCart();
-        recView = (RecyclerView) findViewById(R.id.checkoutItemRecyclerView);
+        RecyclerView recView = (RecyclerView) findViewById(R.id.checkoutItemRecyclerView);
         recView.setLayoutManager(new LinearLayoutManager(this));
-//        recView.getLayoutParams().height = (cartItems.size()+1)*80;
-        adapter = new CartItemListAdapter(this, cart.getCart());
-        adapter.notifyDataSetChanged();
-        recView.setAdapter(adapter);
-        total = (TextView) findViewById(R.id.checkoutTotal);
-        subtotal = (TextView) findViewById(R.id.checkoutSubtotal);
-        discount = (TextView) findViewById(R.id.checkoutDiscount);
-        shippingCost = (TextView) findViewById(R.id.checkoutShipping);
-//        tax = (TextView) findViewById(R.id.cartTotalTax);
+        CartItemListAdapter adapter1 = new CartItemListAdapter(this, cart.getCart());
+        adapter1.notifyDataSetChanged();
+        recView.setAdapter(adapter1);
+        TextView total = (TextView) findViewById(R.id.checkoutTotal);
+        TextView subtotal = (TextView) findViewById(R.id.checkoutSubtotal);
+        TextView discount = (TextView) findViewById(R.id.checkoutDiscount);
+        TextView shippingCost = (TextView) findViewById(R.id.checkoutShipping);
 
         String currency = cartPrefs.getString(Constants.CURRENCY, "");
-        total.setText(Html.fromHtml(currency + " " + cart.getGrandTotal()));
-        subtotal.setText(Html.fromHtml(currency + " " + cart.getCartSubtotal()));
-        discount.setText(Html.fromHtml(currency+" "+cart.getDiscount()));
-        shippingCost.setText(Html.fromHtml(currency + " " + cart.getShippingCost()));
+        total.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getGrandTotal()))));
+        subtotal.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getCartSubtotal()))));
+        discount.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getDiscount()))));
+        shippingCost.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getShippingCost()))));
 
         if (cart.getPaymentMethod()!=null){
 
@@ -171,7 +167,7 @@ public class CartCheckoutActivity extends AbstractActivity{
 
 
     private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.cartCheckoutToolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.cartCheckoutToolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null){
             getSupportActionBar().setHomeButtonEnabled(true);

@@ -2,16 +2,24 @@ package com.serfcompany.ecommerce.acart.view.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.serfcompany.ecommerce.acart.view.ProductActivity;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.model.product.Category;
@@ -19,8 +27,13 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.presenter.main.IExploreFragmentPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by serfcompany on 29.02.16.
@@ -62,7 +75,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
     }
 
     @Override
-    public void onBindViewHolder(ProductsViewHolder holder, final int position) {
+    public void onBindViewHolder(final ProductsViewHolder holder, final int position) {
         final Product product = datas.get(position);
         holder.productTitle.setText(product.getGeneral().getTitle());
         holder.productDescription.setText(product.getGeneral().getContent().getExcepts());
@@ -84,6 +97,9 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
             holder.onSaleImage.setImageResource(R.drawable.sale);
         }
 
+
+//                holder.productImage.setImageDrawable(LoadImageFromWebOperations(product.getProductGallery().getFeaturedImages()));
+
         Picasso.with(context)
                 .load(product.getProductGallery().getFeaturedImages())
                 .fit()
@@ -91,7 +107,6 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
                 .placeholder(R.drawable.empty_photo)
                 .error(R.drawable.default_product)
                 .into(holder.productImage);
-
 
         List<Category> productCategories = product.getCategories();
         String productCategoryTag = "";

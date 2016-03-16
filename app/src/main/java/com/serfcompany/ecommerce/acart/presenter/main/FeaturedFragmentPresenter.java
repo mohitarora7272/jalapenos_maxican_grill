@@ -70,6 +70,11 @@ public class FeaturedFragmentPresenter extends AbstractPresenter implements IExp
     }
 
     @Override
+    public void loadMoreDatas(int page) {
+
+    }
+
+    @Override
     public List<Product> getData() {
         return datas;
     }

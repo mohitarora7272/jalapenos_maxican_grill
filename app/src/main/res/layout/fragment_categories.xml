@@ -9,8 +9,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:id="@+id/categoryConnectionError"
         android:layout_margin="32dp"
         android:visibility="gone">
@@ -36,10 +36,7 @@
             android:layout_gravity="center"/>
     </FrameLayout>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,9 +71,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerProductsInCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
+                android:layout_height="wrap_content">
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>

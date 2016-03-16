@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface IExploreFragmentPresenter {
     void loadDatas();
+    public void loadMoreDatas(int page);
     List<Product> getData();
     void loadSearchData(String keyword);
     void clearDatas();

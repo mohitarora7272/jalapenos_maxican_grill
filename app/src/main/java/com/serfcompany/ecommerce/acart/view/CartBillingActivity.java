@@ -88,9 +88,7 @@ public class CartBillingActivity extends AbstractActivity{
 
     public void onEvent(ProfileUpdateEvent event){
         if (event != null && event.getResponse().getStatus()!= null){
-            if (event.getResponse().getStatus().equals("0")){
-                Toast.makeText(this, "Updated. Go to shipping details", Toast.LENGTH_SHORT).show();
-            } else {
+            if (!event.getResponse().getStatus().equals("0")){
                 Toast.makeText(this, "Try again later. Something went wrong", Toast.LENGTH_SHORT).show();
             }
         }

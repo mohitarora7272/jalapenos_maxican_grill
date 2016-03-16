@@ -122,7 +122,7 @@ public class OrderActivity extends AbstractActivity{
         orderRecView.setLayoutManager(new LinearLayoutManager(this));
 
         OrderItemListAdapter adapter = new OrderItemListAdapter(this, orderItems);
-        orderRecView.getLayoutParams().height = (orderItems.size()+1)*80;
+//        orderRecView.getLayoutParams().height = (orderItems.size()+1)*80;
         orderRecView.setAdapter(adapter);
         orderSubtotal.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getSubtotalWithTax()))));
         orderShipping.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getShippingCost()))));

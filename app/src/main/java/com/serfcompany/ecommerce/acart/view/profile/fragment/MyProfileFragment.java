@@ -159,14 +159,14 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
 
     public void onEvent(ProfileUpdateEvent event){
         if (event != null && event.getResponse()!=null){
-            String toToast = event.getResponse().getReason();
-            Toast.makeText(getContext(), toToast, Toast.LENGTH_SHORT).show();
+//            String toToast = event.getResponse().getReason();
+//            Toast.makeText(getContext(), toToast, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void onEvent(NetworkConnectionProblemEvent event){
         if (event != null){
-            Toast.makeText(getContext(), "Error. Try again later.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Connection problem. Try again later.", Toast.LENGTH_SHORT).show();
         }
     }
 

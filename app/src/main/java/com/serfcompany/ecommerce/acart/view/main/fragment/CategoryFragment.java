@@ -107,6 +107,7 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
         if (event != null && event.getCategories()!=null && event.getCategoriesProducts()!=null){
             loadingFrame.setVisibility(View.GONE);
             divider1.setVisibility(View.VISIBLE);
+
             if (event.getCategories().size() > 0) {
                 divider2.setVisibility(View.VISIBLE);
                 mAdapter.setDatas(event.getCategories());

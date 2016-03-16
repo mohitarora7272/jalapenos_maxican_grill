@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetProductByKeywordHTTP;
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetRecentItemsHTTP;
 import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetDatasEvent;
+import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetMoreDataEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.event.ScreenRotateEvent;
 import com.serfcompany.ecommerce.acart.model.product.Product;
@@ -22,6 +23,7 @@ import de.greenrobot.event.EventBus;
 public class ExploreFragmentPresenterImpl extends AbstractPresenter implements IExploreFragmentPresenter{
     IFragmentView iFragmentView;
     ExploreFragmentGetDatasEvent getDatasEvent;
+    ExploreFragmentGetMoreDataEvent getMoreDataEvent;
     List<Product> datas;
 
     public ExploreFragmentPresenterImpl(IFragmentView iFragmentView) {
@@ -38,7 +40,6 @@ public class ExploreFragmentPresenterImpl extends AbstractPresenter implements I
 
     @Override
     public void loadDatas() {
-        clearDatas();
         if (this.isNetworkAvailable(iFragmentView.getActivity().getBaseContext())) {
             new AsyncTask<Void, Void, Void>() {
                 @Override
@@ -46,7 +47,7 @@ public class ExploreFragmentPresenterImpl extends AbstractPresenter implements I
                     try {
                         GetRecentItemsHTTP con = new GetRecentItemsHTTP();
                         ProductsParser parser = new ProductsParser();
-                        setDatas(parser.parseProducts(con.loadProducts()));
+                        setDatas(parser.parseProducts(con.loadProducts(1)));
                         getDatasEvent = new ExploreFragmentGetDatasEvent(getDatas());
                     } catch (Exception e){
                         EventBus.getDefault().post(new NetworkConnectionProblemEvent());
@@ -61,6 +62,38 @@ public class ExploreFragmentPresenterImpl extends AbstractPresenter implements I
                     }
                 }
             }.execute();
+        } else {
+            NetworkConnectionProblemEvent networkEvent = new NetworkConnectionProblemEvent();
+            EventBus.getDefault().post(networkEvent);
+        }
+    }
+
+    @Override
+    public void loadMoreDatas(int page) {
+
+        if (this.isNetworkAvailable(iFragmentView.getActivity().getBaseContext())) {
+            new AsyncTask<Integer, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Integer... params) {
+                    try {
+                        GetRecentItemsHTTP con = new GetRecentItemsHTTP();
+                        ProductsParser parser = new ProductsParser();
+                        setDatas(parser.parseProducts(con.loadProducts(params[0])));
+                        getMoreDataEvent = new ExploreFragmentGetMoreDataEvent(getDatas());
+                    } catch (Exception e){
+                        EventBus.getDefault().post(new NetworkConnectionProblemEvent());
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    if (getMoreDataEvent != null) {
+                        EventBus.getDefault().post(getMoreDataEvent);
+                    }
+                }
+            }.execute(page);
         } else {
             NetworkConnectionProblemEvent networkEvent = new NetworkConnectionProblemEvent();
             EventBus.getDefault().post(networkEvent);

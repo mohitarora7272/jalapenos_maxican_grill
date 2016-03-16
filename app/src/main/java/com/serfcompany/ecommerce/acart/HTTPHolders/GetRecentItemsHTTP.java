@@ -12,10 +12,6 @@ public class GetRecentItemsHTTP {
 
     String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=get-recent-items";
 
-    public String loadProducts() throws IOException {
-        return loadProducts(1);
-    }
-
     public String loadProducts(int currentPage) throws IOException {
 
             URL url = new URL(urlString+"&current_page="+currentPage);

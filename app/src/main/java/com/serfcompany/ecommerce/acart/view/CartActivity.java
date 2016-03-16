@@ -25,6 +25,7 @@ import com.serfcompany.ecommerce.acart.model.cart.Item;
 import com.serfcompany.ecommerce.acart.presenter.CartActivityPresenter;
 import com.serfcompany.ecommerce.acart.view.adapter.CartItemListAdapter;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,10 +140,10 @@ public class CartActivity extends AbstractActivity{
                 tax = (TextView) findViewById(R.id.cartTotalTax);
 
                 String currency = cartPrefs.getString(Constants.CURRENCY, "");
-                total.setText(Html.fromHtml(currency + " " + cart.getGrandTotal()));
-                subtotal.setText(Html.fromHtml(currency + " " + cart.getCartSubtotal()));
-                discount.setText(Html.fromHtml(currency+" "+cart.getDiscount()));
-                tax.setText(Html.fromHtml(currency + " " + cart.getCartTaxTotal()));
+                total.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getGrandTotal()))));
+                subtotal.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getCartSubtotal()))));
+                discount.setText(Html.fromHtml(currency+" "+String.valueOf(new DecimalFormat("##.##").format(cart.getDiscount()))));
+                tax.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getCartTaxTotal()))));
 
 //                if (cart.getCoupon().getAppliedCoupon()!=null){
 //                    FrameLayout couponsFrame = (FrameLayout) findViewById(R.id.cartCouponNotificationsFrame);

@@ -89,7 +89,7 @@ public class ProductActivity extends AbstractActivity {
                 .load(product.getProductGallery().getFeaturedImages())
                 .fit()
                 .centerInside()
-                .placeholder(R.drawable.default_product)
+                .placeholder(R.drawable.empty_photo)
                 .error(R.drawable.default_product)
                 .into(productImage);
 
