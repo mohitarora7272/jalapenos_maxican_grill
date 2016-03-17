@@ -64,28 +64,7 @@ public class OrderActivity extends AbstractActivity{
         orderBillingAddress = (TextView) findViewById(R.id.order_detailsBillingAddress);
         orderDiscount = (TextView) findViewById(R.id.order_detailsDiscount);
         orderShippingAddress = (TextView) findViewById(R.id.order_detailsShippingAddress);
-
         orderRecView = (RecyclerView) findViewById(R.id.order_detailRecyclerView);
-        orderRecView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                int action = e.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_MOVE:
-                        rv.getParent().requestDisallowInterceptTouchEvent(true);
-                        break;
-                }
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-            }
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-            }
-        });
-
         orderSubtotal = (TextView) findViewById(R.id.order_detailsSubtotal);
         orderShipping = (TextView) findViewById(R.id.order_detailsShippingCost);
         orderTotal = (TextView) findViewById(R.id.order_detailsTotalCost);
@@ -124,10 +103,10 @@ public class OrderActivity extends AbstractActivity{
         OrderItemListAdapter adapter = new OrderItemListAdapter(this, orderItems);
 //        orderRecView.getLayoutParams().height = (orderItems.size()+1)*80;
         orderRecView.setAdapter(adapter);
-        orderSubtotal.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getSubtotalWithTax()))));
-        orderShipping.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getShippingCost()))));
-        orderDiscount.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getDiscountTotal()))));
-        orderTotal.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("##.##").format(order.getOrderTotal()))));
+        orderSubtotal.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("0.00").format(order.getSubtotalExTax()+order.getDiscountTotal()))));
+        orderShipping.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("0.00").format(order.getShippingCost()))));
+        orderDiscount.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("0.00").format(order.getDiscountTotal()))));
+        orderTotal.setText(Html.fromHtml(orderCurrency + String.valueOf(new DecimalFormat("0.00").format(order.getOrderTotal()))));
     }
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.orderToolbar);

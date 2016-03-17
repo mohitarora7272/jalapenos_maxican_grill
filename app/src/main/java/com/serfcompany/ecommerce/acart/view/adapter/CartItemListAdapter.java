@@ -19,6 +19,7 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.parser.SingleProductParser;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -74,9 +75,9 @@ public class CartItemListAdapter extends RecyclerView.Adapter<CartItemListAdapte
 
         String currency = context.getSharedPreferences(
                 Constants.CART_PREFS, Context.MODE_PRIVATE).getString(Constants.CURRENCY, "");
-        holder.productPrice.setText(Html.fromHtml(currency + " " + item.getProductPrice()));
+        holder.productPrice.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(item.getProductPrice()))));
         holder.productQuantity.setText(item.getQuantity());
-        holder.itemTotalPrice.setText(Html.fromHtml(currency + " " + item.getTotalPrice()));
+        holder.itemTotalPrice.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(item.getTotalPrice()))));
 
 
     }

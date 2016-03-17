@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.serfcompany.ecommerce.acart.HTTPHolders.SignInRequestHTTP;
 import com.serfcompany.ecommerce.acart.HTTPHolders.UpdateBillingHTTP;
 import com.serfcompany.ecommerce.acart.HTTPHolders.UpdateShippingHTTP;
+import com.serfcompany.ecommerce.acart.HTTPHolders.UpdateUserProfileHTTP;
 import com.serfcompany.ecommerce.acart.event.ProfileUpdateEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.model.response.Response;
@@ -90,6 +91,43 @@ public class UpdateProfilePresenter extends AbstractPresenter{
                         setResponse(parser.parse(con.updateShipping(username, password, firstName, lastName,
                                 companyName, address1, address2, cityName, postcode,
                                 stateName, country)));
+                        SignInRequestHTTP signInCon = new SignInRequestHTTP();
+                        ProfileParser profileParser = new ProfileParser();
+                        setProfile(profileParser.parseProfile(
+                                signInCon.userLogin(username, password, null)));
+
+                    } catch (IOException e) {
+                        connectionProblemEvent = new NetworkConnectionProblemEvent();
+                        EventBus.getDefault().post(connectionProblemEvent);
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    if (getResponse() != null && getProfile() != null){
+                        updateEvent = new ProfileUpdateEvent(getResponse(), getProfile());
+                        EventBus.getDefault().post(updateEvent);
+                    }
+                }
+            }.execute();
+        }
+    }
+
+    public void updateProfile(final String username, final String password, final String firstName,
+                               final String lastName, final String nickname, final String email){
+        if (!isNetworkAvailable(context)){
+            connectionProblemEvent = new NetworkConnectionProblemEvent();
+            EventBus.getDefault().post(connectionProblemEvent);
+        } else {
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    UpdateUserProfileHTTP con = new UpdateUserProfileHTTP();
+                    ResponseParser parser = new ResponseParser();
+                    try {
+                        setResponse(parser.parse(con.updateProfile(username, password, firstName, lastName,
+                                nickname, email)));
                         SignInRequestHTTP signInCon = new SignInRequestHTTP();
                         ProfileParser profileParser = new ProfileParser();
                         setProfile(profileParser.parseProfile(

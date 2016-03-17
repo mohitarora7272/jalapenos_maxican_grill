@@ -100,11 +100,7 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         rView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(final int page, int totalItemsCount) {
-                if (savedInstanceState == null) {
                     iFragmentPresenter.loadMoreDatas(page);
-                } else {
-//                    iFragmentPresenter.loadMoreDatas(page);
-                }
             }
         });
 
@@ -246,10 +242,12 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         return true;
 
     }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        EventBus.getDefault().unregister(this);
+//    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        EventBus.getDefault().unregister(this);
-    }
+
 }

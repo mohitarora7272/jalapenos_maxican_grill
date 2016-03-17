@@ -48,7 +48,7 @@ public class ExploreFragmentPresenterImpl extends AbstractPresenter implements I
                         GetRecentItemsHTTP con = new GetRecentItemsHTTP();
                         ProductsParser parser = new ProductsParser();
                         setDatas(parser.parseProducts(con.loadProducts(1)));
-                        getDatasEvent = new ExploreFragmentGetDatasEvent(getDatas());
+
                     } catch (Exception e){
                         EventBus.getDefault().post(new NetworkConnectionProblemEvent());
                     }
@@ -57,9 +57,8 @@ public class ExploreFragmentPresenterImpl extends AbstractPresenter implements I
 
                 @Override
                 protected void onPostExecute(Void aVoid) {
-                    if (getDatasEvent != null) {
-                        EventBus.getDefault().post(getDatasEvent);
-                    }
+                    getDatasEvent = new ExploreFragmentGetDatasEvent(getDatas());
+                    EventBus.getDefault().post(getDatasEvent);
                 }
             }.execute();
         } else {

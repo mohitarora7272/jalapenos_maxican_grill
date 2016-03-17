@@ -137,10 +137,10 @@ public class CartCheckoutActivity extends AbstractActivity{
         TextView shippingCost = (TextView) findViewById(R.id.checkoutShipping);
 
         String currency = cartPrefs.getString(Constants.CURRENCY, "");
-        total.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getGrandTotal()))));
-        subtotal.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getCartSubtotal()))));
-        discount.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getDiscount()))));
-        shippingCost.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getShippingCost()))));
+        total.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(cart.getGrandTotal()))));
+        subtotal.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(cart.getCartSubtotal()))));
+        discount.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(cart.getDiscount()))));
+        shippingCost.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(cart.getShippingCost()))));
 
         if (cart.getPaymentMethod()!=null){
 

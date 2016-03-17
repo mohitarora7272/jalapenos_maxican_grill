@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +69,8 @@ public class CartActivity extends AbstractActivity{
             EventBus.getDefault().register(this);
         }
 
-
+        couponPrefs = getSharedPreferences(Constants.COUPON_PREFS, MODE_PRIVATE);
+        couponPrefsEditor = couponPrefs.edit();
         drawerLayout = (DrawerLayout) findViewById(R.id.cart_drawer_layout);
         cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
         loginPrefs = getSharedPreferences(Constants.LOGIN_PREFS, MODE_PRIVATE);
@@ -140,16 +142,10 @@ public class CartActivity extends AbstractActivity{
                 tax = (TextView) findViewById(R.id.cartTotalTax);
 
                 String currency = cartPrefs.getString(Constants.CURRENCY, "");
-                total.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getGrandTotal()))));
-                subtotal.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getCartSubtotal()))));
-                discount.setText(Html.fromHtml(currency+" "+String.valueOf(new DecimalFormat("##.##").format(cart.getDiscount()))));
-                tax.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("##.##").format(cart.getCartTaxTotal()))));
-
-//                if (cart.getCoupon().getAppliedCoupon()!=null){
-//                    FrameLayout couponsFrame = (FrameLayout) findViewById(R.id.cartCouponNotificationsFrame);
-//                    couponsFrame.setVisibility(View.VISIBLE);
-//
-//                }
+                total.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(cart.getGrandTotal()))));
+                subtotal.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(cart.getCartSubtotal()))));
+                discount.setText(Html.fromHtml(currency+" "+String.valueOf(new DecimalFormat("0.00").format(cart.getDiscount()))));
+                tax.setText(Html.fromHtml(currency + " " + String.valueOf(new DecimalFormat("0.00").format(cart.getCartTaxTotal()))));
             }
         }
 
@@ -182,10 +178,6 @@ public class CartActivity extends AbstractActivity{
                 coupon.put(String.valueOf(couponText.getText().hashCode()), String.valueOf(couponText.getText()));
                 presenter.checkCart(loginPrefs.getString(Constants.USERNAME, null),
                         loginPrefs.getString(Constants.PASSWORD, null), products, coupon);
-                couponPrefs = getSharedPreferences(Constants.COUPON_PREFS, MODE_PRIVATE);
-//                Set<String> couponSet = couponPrefs.getStringSet("coupons", Collections.<String>emptySet());
-//                couponSet.add(String.valueOf(couponText.getText()));
-                couponPrefsEditor = couponPrefs.edit();
                 couponPrefsEditor.clear();
                 couponPrefsEditor.putString("coupon", String.valueOf(couponText.getText()));
                 couponPrefsEditor.apply();
@@ -235,6 +227,15 @@ public class CartActivity extends AbstractActivity{
         EventBus.getDefault().unregister(this);
         super.onStop();
     }
+
+    @Override
+    protected void onDestroy() {
+        Log.i("LOG", "Coupons cleared");
+        couponPrefsEditor.clear();
+        couponPrefsEditor.commit();
+        super.onDestroy();
+    }
+
     @Override
     protected void onResume() {
         if (!EventBus.getDefault().isRegistered(this)){

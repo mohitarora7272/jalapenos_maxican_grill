@@ -60,6 +60,10 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     EditText billingState;
     EditText billingPhone;
     EditText billingEmail;
+    AppCompatEditText profileFirstName;
+    AppCompatEditText profileLastName;
+    EditText profileNickname;
+    EditText profileEmail;
     String username, password;
     FrameLayout loadingFrame;
 
@@ -120,6 +124,7 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
             presenter.signIn(username, password);
         } else {
             Log.i("LOG", "Displaying old profile data");
+            loadingFrame.setVisibility(View.GONE);
             fillData(profile);
         }
 
@@ -189,10 +194,10 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
 
             ImageView profileAvatar = (ImageView) view.findViewById(R.id.profileAvatar);
 
-            AppCompatEditText profileFirstName = (AppCompatEditText) view.findViewById(R.id.profileFirstName);
-            AppCompatEditText profileLastName = (AppCompatEditText) view.findViewById(R.id.profileLastName);
-            EditText profileNickname = (EditText) view.findViewById(R.id.profileNickname);
-            EditText profileEmail = (EditText) view.findViewById(R.id.profileEmail);
+            profileFirstName = (AppCompatEditText) view.findViewById(R.id.profileFirstName);
+            profileLastName = (AppCompatEditText) view.findViewById(R.id.profileLastName);
+            profileNickname = (EditText) view.findViewById(R.id.profileNickname);
+            profileEmail = (EditText) view.findViewById(R.id.profileEmail);
 
             profileFirstName.setText(user.getFirstName());
             profileLastName.setText(user.getLastName());
@@ -236,10 +241,12 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
                 Toast.makeText(getContext(), "Currently unavailable", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.profileUpdateButton :
-                Log.i("LOG", "Update profile button was clicked");
+                updateProfile();
+                Toast.makeText(context, "Profile was updated", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.billingUpdateButton :
                 updateBilling();
+                Toast.makeText(context, "Billing was updated", Toast.LENGTH_SHORT).show();
             default: break;
         }
     }
@@ -250,6 +257,16 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
 
     private void updateProfile(Map<String, String> map){
 
+    }
+
+    private void updateProfile(){
+        String firstName = getFromEditable(profileFirstName.getText());
+        String lastName = getFromEditable(profileLastName.getText());
+        String profileNickName = getFromEditable(profileNickname.getText());
+        String profEmail = getFromEditable(profileEmail.getText());
+
+        UpdateProfilePresenter updateProfilePresenter = new UpdateProfilePresenter(getContext());
+        updateProfilePresenter.updateProfile(username, password, firstName, lastName, profileNickName, profEmail);
     }
 
     private void updateBilling(){

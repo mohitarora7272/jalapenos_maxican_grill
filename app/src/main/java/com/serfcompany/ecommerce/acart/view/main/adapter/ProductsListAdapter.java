@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -70,7 +71,7 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
 
     @Override
     public ProductsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.test_item_product, parent, false);
         return new ProductsViewHolder(view);
     }
 
@@ -81,16 +82,23 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
         holder.productDescription.setText(product.getGeneral().getContent().getExcepts());
         Boolean onSale = product.getGeneral().getPricing().getIsOnSale();
         String currency = product.getGeneral().getPricing().getCurrency();
-        final String productRegularPrice = "" + currency+" "+String.valueOf(Double.valueOf(product.getGeneral().getPricing().getRegularPrice()));
-        final String productSalePrice ="" + currency+" "+String.valueOf(product.getGeneral().getPricing().getSalePrice());
+        Double salePrice = 0.0;
+        Double reguralPrice = Double.valueOf(product.getGeneral().getPricing().getRegularPrice());
+        if (onSale){
+            salePrice = Double.valueOf(product.getGeneral().getPricing().getSalePrice());
+        }
+        final String productRegularPrice = "" + currency+" "+String.valueOf(new DecimalFormat("0.00").format(reguralPrice));
+        final String productSalePrice ="" + currency+" "+String.valueOf(new DecimalFormat("0.00").format(salePrice));
+
         if (!onSale){
             holder.onSaleImage.setImageDrawable(null);
             holder.productSalePrice.setText(null);
             holder.productRegularPrice.setText(Html.fromHtml(productRegularPrice));
             holder.productRegularPrice.setPaintFlags(holder.productRegularPrice.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            holder.productSalePrice.setVisibility(View.GONE);
         } else {
             holder.productRegularPrice.setText(Html.fromHtml(productRegularPrice));
-
+            holder.productSalePrice.setVisibility(View.VISIBLE);
             holder.productRegularPrice.setPaintFlags(holder.productRegularPrice
                     .getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.productSalePrice.setText(Html.fromHtml(productSalePrice));

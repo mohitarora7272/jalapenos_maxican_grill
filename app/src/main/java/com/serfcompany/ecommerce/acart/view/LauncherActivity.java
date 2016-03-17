@@ -36,6 +36,12 @@ public class LauncherActivity extends Activity {
             cartEditor.apply();
             Log.i("LOG", "Cart preferences deleted");
         }
+        Log.i("LOG", "Coupons preferences deleted");
+        SharedPreferences couponPrefs = getSharedPreferences(Constants.COUPON_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor couponPrefsEditor = couponPrefs.edit();
+        couponPrefsEditor.clear();
+        couponPrefsEditor.apply();
+
 
         getBaseContext().getResources().flushLayoutCache();
         super.onDestroy();

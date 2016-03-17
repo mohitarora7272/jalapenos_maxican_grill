@@ -14,6 +14,7 @@ import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.model.orders.Item;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,9 +42,9 @@ public class OrderItemListAdapter extends RecyclerView.Adapter<OrderItemListAdap
     public void onBindViewHolder(OrderItemsViewHolder holder, int position) {
         Item item = orderItems.get(position);
         holder.itemTitle.setText(item.getProductInfo().getProductName());
-        holder.itemCost.setText(String.valueOf(item.getProductPrice()));
+        holder.itemCost.setText(String.valueOf(new DecimalFormat("0.00").format(item.getProductPrice())));
         holder.itemAmount.setText(String.valueOf(item.getQuantity()));
-        holder.itemTotalCost.setText(String.valueOf(item.getTotalPrice()));
+        holder.itemTotalCost.setText(String.valueOf(new DecimalFormat("0.00").format(item.getTotalPrice())));
 //        holder.cardView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

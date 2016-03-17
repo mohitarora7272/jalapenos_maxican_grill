@@ -2,7 +2,9 @@ package com.serfcompany.ecommerce.acart.view;
 
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -14,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +28,7 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.presenter.main.ProductActivityPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,7 +51,7 @@ public class ProductActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppDefault);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
+        setContentView(R.layout.test_activity_product);
 
         cartPreferences = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
         editor = cartPreferences.edit();
@@ -77,13 +81,29 @@ public class ProductActivity extends AbstractActivity {
         ImageView onSaleImage = (ImageView) findViewById(R.id.productPageSaleImage);
         TextView regularPrice = (TextView) findViewById(R.id.productPageRegularPrice);
         TextView salePrice = (TextView) findViewById(R.id.productPageSalePrice);
-        TextView inStock = (TextView) findViewById(R.id.productsInStock);
+        TextView productDescription = (TextView) findViewById(R.id.productPageDescription);
+        TextView productRating = (TextView) findViewById(R.id.productPageRating);
+        TextView productVotes = (TextView) findViewById(R.id.productPageVotesCount);
+//        TextView inStock = (TextView) findViewById(R.id.productsInStock);
         final Spinner quantitySpinner = (Spinner) findViewById(R.id.quantitySpinner);
         Button addToCartButton = (Button) findViewById(R.id.productPageAddToCardButton);
 
+
+
         String currency = product.getGeneral().getPricing().getCurrency();
-        String regPriceString = String.valueOf("" + currency + " " + product.getGeneral().getPricing().getRegularPrice());
-        String salePriceString = String.valueOf(""+currency+" "+product.getGeneral().getPricing().getSalePrice());
+        Double regPrice = Double.parseDouble(product.getGeneral().getPricing().getRegularPrice());
+        Double salPrice =0.0;
+        if (product.getGeneral().getPricing().getIsOnSale()){
+            salPrice = Double.parseDouble(product.getGeneral().getPricing().getSalePrice());
+        }else{
+            salePrice.setVisibility(View.GONE);
+        }
+        String regPriceString = String.valueOf("" + currency + " " + String.valueOf(new DecimalFormat("0.00").format(regPrice)));
+        String salePriceString = String.valueOf(""+currency+" "+String.valueOf(new DecimalFormat("0.00").format(salPrice)));
+        productDescription.setText(product.getGeneral().getContent().getExcepts());
+        productRating.setText(product.getRatings().getAverageRating());
+        productVotes.setText(" ("+String.valueOf(product.getRatings().getRatingCount())+" votes)");
+
 
         Picasso.with(this)
                 .load(product.getProductGallery().getFeaturedImages())
@@ -105,9 +125,9 @@ public class ProductActivity extends AbstractActivity {
         productTitle.setText(product.getGeneral().getTitle());
         if (product.getInventory().getQuantity() != null) {
             quantity = product.getInventory().getQuantity();
-            inStock.setText(String.valueOf(quantity)+" in stock");
+//            inStock.setText(String.valueOf(quantity)+" in stock");
         } else {
-            inStock.setText("Out of stock");
+//            inStock.setText("Out of stock");
             addToCartButton.setEnabled(false);
         }
         List<Integer> arr = new ArrayList<>();
@@ -161,6 +181,7 @@ public class ProductActivity extends AbstractActivity {
                 fillFields(getDatasEvent.getProduct());
             }
         }catch (Exception e){
+            e.printStackTrace();
             loadingFrame.setVisibility(View.GONE);
             FrameLayout fl = (FrameLayout) findViewById(R.id.connectionErrorFrame);
             fl.setVisibility(View.VISIBLE);

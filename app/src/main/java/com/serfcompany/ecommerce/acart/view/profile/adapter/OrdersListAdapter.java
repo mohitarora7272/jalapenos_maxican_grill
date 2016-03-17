@@ -16,6 +16,7 @@ import com.serfcompany.ecommerce.acart.model.orders.MyOrder;
 import com.serfcompany.ecommerce.acart.presenter.profile.MyOrdersFragmentPresenter;
 import com.serfcompany.ecommerce.acart.view.OrderActivity;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.Or
         holder.orderDate.setText(order.getOrderDate());
         holder.orderStatus.setText(order.getStatus());
         String currency = order.getCurrency();
-        String orderTotal = ""+ currency +" "+order.getOrderTotal()+"";
+        String orderTotal = ""+ currency +" "+String.valueOf(new DecimalFormat("0.00").format(order.getOrderTotal())) + "";
         holder.orderTotal.setText(Html.fromHtml(orderTotal));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

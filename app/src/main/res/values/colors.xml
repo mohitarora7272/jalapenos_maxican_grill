@@ -8,5 +8,5 @@
     <color name="colorPrimaryText">#b4212121</color>
     <color name="colorSecondaryText">#727272</color>
     <color name="colorDivider">#B6B6B6</color>
-    <color name="salePriceColor">#9dff0004</color>
+    <color name="salePriceColor">#9dff4444</color>
 </resources>
