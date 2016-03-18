@@ -1,17 +1,43 @@
 <resources>
     <string name="app_name">AmazingCart</string>
-    <string name="search_title">Search</string>
 
+
+
+    <string name="search_title">Search</string>
     <string name="menu_item_shop">Store Home</string>
     <string name="menu_item_profile">Profile</string>
     <string name="menu_item_cart">Cart</string>
-
     <string name="open">Open</string>
     <string name="close">Close</string>
-
     <string name="network_error">Problem has occurred when loading data. Check your network connection</string>
-
     <string name="tab_item_explore">Explore</string>
     <string name="tab_item_categories">Categories</string>
     <string name="tab_item_featured">Featured</string>
+    <string name="pre_total">PRE TOTAL</string>
+    <string name="coupon">COUPON :</string>
+    <string name="code">CODE</string>
+    <string name="apply">APPLY</string>
+    <string name="clear_cart_button">CLEAR CART</string>
+    <string name="next_button">NEXT</string>
+    <string name="please_text">Please,</string>
+    <string name="sign_in_link_text">SIGN IN</string>
+    <string name="cart_is_empty">Cart is empty</string>
+    <string name="launch_product_button">Launch products</string>
+    <string name="subtotal">SUBTOTAL</string>
+    <string name="tax">TAX</string>
+    <string name="discount">DISCOUNT</string>
+    <string name="total">TOTAL</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="company">Company</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="post_code">Post code</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="order_notes_hint">Notes about your order. E.g special note for delivery</string>
+    <string name="same_as_billing_button">SAME AS BILLING</string>
 </resources>

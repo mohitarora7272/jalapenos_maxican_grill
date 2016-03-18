@@ -64,14 +64,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
-                    android:text="PRE TOTAL"/>
+                    android:text="@string/pre_total"/>
                 <TextView
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:id="@+id/cartPreTotal"
-                    android:text="$19.99"
                     android:paddingRight="16dp"/>
 
             </LinearLayout>
@@ -85,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:text="COUPON :"
+                    android:text="@string/coupon"
                     android:gravity="bottom"
                     android:layout_marginBottom="8dp"
                     />
@@ -98,8 +97,9 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="CODE"
+                        android:hint="@string/code"
                         android:layout_marginRight="6dp"
+                        android:selectAllOnFocus="true"
                         android:singleLine="true"
                         android:textSize="14sp"
                         />
@@ -108,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="APPLY"
+                    android:text="@string/apply"
                     android:textColor="@color/colorTextIcons"
                     android:id="@+id/applyCoupon"/>
 
@@ -125,14 +125,14 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="CLEAR CART"
+                    android:text="@string/clear_cart_button"
                     android:id="@+id/cartClearCart"
                     android:textColor="@color/colorTextIcons"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="NEXT STEP"
+                    android:text="@string/next_button"
                     android:id="@+id/cartNextToBilling"
                     android:textColor="@color/colorTextIcons"/>
             </LinearLayout>

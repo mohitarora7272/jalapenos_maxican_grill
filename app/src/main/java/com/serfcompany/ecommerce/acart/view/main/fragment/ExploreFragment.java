@@ -99,8 +99,9 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
 
         rView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
-            public void onLoadMore(final int page, int totalItemsCount) {
+            public synchronized void onLoadMore(final int page, int totalItemsCount) {
                     iFragmentPresenter.loadMoreDatas(page);
+                return;
             }
         });
 
@@ -170,7 +171,7 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
     }
 
     //on load more products
-    public void onEvent(final ExploreFragmentGetMoreDataEvent event){
+    public synchronized void onEvent(final ExploreFragmentGetMoreDataEvent event){
         Log.i("LOG", "INITIAL GET MORE DATA EVENT");
         if (event != null && event.getDatas()!=null) {
             int curSize = mAdapter.getItemCount();
@@ -178,7 +179,8 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
             modelForFilter = model;
             Log.i("LOG", "Expecting " + model.size() + " displaying");
             mAdapter.setDatas(model);
-            mAdapter.notifyItemRangeInserted(curSize, model.size() - 1);
+//            mAdapter.notifyItemRangeInserted(curSize, model.size() - 1);
+            mAdapter.notifyDataSetChanged();
         }
     }
 
@@ -242,12 +244,18 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         return true;
 
     }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        EventBus.getDefault().unregister(this);
-//    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
 }

@@ -49,14 +49,19 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:text="Subcategories"
+                android:text="Subcategories (click to hide)"
                 android:textSize="16sp"
                 android:visibility="gone" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerCategoriesView"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/categoriesRecyclerViewFrame">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerCategoriesView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
             </android.support.v7.widget.RecyclerView>
+            </FrameLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/productDivider"
@@ -65,14 +70,19 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:text="Products"
+                android:text="Products (click to hide)"
                 android:textSize="16sp"
                 android:visibility="gone" />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerProductsInCategory"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:id="@+id/productsRecyclerViewFrame">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerProductsInCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </FrameLayout>
         </LinearLayout>
 
 </LinearLayout>

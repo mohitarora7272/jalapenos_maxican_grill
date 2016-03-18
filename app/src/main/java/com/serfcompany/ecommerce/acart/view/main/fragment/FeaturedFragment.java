@@ -107,4 +107,18 @@ public class FeaturedFragment extends AbstractTabFragment {
         getContext().getResources().flushLayoutCache();
         super.onDestroy();
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
 }

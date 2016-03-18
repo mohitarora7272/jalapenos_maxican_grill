@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
-            android:paddingBottom="15dp">
+            android:paddingBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,6 +78,7 @@
                                 android:singleLine="true"
                                 android:nextFocusUp="@id/profileFirstName"
                                 android:nextFocusLeft="@id/profileFirstName"
+                                android:background="@android:drawable/editbox_background_normal"
                                 />
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
@@ -90,6 +91,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/profileLastName"
                                 android:singleLine="true"
+                                android:background="@android:drawable/editbox_background_normal"
                                 />
                         </android.support.design.widget.TextInputLayout>
 
@@ -116,6 +118,8 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/profileNickname"
                                 android:singleLine="true"
+                                android:selectAllOnFocus="true"
+                                android:background="@android:drawable/editbox_background_normal"
                                 android:editable="false"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
@@ -129,7 +133,9 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/profileEmail"
                                 android:singleLine="true"
-                                android:inputType="textEmailAddress"/>
+                                android:selectAllOnFocus="true"
+                                android:inputType="textEmailAddress"
+                                android:background="@android:drawable/editbox_background_normal"/>
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                     <Button
@@ -167,7 +173,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:id="@+id/billingFirstName"/>
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/billingFirstName"
+                                android:background="@android:drawable/editbox_background_normal"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -178,7 +186,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:id="@+id/billingLastName"/>
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/billingLastName"
+                                android:background="@android:drawable/editbox_background_normal"/>
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                     <android.support.design.widget.TextInputLayout
@@ -189,7 +199,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/billingCompanyName"/>
+                            android:selectAllOnFocus="true"
+                            android:id="@+id/billingCompanyName"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -199,7 +211,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/billingAddressLine1"/>
+                            android:selectAllOnFocus="true"
+                            android:id="@+id/billingAddressLine1"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -209,7 +223,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/billingAddressLine2"/>
+                            android:selectAllOnFocus="true"
+                            android:id="@+id/billingAddressLine2"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -224,7 +240,9 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/billingPostCode"/>
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/billingPostCode"
+                                android:background="@android:drawable/editbox_background_normal"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -236,7 +254,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:id="@+id/billingCity"/>
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/billingCity"
+                                android:background="@android:drawable/editbox_background_normal"/>
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                     <android.support.design.widget.TextInputLayout
@@ -247,7 +267,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/billingCountry"/>
+                            android:selectAllOnFocus="true"
+                            android:id="@+id/billingCountry"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -257,7 +279,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
-                            android:id="@+id/billingState"/>
+                            android:selectAllOnFocus="true"
+                            android:id="@+id/billingState"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -272,7 +296,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
-                                android:id="@+id/billingPhone"/>
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/billingPhone"
+                                android:background="@android:drawable/editbox_background_normal"/>
                         </android.support.design.widget.TextInputLayout>
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -283,8 +309,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:singleLine="true"
+                                android:selectAllOnFocus="true"
                                 android:inputType="textEmailAddress"
-                                android:id="@+id/billingEmail"/>
+                                android:id="@+id/billingEmail"
+                                android:background="@android:drawable/editbox_background_normal"/>
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                 </LinearLayout>

@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:visibility="visible"
             android:id="@+id/progressBarFrame">
 
             <ProgressBar
@@ -39,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
-            android:paddingBottom="15dp">
+            android:paddingBottom="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -61,9 +62,11 @@
                         <android.support.v7.widget.AppCompatEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="First name"
+                            android:hint="@string/first_name"
                             android:singleLine="true"
+                            android:selectAllOnFocus="true"
                             android:textSize="16sp"
+                            android:background="@android:drawable/editbox_background_normal"
                             android:id="@+id/billingFirstName"
                             android:nextFocusUp="@id/billingFirstName"
                             android:nextFocusLeft="@id/billingFirstName"/>
@@ -76,10 +79,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Last name"
+                            android:hint="@string/last_name"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingLastName"/>
+                            android:selectAllOnFocus="true"
+                            android:id="@+id/billingLastName"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -93,10 +98,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Company"
+                            android:hint="@string/company"
                             android:singleLine="true"
+                            android:selectAllOnFocus="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingCompanyName"/>
+                            android:id="@+id/billingCompanyName"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -110,10 +117,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Address Line 1"
+                            android:hint="@string/address_line_1"
+                            android:selectAllOnFocus="true"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingAddress1Text"/>
+                            android:id="@+id/billingAddress1Text"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -127,10 +136,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Address Line 2"
+                            android:hint="@string/address_line_2"
+                            android:selectAllOnFocus="true"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingAddress2Text"/>
+                            android:id="@+id/billingAddress2Text"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -144,10 +155,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Post code"
+                            android:hint="@string/post_code"
+                            android:selectAllOnFocus="true"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingPostCodeText"/>
+                            android:id="@+id/billingPostCodeText"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -157,10 +170,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="City"
+                            android:hint="@string/city"
                             android:textSize="16sp"
+                            android:selectAllOnFocus="true"
                             android:singleLine="true"
-                            android:id="@+id/billingCityText"/>
+                            android:id="@+id/billingCityText"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -174,10 +189,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Country"
+                            android:hint="@string/country"
                             android:singleLine="true"
+                            android:selectAllOnFocus="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingCountryText"/>
+                            android:id="@+id/billingCountryText"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -191,10 +208,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="State"
+                            android:hint="@string/state"
+                            android:selectAllOnFocus="true"
                             android:singleLine="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingStateText"/>
+                            android:id="@+id/billingStateText"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -208,10 +227,12 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Phone"
+                            android:hint="@string/phone"
                             android:singleLine="true"
+                            android:selectAllOnFocus="true"
                             android:textSize="16sp"
-                            android:id="@+id/billingPhoneText"/>
+                            android:id="@+id/billingPhoneText"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
@@ -221,17 +242,20 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Email"
+                            android:hint="@string/email"
                             android:textSize="16sp"
                             android:singleLine="true"
+                            android:selectAllOnFocus="true"
                             android:id="@+id/billingEmailText"
-                            android:inputType="textEmailAddress"/>
+                            android:inputType="textEmailAddress"
+                            android:background="@android:drawable/editbox_background_normal"/>
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="NEXT"
+                    android:text="@string/next_button"
+                    android:selectAllOnFocus="true"
                     android:id="@+id/cartBillingNextButton"
                     android:textColor="@color/colorTextIcons"
                     android:layout_marginBottom="16dp"/>

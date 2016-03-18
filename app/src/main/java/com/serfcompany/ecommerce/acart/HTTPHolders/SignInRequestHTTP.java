@@ -2,6 +2,9 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
+
 import org.json.JSONException;
 
 import java.io.BufferedReader;
@@ -17,7 +20,8 @@ import java.net.URL;
  */
 public class SignInRequestHTTP {
 
-    String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=user-login";
+    String urlString = Constants.APP_URI +
+            "?amazingcart=json-api&type=user-login";
 
     public String userLogin(String username, String password, String deviceID){
         try {

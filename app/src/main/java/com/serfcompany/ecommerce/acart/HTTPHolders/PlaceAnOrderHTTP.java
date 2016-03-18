@@ -2,6 +2,8 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.Utils;
 
 import java.io.BufferedReader;
@@ -19,7 +21,8 @@ import java.util.Map;
  */
 public class PlaceAnOrderHTTP {
 
-    private String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=place-an-order-api";
+    private String urlString = Constants.APP_URI +
+            "?amazingcart=json-api&type=place-an-order-api";
 
     public String placeOrder(String username, String password,
                            Map<String, String> idQuantityMap, Map<String, String> couponCode, String paymentMethodID, String orderNotes) throws IOException {

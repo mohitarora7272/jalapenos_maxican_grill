@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -26,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:visibility="visible"
             android:id="@+id/progressBarFrame">
 
             <ProgressBar
@@ -35,201 +37,226 @@
                 android:visibility="visible"
                 android:layout_gravity="center"/>
         </FrameLayout>
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:paddingBottom="15dp">
-            <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_margin="12dp">
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="12dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/orderNoteLayout"
-                        android:layout_weight="1">
-                        <EditText
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Notes about your order. E.g special note for delivery"
-                            android:lines="4"
-                            android:gravity="top|left"
-                            android:textSize="14sp"
-                            android:id="@+id/orderNoteText"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
+                            android:id="@+id/orderNoteLayout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/order_notes_hint"
+                                android:lines="4"
+                                android:gravity="top|left"
+                                android:selectAllOnFocus="true"
+                                android:textSize="14sp"
+                                android:id="@+id/orderNoteText"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingSameAsBillingButton"
-                        android:text="SAME AS BILLING"
-                        android:layout_weight="1"
-                        android:textColor="@color/colorTextIcons"/>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:id="@+id/shippingNextButton"
-                        android:layout_weight="1"
-                        android:text="NEXT"
-                        android:textColor="@color/colorTextIcons"/>
-                </LinearLayout>
+                        android:layout_height="wrap_content">
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingSameAsBillingButton"
+                            android:text="@string/same_as_billing_button"
+                            android:selectAllOnFocus="true"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorTextIcons"/>
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:id="@+id/shippingNextButton"
+                            android:selectAllOnFocus="true"
+                            android:layout_weight="1"
+                            android:text="@string/next_button"
+                            android:textColor="@color/colorTextIcons"/>
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingFirstNameLayout"
-                        android:layout_weight="1">
-                        <EditText
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="First name"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingFirstName"/>
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingLastNameLayout"
-                        android:layout_weight="1">
-                        <EditText
+                            android:id="@+id/shippingFirstNameLayout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/first_name"
+                                android:singleLine="true"
+                                android:selectAllOnFocus="true"
+                                android:textSize="16sp"
+                                android:id="@+id/shippingFirstName"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                        <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Last name"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingLastName"/>
-                    </android.support.design.widget.TextInputLayout>
+                            android:id="@+id/shippingLastNameLayout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/last_name"
+                                android:singleLine="true"
+                                android:selectAllOnFocus="true"
+                                android:textSize="16sp"
+                                android:id="@+id/shippingLastName"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingCompanyLayout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/company"
+                                android:selectAllOnFocus="true"
+                                android:singleLine="true"
+                                android:textSize="16sp"
+                                android:id="@+id/shippingCompanyName"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingAddress1Layout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/address_line_1"
+                                android:singleLine="true"
+                                android:textSize="16sp"
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/shippingAddress1Text"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingAddress2Layout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/address_line_2"
+                                android:singleLine="true"
+                                android:textSize="16sp"
+                                android:selectAllOnFocus="true"
+                                android:id="@+id/shippingAddress2Text"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingPostCodeLayout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/post_code"
+                                android:selectAllOnFocus="true"
+                                android:singleLine="true"
+                                android:textSize="16sp"
+                                android:id="@+id/shippingPostCodeText"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingCityLayout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/city"
+                                android:selectAllOnFocus="true"
+                                android:textSize="16sp"
+                                android:singleLine="true"
+                                android:id="@+id/shippingCityText"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingCountryLayout"
+                            android:layout_weight="1">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/country"
+                                android:singleLine="true"
+                                android:selectAllOnFocus="true"
+                                android:textSize="16sp"
+                                android:id="@+id/shippingCountryText"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/shippingStateLayout"
+                            android:layout_marginBottom="5dp">
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/state"
+                                android:singleLine="true"
+                                android:selectAllOnFocus="true"
+                                android:textSize="16sp"
+                                android:id="@+id/shippingStateText"
+                                android:background="@android:drawable/editbox_background_normal"/>
+                        </android.support.design.widget.TextInputLayout>
+                    </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingCompanyLayout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Company"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingCompanyName"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingAddress1Layout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Address Line 1"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingAddress1Text"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingAddress2Layout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Address Line 2"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingAddress2Text"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingPostCodeLayout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Post code"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingPostCodeText"/>
-                    </android.support.design.widget.TextInputLayout>
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingCityLayout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="City"
-                            android:textSize="16sp"
-                            android:singleLine="true"
-                            android:id="@+id/shippingCityText"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingCountryLayout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Country"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingCountryText"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/shippingStateLayout"
-                        android:layout_weight="1">
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="State"
-                            android:singleLine="true"
-                            android:textSize="16sp"
-                            android:id="@+id/shippingStateText"/>
-                    </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+            </ScrollView>
+        </LinearLayout>
     </LinearLayout>
     <include layout="@layout/navigation_view"/>
 </android.support.v4.widget.DrawerLayout>

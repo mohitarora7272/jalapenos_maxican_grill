@@ -2,6 +2,9 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -17,7 +20,8 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class UpdateBillingHTTP {
 
-    private final String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=user-billing-update";
+    private final String urlString = Constants.APP_URI +
+            "?amazingcart=json-api&type=user-billing-update";
 
     public String updateBilling(String username, String password, String firstName,
                                 String lastName, String companyName, String address1,

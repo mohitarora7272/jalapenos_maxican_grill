@@ -1,5 +1,8 @@
 package com.serfcompany.ecommerce.acart.HTTPHolders;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +13,8 @@ import java.net.URL;
 
 public class GetRecentItemsHTTP {
 
-    String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=get-recent-items";
+    String urlString = Constants.APP_URI +
+            "?amazingcart=json-api&type=get-recent-items";
 
     public String loadProducts(int currentPage) throws IOException {
 

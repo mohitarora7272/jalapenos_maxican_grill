@@ -2,6 +2,8 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.Utils;
 
 import java.io.BufferedReader;
@@ -19,8 +21,8 @@ import java.util.Map;
  */
 public class CheckCartHTTP {
 
-    private static final String urlString =
-            "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=cart-api";
+    private static final String urlString = Constants.APP_URI +
+            "?amazingcart=json-api&type=cart-api";
 
     public String loadCart(String username, String password,
                             Map<String, String> idQuantityMap, Map<String, String> couponCode){

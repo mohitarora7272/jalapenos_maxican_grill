@@ -2,6 +2,9 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,7 +22,8 @@ import java.net.URL;
 public class SignUpRequestHTTP {
 
     private static final String urlString =
-            "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=user-registration";
+            Constants.APP_URI +
+                    "?amazingcart=json-api&type=user-registration";
 
     public String userSignUp(String username, String email, String firstname,
                           String lastname, String password, String deviceID) {

@@ -3,6 +3,8 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 import android.provider.SyncStateContract;
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.model.category.Category;
 
 import org.json.JSONException;
@@ -22,8 +24,8 @@ import java.util.List;
  * Created by serfcompany on 29.02.16.
  */
 public class GetCategoriesHTTP {
-    private static final String urlString =
-            "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=product-categories";
+    private static final String urlString = Constants.APP_URI +
+            "?amazingcart=json-api&type=product-categories";
 
     public String loadCategories() throws IOException {
             URL url = new URL(urlString);

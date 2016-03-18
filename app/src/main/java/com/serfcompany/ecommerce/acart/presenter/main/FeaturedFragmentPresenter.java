@@ -60,7 +60,9 @@ public class FeaturedFragmentPresenter extends AbstractPresenter implements IExp
 
                 @Override
                 protected void onPostExecute(Void aVoid) {
-                    EventBus.getDefault().post(getDataEvent);
+                    if (getDataEvent!= null) {
+                        EventBus.getDefault().post(getDataEvent);
+                    }
                 }
             }.execute();
         } else {

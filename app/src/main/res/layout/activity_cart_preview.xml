@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:visibility="visible"
             android:id="@+id/progressBarFrame">
 
             <ProgressBar
@@ -59,14 +60,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="Please, "
+                            android:text="@string/please_text"
                             android:textSize="16sp"
                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/cartPleaseSignIn"
-                            android:text="SIGN IN "
+                            android:text="@string/sign_in_link_text"
                             android:textSize="16sp"
                             android:textColor="@color/colorPrimary"
                             />
@@ -86,7 +87,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Cart is empty"
+                            android:text="@string/cart_is_empty"
                             android:gravity="center"
                             android:textColor="@color/colorPrimaryText"/>
                         <Button
@@ -95,7 +96,7 @@
                             android:gravity="center"
                             android:id="@+id/cartLaunchProducts"
                             android:layout_marginTop="12dp"
-                            android:text="Launch products"
+                            android:text="@string/launch_product_button"
                             android:textColor="@color/colorTextIcons"/>
                     </LinearLayout>
                 </FrameLayout>
@@ -137,13 +138,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="SUBTOTAL"/>
+                                    android:text="@string/subtotal"/>
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:text="$ 18.99"
                                     android:id="@+id/cartSubtotal"/>
                             </LinearLayout>
                             <LinearLayout
@@ -154,13 +154,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="TAX"/>
+                                    android:text="@string/tax"/>
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:text="$ 0.00"
                                     android:id="@+id/cartTotalTax"/>
                             </LinearLayout>
                             <FrameLayout
@@ -176,13 +175,12 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:text="DISCOUNT"/>
+                                        android:text="@string/discount"/>
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:gravity="right"
-                                        android:text="$ 2.99"
                                         android:id="@+id/cartDiscount"/>
                                 </LinearLayout>
                             </FrameLayout>
@@ -199,13 +197,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="TOTAL"/>
+                                    android:text="@string/total"/>
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:text="$ 18.99"
                                     android:id="@+id/cartCartTotal"/>
                             </LinearLayout>
                             <FrameLayout
@@ -224,13 +221,11 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="right"
-                                    android:text="2016"
                                     android:textColor="@android:color/holo_green_dark"/>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="right"
-                                    android:text=" has been successfully added"
                                     android:textColor="@android:color/holo_green_dark"/>
                                 </LinearLayout>
                             </FrameLayout>
@@ -266,17 +261,19 @@
                                     <EditText
                                         android:layout_width="100dp"
                                         android:layout_height="wrap_content"
-                                        android:hint="CODE"
+                                        android:hint="@string/code"
                                         android:gravity="center"
+                                        android:selectAllOnFocus="true"
                                         android:textSize="12sp"
                                         android:id="@+id/cartCouponCode"
-                                        android:singleLine="true"/>
+                                        android:singleLine="true"
+                                        android:background="@android:drawable/editbox_background_normal"/>
                                 </android.support.design.widget.TextInputLayout>
 
                                 <Button
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="APPLY COUPON"
+                                    android:text="@string/apply"
                                     android:textSize="12sp"
                                     android:id="@+id/cartApplyCouponButton"
                                     android:textColor="@color/colorTextIcons"
@@ -290,7 +287,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
-                                    android:text="CLEAR CART"
+                                    android:text="@string/clear_cart_button"
                                     android:id="@+id/cartClearButton"
                                     android:textSize="12sp"
                                     android:textColor="@color/colorTextIcons"/>
@@ -305,7 +302,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
-                                    android:text="NEXT"
+                                    android:text="@string/next_button"
                                     android:id="@+id/cartNextToBillingButton"
                                     android:textSize="12sp"
                                     android:textColor="@color/colorTextIcons"/>

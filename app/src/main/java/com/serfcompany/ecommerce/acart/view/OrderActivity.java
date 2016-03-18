@@ -10,6 +10,8 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.serfcompany.ecommerce.acart.Constants;
@@ -38,6 +40,7 @@ public class OrderActivity extends AbstractActivity{
     RecyclerView orderRecView;
     OrderActivityPresenter activityPresenter;
     Toolbar toolbar;
+    FrameLayout loadingFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class OrderActivity extends AbstractActivity{
         if (!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
-
+        loadingFrame = (FrameLayout) findViewById(R.id.progressBarFrame);
         orderDate = (TextView) findViewById(R.id.order_detailsDate);
         orderPaymentMethod = (TextView) findViewById(R.id.order_detailsPaymentMethod);
         orderID = (TextView) findViewById(R.id.order_detailsID);
@@ -79,6 +82,7 @@ public class OrderActivity extends AbstractActivity{
 
     public void onEvent(OrderByIdGetDataEvent getDataEvent){
         if (getDataEvent != null && getDataEvent.getOrder() != null){
+            loadingFrame.setVisibility(View.GONE);
             fillFields(getDataEvent.getOrder());
         }
     }

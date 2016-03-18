@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,19 @@ import android.widget.TextView;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.event.CategoryExploreEvent;
 import com.serfcompany.ecommerce.acart.event.CategoryFragmentGetDataEvent;
+import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetMoreDataEvent;
 import com.serfcompany.ecommerce.acart.event.NetworkConnectionProblemEvent;
 import com.serfcompany.ecommerce.acart.model.category.Category;
 import com.serfcompany.ecommerce.acart.model.product.Product;
+import com.serfcompany.ecommerce.acart.presenter.EndlessRecyclerViewScrollListener;
 import com.serfcompany.ecommerce.acart.presenter.main.CategoryFragmentPresenter;
+import com.serfcompany.ecommerce.acart.presenter.main.ExploreFragmentPresenterImpl;
 import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
 import com.serfcompany.ecommerce.acart.view.main.adapter.CategoriesListAdapter;
 import com.serfcompany.ecommerce.acart.view.main.adapter.ProductsListAdapter;
 
 import java.util.Collections;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
@@ -38,6 +43,7 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
     private CategoryFragmentPresenter presenter;
     private CategoriesListAdapter mAdapter;
     private ProductsListAdapter prodAdapter;
+    ExploreFragmentPresenterImpl iFragmentPresenter;
     FrameLayout loadingFrame;
     TextView divider1, divider2;
 
@@ -59,6 +65,40 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
         loadingFrame = (FrameLayout) view.findViewById(R.id.progressBarFrame);
         divider1 = (TextView) view.findViewById(R.id.productDivider);
         divider2 = (TextView) view.findViewById(R.id.categoryDivider);
+
+        final FrameLayout categoriesFrame = (FrameLayout) view.findViewById(R.id.categoriesRecyclerViewFrame);
+        final FrameLayout productsFrame = (FrameLayout) view.findViewById(R.id.productsRecyclerViewFrame);
+
+        divider2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (divider2.getText().equals("Click here to go back")) {
+                    CategoryFragmentPresenter presenter = new CategoryFragmentPresenter(context);
+                    presenter.loadDatas();
+                } else {
+
+                    if (categoriesFrame.getVisibility() == View.VISIBLE) {
+                        categoriesFrame.setVisibility(View.GONE);
+                        divider2.setText("Subcategories (click here to show)");
+                    } else {
+                        categoriesFrame.setVisibility(View.VISIBLE);
+                        divider2.setText("Subcategories (click here to hide)");
+                    }
+                }
+            }
+        });
+        divider1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (productsFrame.getVisibility() == View.VISIBLE) {
+                    divider1.setText("Products (click here to show)");
+                    productsFrame.setVisibility(View.GONE);
+                } else {
+                    productsFrame.setVisibility(View.VISIBLE);
+                    divider1.setText("Products (click here to hide)");
+                }
+            }
+        });
         return view;
     }
 
@@ -70,8 +110,9 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
             EventBus.getDefault().register(this);
         }
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         rView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        prodRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        prodRecView.setLayoutManager(linearLayoutManager);
         presenter = new CategoryFragmentPresenter(this);
         presenter.loadDatas();
         mAdapter = new CategoriesListAdapter(getContext(), presenter);
@@ -80,7 +121,6 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
             prodRecView.setAdapter(prodAdapter);
         }
         rView.setAdapter(mAdapter);
-
     }
 
     public void onEvent(CategoryFragmentGetDataEvent getDataEvent){
@@ -107,13 +147,13 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
         if (event != null && event.getCategories()!=null && event.getCategoriesProducts()!=null){
             loadingFrame.setVisibility(View.GONE);
             divider1.setVisibility(View.VISIBLE);
+            divider2.setVisibility(View.VISIBLE);
 
             if (event.getCategories().size() > 0) {
-                divider2.setVisibility(View.VISIBLE);
                 mAdapter.setDatas(event.getCategories());
                 mAdapter.notifyDataSetChanged();
             } else {
-                divider2.setVisibility(View.GONE);
+                divider2.setText("Click here to go back");
                 rView.setVisibility(View.GONE);
             }
             prodRecView.setVisibility(View.VISIBLE);
@@ -133,5 +173,19 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
 
     public void setContext(Context context){
         this.context = context;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
     }
 }

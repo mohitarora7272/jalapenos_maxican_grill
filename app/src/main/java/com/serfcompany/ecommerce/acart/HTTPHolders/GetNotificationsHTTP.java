@@ -2,6 +2,9 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,7 +18,8 @@ import java.net.URL;
  */
 public class GetNotificationsHTTP {
 
-    String urlString = "http://woocommerce.serfcompany.com/?amazingcart=notification&type=json";
+    String urlString = Constants.APP_URI +
+            "?amazingcart=notification&type=json";
 
     public String loadNotifications(String page, String postPerPage, String username, String password){
         try {

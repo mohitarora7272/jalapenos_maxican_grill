@@ -2,6 +2,9 @@ package com.serfcompany.ecommerce.acart.HTTPHolders;
 
 import android.util.Log;
 
+import com.serfcompany.ecommerce.acart.Constants;
+import com.serfcompany.ecommerce.acart.R;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,7 +16,8 @@ import java.net.URL;
  * Created by serfcompany on 17.03.16.
  */
 public class UpdateUserProfileHTTP {
-    private final String urlString = "http://woocommerce.serfcompany.com/?amazingcart=json-api&type=user-profile-update";
+    private final String urlString = Constants.APP_URI +
+            "?amazingcart=json-api&type=user-profile-update";
 
     public String updateProfile(String username, String password, String first_name,
                                  String last_name, String display_name, String email) throws IOException {

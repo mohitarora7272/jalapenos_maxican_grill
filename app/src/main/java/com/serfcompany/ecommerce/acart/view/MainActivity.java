@@ -128,11 +128,10 @@ public class MainActivity extends AbstractActivity{
             case 0:
                 goHomeDude(); break;
             case 1:
-                CategoryFragmentPresenter presenter = new CategoryFragmentPresenter(getBaseContext());
-                presenter.loadDatas();
+                viewPager.setCurrentItem(0);
                 break;
             case 2:
-                goHomeDude(); break;
+                viewPager.setCurrentItem(0); break;
             default:
                 viewPager.setCurrentItem(0); break;
         }
