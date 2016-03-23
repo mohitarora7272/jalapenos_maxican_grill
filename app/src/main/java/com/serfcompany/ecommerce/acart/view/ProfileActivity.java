@@ -14,9 +14,6 @@ import com.serfcompany.ecommerce.acart.view.profile.adapter.TabProfileAdapter;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class ProfileActivity extends AbstractActivity{
 
     private static final int LAYOUT = R.layout.activity_profile;

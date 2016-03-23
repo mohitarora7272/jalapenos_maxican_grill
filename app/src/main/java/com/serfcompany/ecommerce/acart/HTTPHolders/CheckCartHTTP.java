@@ -16,9 +16,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Map;
 
-/**
- * Created by serfcompany on 07.03.16.
- */
 public class CheckCartHTTP {
 
     private static final String urlString = Constants.APP_URI +

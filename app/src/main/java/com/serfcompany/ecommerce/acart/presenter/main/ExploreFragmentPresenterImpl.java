@@ -17,9 +17,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class ExploreFragmentPresenterImpl extends AbstractPresenter implements IExploreFragmentPresenter{
     IFragmentView iFragmentView;
     ExploreFragmentGetDatasEvent getDatasEvent;

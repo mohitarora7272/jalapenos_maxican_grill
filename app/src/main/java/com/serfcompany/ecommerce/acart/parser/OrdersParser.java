@@ -9,9 +9,6 @@ import com.serfcompany.ecommerce.acart.model.orders.Orders;
 
 import java.util.List;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class OrdersParser {
 
     public List<MyOrder> parseOrders(String JSON){

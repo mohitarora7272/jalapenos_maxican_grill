@@ -9,9 +9,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by serfcompany on 15.03.16.
- */
 public class GetChildCategories {
     private static final String urlString = Constants.APP_URI +
             "?amazingcart=json-api&type=product-categories";

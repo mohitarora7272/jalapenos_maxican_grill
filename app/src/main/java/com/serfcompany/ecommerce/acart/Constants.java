@@ -1,10 +1,8 @@
 package com.serfcompany.ecommerce.acart;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class Constants {
 
+    // ---------------- Change Application URL here -------------------------
     public static final String APP_URI = "http://woocommerce.serfcompany.com/";
 
 

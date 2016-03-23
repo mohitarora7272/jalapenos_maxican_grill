@@ -12,9 +12,6 @@ import com.serfcompany.ecommerce.acart.parser.SingleProductParser;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class ProductActivityPresenter {
     Context context;
     Product product;

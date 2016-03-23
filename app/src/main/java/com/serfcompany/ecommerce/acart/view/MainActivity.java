@@ -23,9 +23,6 @@ import com.serfcompany.ecommerce.acart.view.main.fragment.IFragmentView;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class MainActivity extends AbstractActivity{
 
     private Toolbar toolbar;

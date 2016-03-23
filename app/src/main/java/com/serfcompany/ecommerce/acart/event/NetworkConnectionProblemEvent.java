@@ -5,9 +5,6 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class NetworkConnectionProblemEvent {
     List<Product> datas;
 

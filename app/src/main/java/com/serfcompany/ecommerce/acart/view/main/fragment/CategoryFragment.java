@@ -32,9 +32,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class CategoryFragment extends AbstractTabFragment implements IFragmentView{
 
     private static final int LAYOUT = R.layout.fragment_categories;
@@ -150,6 +147,7 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
             divider2.setVisibility(View.VISIBLE);
 
             if (event.getCategories().size() > 0) {
+                divider2.setText("Subcategories (click here to show)");пш
                 mAdapter.setDatas(event.getCategories());
                 mAdapter.notifyDataSetChanged();
             } else {

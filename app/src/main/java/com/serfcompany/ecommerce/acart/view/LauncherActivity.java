@@ -8,9 +8,6 @@ import android.util.Log;
 
 import com.serfcompany.ecommerce.acart.Constants;
 
-/**
- * Created by serfcompany on 08.03.16.
- */
 public class LauncherActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

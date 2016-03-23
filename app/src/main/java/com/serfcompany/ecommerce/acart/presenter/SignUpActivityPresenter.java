@@ -10,9 +10,6 @@ import com.serfcompany.ecommerce.acart.parser.SignUpCodeParser;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class SignUpActivityPresenter {
 
     SignUpEvent signUpEvent;

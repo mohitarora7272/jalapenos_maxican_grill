@@ -15,9 +15,6 @@ import android.widget.LinearLayout;
 import com.serfcompany.ecommerce.acart.Constants;
 import com.serfcompany.ecommerce.acart.R;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public abstract class AbstractActivity extends AppCompatActivity {
 
 
@@ -25,8 +22,6 @@ public abstract class AbstractActivity extends AppCompatActivity {
     public void initNavigationView(final DrawerLayout drawerLayout, final ViewPager viewPager) {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         SharedPreferences cartPrefs = getSharedPreferences(Constants.CART_PREFS, MODE_PRIVATE);
-        MenuItem cart = navigationView.getMenu().findItem(R.id.actionCartItem);
-//        LinearLayout link = (LinearLayout) findViewById(R.id.navigationHeaderLink);
         navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,13 +29,6 @@ public abstract class AbstractActivity extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
-//        link.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.APP_URI));
-//                startActivity(browserIntent);
-//            }
-//        });
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -131,7 +119,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
 
     public void showCartActivity(){
         Intent intent = new Intent();
-        intent.setClass(getBaseContext(), CartActivity.class);
+        intent.setClass(getApplicationContext(), CartActivity.class);
         startActivity(intent);
     }
 }

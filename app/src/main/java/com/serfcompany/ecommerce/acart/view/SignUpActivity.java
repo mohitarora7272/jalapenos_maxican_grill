@@ -21,9 +21,6 @@ import com.serfcompany.ecommerce.acart.presenter.SignUpActivityPresenter;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class SignUpActivity extends AbstractActivity{
     private final static int LAYOUT = R.layout.activity_sign_up;
     private Toolbar toolbar;

@@ -11,9 +11,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-/**
- * Created by serfcompany on 14.03.16.
- */
 public class PaymentRedirectHTTP {
 
     private String urlString = Constants.APP_URI +

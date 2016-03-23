@@ -32,6 +32,7 @@ import com.serfcompany.ecommerce.acart.model.user.User;
 import com.serfcompany.ecommerce.acart.presenter.SignInActivityPresenter;
 import com.serfcompany.ecommerce.acart.presenter.profile.UpdateProfilePresenter;
 import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
+import com.serfcompany.ecommerce.acart.view.ChangePasswordActivity;
 import com.serfcompany.ecommerce.acart.view.SignInActivity;
 import com.squareup.picasso.Picasso;
 
@@ -39,9 +40,6 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class MyProfileFragment extends AbstractTabFragment implements OnClickListener{
     private static final int LAYOUT = R.layout.fragment_my_profile;
     private Profile profile;
@@ -238,7 +236,8 @@ public class MyProfileFragment extends AbstractTabFragment implements OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.profileChangePassword :
-                Toast.makeText(getContext(), "Currently unavailable", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ChangePasswordActivity.class);
+                startActivity(intent);
                 break;
             case R.id.profileUpdateButton :
                 updateProfile();

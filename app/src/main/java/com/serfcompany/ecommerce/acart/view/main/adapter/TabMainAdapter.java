@@ -13,9 +13,6 @@ import com.serfcompany.ecommerce.acart.view.main.fragment.FeaturedFragment;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class TabMainAdapter extends FragmentPagerAdapter {
 
         private Map<Integer, AbstractTabFragment> tabs;

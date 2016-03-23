@@ -11,9 +11,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class GetProductByIdHTTP {
     String urlString = Constants.APP_URI +
             "?amazingcart=json-api&type=single-product&id=";

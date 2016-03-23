@@ -12,9 +12,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class OrderActivityPresenter extends AbstractPresenter{
     OrderByIdGetDataEvent getDataEvent;
     Context context;

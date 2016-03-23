@@ -15,9 +15,6 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by serfcompany on 11.03.16.
- */
 public class UpdateBillingHTTP {
 
     private final String urlString = Constants.APP_URI +

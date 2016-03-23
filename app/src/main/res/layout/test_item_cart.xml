@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="-1dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cartItemCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card:cardElevation="1dp"
+        card:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="0.2"
+                    android:id="@+id/cartItemImage" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="0.6"
+                    android:layout_marginLeft="4dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:text="AmazingCart Ios"
+                        android:layout_weight="0.4"
+                        android:layout_marginTop="2dp"
+                        android:id="@+id/cartItemProductName"
+                        android:singleLine="true"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.6">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="$8.99"
+                            android:id="@+id/cartItemProductCost" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text=" x "/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:layout_marginTop="6dp"
+                            android:visibility="visible"
+                            android:id="@+id/cartItemItemAmount" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:textColor="@color/colorPrimary"
+                            android:text="(Click on cart to edit quantity)"
+                            android:layout_marginTop="6dp"
+                            android:visibility="visible"
+                            android:id="@+id/cartItemItemAmountHint" />
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/quantitySpinnerFrame"
+                            android:visibility="visible">
+                            <Spinner
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                android:gravity="center"
+                                android:background="@android:drawable/editbox_background_normal"
+                                android:id="@+id/quantitySpinner"
+                                >
+                            </Spinner>
+                        </FrameLayout>
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/changeQuantityButton"
+                            android:text="Change quantity"
+                            android:textColor="@color/colorTextIcons"
+                            android:textSize="10sp"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.2">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="$27.97"
+                        android:singleLine="true"
+                        android:id="@+id/cartItemTotalCost" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+</LinearLayout>

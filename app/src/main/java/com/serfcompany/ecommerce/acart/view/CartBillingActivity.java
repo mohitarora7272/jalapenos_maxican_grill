@@ -25,9 +25,6 @@ import com.serfcompany.ecommerce.acart.presenter.profile.UpdateProfilePresenter;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 09.03.16.
- */
 public class CartBillingActivity extends AbstractActivity{
     private static int LAYOUT = R.layout.activity_cartbilling;
     private SignInActivityPresenter presenter;

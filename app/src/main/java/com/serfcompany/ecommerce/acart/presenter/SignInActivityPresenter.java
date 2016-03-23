@@ -15,9 +15,6 @@ import com.serfcompany.ecommerce.acart.parser.ProfileParser;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class SignInActivityPresenter {
     SignInSuccessEvent successEvent;
     SignInFailureEvent failureEvent;

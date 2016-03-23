@@ -18,9 +18,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class OrderItemListAdapter extends RecyclerView.Adapter<OrderItemListAdapter.OrderItemsViewHolder>{
 
     private Context context;

@@ -1,8 +1,5 @@
 package com.serfcompany.ecommerce.acart.event;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class SignUpEvent {
     private int statusCode;
 

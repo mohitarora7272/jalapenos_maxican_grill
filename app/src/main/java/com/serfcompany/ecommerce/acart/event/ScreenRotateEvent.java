@@ -4,9 +4,6 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 
 import java.util.List;
 
-/**
- * Created by serfcompany on 10.03.16.
- */
 public class ScreenRotateEvent {
     List<Product> datas;
 

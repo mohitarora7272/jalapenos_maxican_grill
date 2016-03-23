@@ -16,9 +16,6 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 07.03.16.
- */
 public class CartActivityPresenter extends AbstractPresenter{
 
     Context context;

@@ -20,9 +20,6 @@ import com.serfcompany.ecommerce.acart.view.profile.adapter.NotificationListAdap
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class MyNotificationsFragment extends AbstractTabFragment implements IFragmentView {
 
     private final int LAYOUT = R.layout.fragment_notifications;

@@ -5,9 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.serfcompany.ecommerce.acart.model.response.Response;
 import com.serfcompany.ecommerce.acart.model.user.Profile;
 
-/**
- * Created by serfcompany on 11.03.16.
- */
 public class ResponseParser {
 
     public Response parse(String JSON){

@@ -1,13 +1,9 @@
 package com.serfcompany.ecommerce.acart.event;
 
-import com.serfcompany.ecommerce.acart.model.category.Category;
 import com.serfcompany.ecommerce.acart.model.product.Product;
 
 import java.util.List;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class FeaturedFragmentGetDataEvent {
     List<Product> datas;
 

@@ -16,9 +16,6 @@ import com.serfcompany.ecommerce.acart.view.profile.fragment.MyProfileFragment;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class TabProfileAdapter extends FragmentPagerAdapter {
     private Map<Integer, AbstractTabFragment> tabs;
     Context context;

@@ -21,9 +21,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class CategoryFragmentPresenter extends AbstractPresenter {
     List<Category> categories;
     List<Product> products;

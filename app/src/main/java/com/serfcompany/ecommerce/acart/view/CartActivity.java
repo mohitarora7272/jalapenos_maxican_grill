@@ -33,9 +33,6 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 07.03.16.
- */
 public class CartActivity extends AbstractActivity{
 
     private static final int LAYOUT = R.layout.activity_cart_preview;
@@ -176,6 +173,8 @@ public class CartActivity extends AbstractActivity{
             public void onClick(View v) {
                 Map<String, String> coupon = new HashMap<String, String>();
                 coupon.put(String.valueOf(couponText.getText().hashCode()), String.valueOf(couponText.getText()));
+                products = (Map<String, String>) cartPrefs.getAll();
+                products.remove(Constants.CURRENCY);
                 presenter.checkCart(loginPrefs.getString(Constants.USERNAME, null),
                         loginPrefs.getString(Constants.PASSWORD, null), products, coupon);
                 couponPrefsEditor.clear();

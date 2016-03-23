@@ -27,9 +27,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class OrderActivity extends AbstractActivity{
 
     private final int LAYOUT = R.layout.activity_order_details;

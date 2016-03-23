@@ -30,6 +30,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.5.2'
     compile "com.squareup.picasso:picasso:2.5.2"
     compile "com.google.code.gson:gson:2.3"
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.1.+'
     compile "commons-lang:commons-lang:2.3"
     compile 'de.greenrobot:eventbus:2.4.0'
 }

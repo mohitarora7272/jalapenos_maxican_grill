@@ -4,9 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.serfcompany.ecommerce.acart.model.response.Redirect;
 
-/**
- * Created by serfcompany on 14.03.16.
- */
 public class RedirectParser {
 
     public Redirect parse(String JSON){

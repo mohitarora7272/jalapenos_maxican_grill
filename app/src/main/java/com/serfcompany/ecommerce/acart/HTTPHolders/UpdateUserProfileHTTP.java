@@ -12,9 +12,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by serfcompany on 17.03.16.
- */
 public class UpdateUserProfileHTTP {
     private final String urlString = Constants.APP_URI +
             "?amazingcart=json-api&type=user-profile-update";

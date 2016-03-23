@@ -3,9 +3,6 @@ package com.serfcompany.ecommerce.acart.event;
 import com.serfcompany.ecommerce.acart.model.response.Response;
 import com.serfcompany.ecommerce.acart.model.user.Profile;
 
-/**
- * Created by serfcompany on 11.03.16.
- */
 public class ProfileUpdateEvent {
     private Response response;
     private Profile profile;

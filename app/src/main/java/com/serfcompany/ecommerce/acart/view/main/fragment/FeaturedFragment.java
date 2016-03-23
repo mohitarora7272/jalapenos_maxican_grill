@@ -21,9 +21,6 @@ import com.serfcompany.ecommerce.acart.view.main.adapter.ProductsListAdapter;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class FeaturedFragment extends AbstractTabFragment {
 
     private static final int LAYOUT = R.layout.fragment_explore;

@@ -4,13 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -33,22 +32,18 @@ import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.event.ProductByIdEvent;
 import com.serfcompany.ecommerce.acart.model.product.Product;
 import com.serfcompany.ecommerce.acart.presenter.main.ProductActivityPresenter;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 08.02.16.
- */
 public class ProductActivity extends AbstractActivity {
 
     private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
     private ProductActivityPresenter presenter;
     private SharedPreferences cartPreferences;
     SharedPreferences.Editor editor;
@@ -76,7 +71,6 @@ public class ProductActivity extends AbstractActivity {
         }
 
         loadingFrame = (FrameLayout) findViewById(R.id.progressBarFrame);
-        drawerLayout = (DrawerLayout) findViewById(R.id.product_drawer_layout);
 
         productImage = (ImageView) findViewById(R.id.productActivityImage);
         productImage.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +84,16 @@ public class ProductActivity extends AbstractActivity {
         mShortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
-        initToolbar();
-        initNavigationView(drawerLayout, null);
+        LinearLayout toComments = (LinearLayout) findViewById(R.id.toCommentsActivity);
+        toComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), CommentsActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        initToolbar();
     }
 
     private void fillFields(final Product product) {
@@ -193,6 +194,7 @@ public class ProductActivity extends AbstractActivity {
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
+        this.getResources().flushLayoutCache();
         super.onDestroy();
     }
 
@@ -252,13 +254,9 @@ public class ProductActivity extends AbstractActivity {
     }
 
     private void zoomImageFromThumb(final View thumbView, Product product) {
-        // If there's an animation in progress, cancel it
-        // immediately and proceed with this one.
         if (mCurrentAnimator != null) {
             mCurrentAnimator.cancel();
         }
-
-        // Load the high-resolution "zoomed-in" image.
         final ImageView expandedImageView = (ImageView) findViewById(
                 R.id.expanded_image);
         Picasso.with(this)
@@ -267,29 +265,19 @@ public class ProductActivity extends AbstractActivity {
                 .centerInside()
                 .placeholder(R.drawable.empty_photo)
                 .error(R.drawable.default_product)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(expandedImageView);
 
-        // Calculate the starting and ending bounds for the zoomed-in image.
-        // This step involves lots of math. Yay, math.
         final Rect startBounds = new Rect();
         final Rect finalBounds = new Rect();
         final Point globalOffset = new Point();
 
-        // The start bounds are the global visible rectangle of the thumbnail,
-        // and the final bounds are the global visible rectangle of the container
-        // view. Also set the container view's offset as the origin for the
-        // bounds, since that's the origin for the positioning animation
-        // properties (X, Y).
         thumbView.getGlobalVisibleRect(startBounds);
         findViewById(R.id.container)
                 .getGlobalVisibleRect(finalBounds, globalOffset);
         startBounds.offset(-globalOffset.x, -globalOffset.y);
         finalBounds.offset(-globalOffset.x, -globalOffset.y);
 
-        // Adjust the start bounds to be the same aspect ratio as the final
-        // bounds using the "center crop" technique. This prevents undesirable
-        // stretching during the animation. Also calculate the start scaling
-        // factor (the end scaling factor is always 1.0).
         float startScale;
         if ((float) finalBounds.width() / finalBounds.height()
                 > (float) startBounds.width() / startBounds.height()) {
@@ -300,7 +288,6 @@ public class ProductActivity extends AbstractActivity {
             startBounds.left -= deltaWidth;
             startBounds.right += deltaWidth;
         } else {
-            // Extend start bounds vertically
             startScale = (float) startBounds.width() / finalBounds.width();
             float startHeight = startScale * finalBounds.height();
             float deltaHeight = (startHeight - startBounds.height()) / 2;
@@ -308,20 +295,12 @@ public class ProductActivity extends AbstractActivity {
             startBounds.bottom += deltaHeight;
         }
 
-        // Hide the thumbnail and show the zoomed-in view. When the animation
-        // begins, it will position the zoomed-in view in the place of the
-        // thumbnail.
         thumbView.setAlpha(0f);
         expandedImageView.setVisibility(View.VISIBLE);
 
-        // Set the pivot point for SCALE_X and SCALE_Y transformations
-        // to the top-left corner of the zoomed-in view (the default
-        // is the center of the view).
         expandedImageView.setPivotX(0f);
         expandedImageView.setPivotY(0f);
 
-        // Construct and run the parallel animation of the four translation and
-        // scale properties (X, Y, SCALE_X, and SCALE_Y).
         AnimatorSet set = new AnimatorSet();
         set
                 .play(ObjectAnimator.ofFloat(expandedImageView, View.X,
@@ -347,9 +326,6 @@ public class ProductActivity extends AbstractActivity {
         set.start();
         mCurrentAnimator = set;
 
-        // Upon clicking the zoomed-in image, it should zoom back down
-        // to the original bounds and show the thumbnail instead of
-        // the expanded image.
         final float startScaleFinal = startScale;
         expandedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -358,8 +334,6 @@ public class ProductActivity extends AbstractActivity {
                     mCurrentAnimator.cancel();
                 }
 
-                // Animate the four positioning/sizing properties in parallel,
-                // back to their original values.
                 AnimatorSet set = new AnimatorSet();
                 set.play(ObjectAnimator
                         .ofFloat(expandedImageView, View.X, startBounds.left))

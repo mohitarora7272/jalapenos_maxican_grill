@@ -16,9 +16,6 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Map;
 
-/**
- * Created by serfcompany on 14.03.16.
- */
 public class PlaceAnOrderHTTP {
 
     private String urlString = Constants.APP_URI +

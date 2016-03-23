@@ -1,6 +1,5 @@
 package com.serfcompany.ecommerce.acart.presenter.profile;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetMyOrdersHTTP;
@@ -13,9 +12,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class MyOrdersFragmentPresenter {
 
     private MyOrdersFragment fragmentView;

@@ -2,9 +2,6 @@ package com.serfcompany.ecommerce.acart;
 
 import java.util.Map;
 
-/**
- * Created by serfcompany on 14.03.16.
- */
 public class Utils {
 
     public static String getProdIDJsonFromMap(Map<String, String> map){

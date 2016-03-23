@@ -13,9 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class GetNotificationsHTTP {
 
     String urlString = Constants.APP_URI +

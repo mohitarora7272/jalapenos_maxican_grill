@@ -4,9 +4,6 @@ import com.serfcompany.ecommerce.acart.model.notification.NotificationData;
 
 import java.util.List;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class MyNotificationsGetDataEvent {
         
     private List<NotificationData> myNotifications;

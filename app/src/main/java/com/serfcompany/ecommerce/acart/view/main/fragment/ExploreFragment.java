@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.serfcompany.ecommerce.acart.HTTPHolders.GetCommentByPostID;
 import com.serfcompany.ecommerce.acart.HTTPHolders.GetNotificationsHTTP;
 import com.serfcompany.ecommerce.acart.R;
 import com.serfcompany.ecommerce.acart.event.ExploreFragmentGetDatasEvent;
@@ -35,6 +36,7 @@ import com.serfcompany.ecommerce.acart.presenter.main.IExploreFragmentPresenter;
 import com.serfcompany.ecommerce.acart.view.AbstractTabFragment;
 import com.serfcompany.ecommerce.acart.view.main.adapter.ProductsListAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -116,7 +118,12 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-//              activity_cart_preview area
+//                GetCommentByPostID con = new GetCommentByPostID();
+//                try {
+//                    con.getComments("127", null, "administrator", "admin-woo123!$");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 return null;
             }
         }.execute();

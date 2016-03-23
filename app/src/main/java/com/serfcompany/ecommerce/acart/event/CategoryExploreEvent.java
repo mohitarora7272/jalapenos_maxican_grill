@@ -5,9 +5,6 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 
 import java.util.List;
 
-/**
- * Created by serfcompany on 15.03.16.
- */
 public class CategoryExploreEvent {
     List<Category> categories;
     List<Product> categoriesProducts;

@@ -21,9 +21,6 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 14.03.16.
- */
 public class CheckoutActivityPresenter extends AbstractPresenter{
     Context context;
     MyOrder order;

@@ -10,7 +10,6 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ProductsParser {
 
     public List<Product> parseProducts(String JSON){

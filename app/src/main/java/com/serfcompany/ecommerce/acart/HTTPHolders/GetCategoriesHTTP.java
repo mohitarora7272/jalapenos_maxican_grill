@@ -1,28 +1,13 @@
 package com.serfcompany.ecommerce.acart.HTTPHolders;
 
-import android.provider.SyncStateContract;
-import android.util.Log;
-
 import com.serfcompany.ecommerce.acart.Constants;
-import com.serfcompany.ecommerce.acart.R;
-import com.serfcompany.ecommerce.acart.model.category.Category;
-
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class GetCategoriesHTTP {
     private static final String urlString = Constants.APP_URI +
             "?amazingcart=json-api&type=product-categories";

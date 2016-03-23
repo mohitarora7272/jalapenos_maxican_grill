@@ -19,9 +19,6 @@ import java.io.IOException;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 11.03.16.
- */
 public class UpdateProfilePresenter extends AbstractPresenter{
 
     Context context;

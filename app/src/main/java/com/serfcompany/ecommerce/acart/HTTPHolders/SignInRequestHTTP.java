@@ -15,9 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class SignInRequestHTTP {
 
     String urlString = Constants.APP_URI +

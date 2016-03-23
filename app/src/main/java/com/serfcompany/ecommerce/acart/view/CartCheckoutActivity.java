@@ -38,9 +38,6 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Checkout view. Represents cart summary. "Checkout" button do redirect to browser.
- */
 public class CartCheckoutActivity extends AbstractActivity{
     private static int LAYOUT = R.layout.activity_checkout;
     private CheckoutActivityPresenter checkoutPresenter;

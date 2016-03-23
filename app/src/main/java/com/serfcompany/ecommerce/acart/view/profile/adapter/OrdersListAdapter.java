@@ -21,9 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by serfcompany on 15.02.16.
- */
 public class OrdersListAdapter extends RecyclerView.Adapter<OrdersListAdapter.OrdersViewHolder>{
 
     private Context context;

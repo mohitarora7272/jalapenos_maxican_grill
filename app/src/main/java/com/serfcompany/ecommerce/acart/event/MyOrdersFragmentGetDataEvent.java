@@ -4,9 +4,6 @@ import com.serfcompany.ecommerce.acart.model.orders.MyOrder;
 
 import java.util.List;
 
-/**
- * Created by serfcompany on 02.03.16.
- */
 public class MyOrdersFragmentGetDataEvent {
 
     private List<MyOrder> myOrders;

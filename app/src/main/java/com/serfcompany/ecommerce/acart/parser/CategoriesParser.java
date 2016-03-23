@@ -15,9 +15,6 @@ import com.serfcompany.ecommerce.acart.model.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by serfcompany on 29.02.16.
- */
 public class CategoriesParser {
 
     public List<Category> parseCategories(String JSON){

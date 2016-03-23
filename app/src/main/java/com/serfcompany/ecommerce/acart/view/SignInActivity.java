@@ -23,9 +23,6 @@ import com.serfcompany.ecommerce.acart.presenter.SignInActivityPresenter;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class SignInActivity extends AbstractActivity{
 
     private final static int LAYOUT = R.layout.activity_sign_in;

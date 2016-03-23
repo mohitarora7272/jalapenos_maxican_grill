@@ -20,9 +20,6 @@ import com.serfcompany.ecommerce.acart.view.profile.adapter.OrdersListAdapter;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by serfcompany on 01.03.16.
- */
 public class MyOrdersFragment extends AbstractTabFragment{
 
     public static final int LAYOUT = R.layout.fragment_orders;
