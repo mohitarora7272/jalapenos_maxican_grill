@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/exploreTryAgain"
-                    android:text="Try again"
+                    android:text="@string/try_again_link"
                     android:gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="SELECT QUANTITY:"
+                        android:text="@string/select_quantity"
                         android:textSize="12sp"
                         android:gravity="center"/>
                     <Spinner
@@ -179,7 +179,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ADD TO CART"
+                        android:text="@string/add_to_cart_button"
                         android:id="@+id/productPageAddToCardButton"
                         android:textSize="14sp"
                         android:layout_weight="4"
@@ -194,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="READ MORE"
+                        android:text="@string/read_more"
                         android:id="@+id/productReadMoreButton"
                         android:layout_weight="1"
                         android:textColor="@color/colorTextIcons"/>
@@ -203,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:id="@+id/productDescriptionButton"
-                        android:text="DESCRIPTION"
+                        android:text="@string/description"
                         android:layout_weight="1"
                         android:textColor="@color/colorTextIcons"/>
                     <Button
@@ -211,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:id="@+id/productReviewButton"
-                        android:text="REVIEWS"
+                        android:text="@string/reviews"
                         android:layout_weight="1"
                         android:textColor="@color/colorTextIcons"/>
 

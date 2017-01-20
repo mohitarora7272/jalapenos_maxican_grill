@@ -48,13 +48,13 @@
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_weight="0.7"
                 android:maxLines="4"
-                android:hint="Your comment"
+                android:hint="@string/your_coment"
                 android:selectAllOnFocus="true"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
-                android:text="WRITE"
+                android:text="@string/WRITE_BUTTON"
                 android:textColor="@color/colorTextIcons"/>
         </LinearLayout>
 

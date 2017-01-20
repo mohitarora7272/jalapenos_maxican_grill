@@ -67,14 +67,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="SUBTOTAL"/>
+                        android:text="@string/subtotal"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:id="@+id/checkoutSubtotal"
-                        android:text="$ 16.00"/>
+                        android:id="@+id/checkoutSubtotal"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,14 +83,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="DISCOUNT"/>
+                        android:text="@string/discount"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:id="@+id/checkoutDiscount"
-                        android:text="$ 2.00"/>
+                        android:id="@+id/checkoutDiscount"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,14 +99,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="SHIPPING"/>
+                        android:text="@string/shipping"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:id="@+id/checkoutShipping"
-                        android:text="$ 0.00"/>
+                        android:id="@+id/checkoutShipping"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -122,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TOTAL"/>
+                        android:text="@string/total"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -152,7 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkoutButton"
-                android:text="CHECKOUT"
+                android:text="@string/checkout"
                 android:textColor="@color/colorTextIcons"
                 android:layout_marginBottom="24dp"/>
         </LinearLayout>

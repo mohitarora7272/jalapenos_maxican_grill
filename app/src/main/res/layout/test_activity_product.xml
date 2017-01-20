@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/exploreTryAgain"
-                    android:text="Try again"
+                    android:text="@string/try_again"
                     android:gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/colorPrimaryDark"/>
@@ -171,7 +171,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.45"
                                 android:id="@+id/productPageAddToCardButton"
-                                android:text="ADD TO CART"
+                                android:text="@string/add_to_cart_button"
                                 android:textColor="@color/colorTextIcons"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -201,14 +201,13 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/productPageRating"
                             android:textColor="@color/colorPrimaryDark"
-                            android:text="4.5"
                             android:textSize="22sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textColor="@color/colorPrimaryDark"
-                            android:text="/5"
+                            android:text="@string/rating_count"
                             android:textSize="22sp"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -216,7 +215,6 @@
                             android:id="@+id/productPageVotesCount"
                             android:gravity="center"
                             android:textColor="@color/colorPrimaryDark"
-                            android:text="(5 votes)"
                             android:paddingLeft="2dp"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -244,7 +242,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="Watch reviews"
+                            android:text="@string/watch_reviews"
                             android:singleLine="true"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"/>
@@ -330,7 +328,8 @@
 
 
     </LinearLayout>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

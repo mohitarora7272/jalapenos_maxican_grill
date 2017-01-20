@@ -250,7 +250,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:text="Coupon :"
+                                    android:text="@string/coupon"
                                     android:gravity="bottom"
                                     android:layout_marginBottom="12dp"/>
                                 <android.support.design.widget.TextInputLayout

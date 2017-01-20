@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/exploreTryAgain"
-                android:text="Try again"
+                android:text="@string/try_again"
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryDark"/>

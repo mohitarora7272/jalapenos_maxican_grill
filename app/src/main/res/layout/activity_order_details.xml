@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="OrderDate :"
+                        android:text="@string/order_date"
                         android:layout_marginLeft="6dp"
                         android:textColor="@color/colorPrimaryDark"/>
                     <TextView
@@ -95,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="Payment method :"
+                        android:text="@string/payment_method"
                         android:layout_weight="1"
                         android:layout_marginLeft="6dp"
                         android:textColor="@color/colorPrimaryDark"/>
@@ -203,7 +203,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Status : "
+                                android:text="@string/status"
                                 android:layout_weight="1"
                                 android:textColor="@color/colorPrimaryDark"
                                 />
@@ -225,7 +225,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Phone :"
+                                android:text="@string/phone_order_details"
                                 android:layout_weight="1"
                                 android:textColor="@color/colorPrimaryDark"
                                 />
@@ -245,7 +245,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Shipping :"
+                                android:text="@string/shipping_order_details"
                                 android:layout_marginTop="2dp"
                                 android:textColor="@color/colorPrimaryDark"
                                 />
@@ -286,7 +286,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="SUBTOTAL : "
+                            android:text="@string/subtotal_order_details"
                             android:layout_marginLeft="6dp"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"/>
@@ -307,7 +307,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="SHIPPING COST : "
+                            android:text="@string/shipping_cost_order_details"
                             android:layout_marginLeft="6dp"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"/>
@@ -327,7 +327,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="DISCOUNT : "
+                            android:text="@string/discount_order_details"
                             android:layout_marginLeft="6dp"
                             android:layout_weight="1"
                             android:textColor="@color/colorPrimaryDark"/>
@@ -354,7 +354,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="TOTAL : "
+                            android:text="@string/total_order_details"
                             android:layout_marginLeft="6dp"
                             android:textSize="16sp"
                             android:layout_weight="1"

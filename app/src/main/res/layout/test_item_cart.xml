@@ -35,7 +35,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:text="AmazingCart Ios"
                         android:layout_weight="0.4"
                         android:layout_marginTop="2dp"
                         android:id="@+id/cartItemProductName"
@@ -48,17 +47,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="$8.99"
                             android:id="@+id/cartItemProductCost" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text=" x "/>
+                            android:text="@string/x"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3"
                             android:layout_marginTop="6dp"
                             android:visibility="visible"
                             android:id="@+id/cartItemItemAmount" />
@@ -67,7 +64,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="10sp"
                             android:textColor="@color/colorPrimary"
-                            android:text="(Click on cart to edit quantity)"
+                            android:text="@string/edit_quantity"
                             android:layout_marginTop="6dp"
                             android:visibility="visible"
                             android:id="@+id/cartItemItemAmountHint" />
@@ -86,14 +83,6 @@
                                 >
                             </Spinner>
                         </FrameLayout>
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/changeQuantityButton"
-                            android:text="Change quantity"
-                            android:textColor="@color/colorTextIcons"
-                            android:textSize="10sp"
-                            android:visibility="gone"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -105,7 +94,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="$27.97"
                         android:singleLine="true"
                         android:id="@+id/cartItemTotalCost" />
                 </LinearLayout>

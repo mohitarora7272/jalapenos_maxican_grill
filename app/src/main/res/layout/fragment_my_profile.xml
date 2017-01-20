@@ -141,14 +141,14 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="UPDATE"
+                        android:text="@string/update_button"
                         android:id="@+id/profileUpdateButton"
                         android:layout_marginTop="6dp"
                         android:textColor="@color/colorTextIcons"/>
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="CHANGE PASSWORD"
+                        android:text="@string/change_password_button"
                         android:id="@+id/profileChangePassword"
                         android:layout_marginTop="6dp"
                         android:textColor="@color/colorTextIcons"/>
@@ -156,7 +156,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BILLING PROFILE"
+                        android:text="@string/billing_profile"
                         android:textSize="18sp"
                         android:layout_marginTop="6dp"
                         android:layout_marginBottom="6dp"/>
@@ -319,7 +319,7 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="UPDATE BILLING"
+                    android:text="@string/update_billing_button"
                     android:layout_marginBottom="24dp"
                     android:id="@+id/billingUpdateButton"
                     android:textColor="@color/colorTextIcons"/>

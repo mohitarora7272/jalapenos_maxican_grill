@@ -53,6 +53,7 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
     FrameLayout loadingFrame;
     private List<Product> modelForFilter;
     private List<Product> model;
+    EndlessRecyclerViewScrollListener listener;
 
     public static ExploreFragment getInstance(Context context){
         Bundle args = new Bundle();
@@ -98,14 +99,13 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
         rView.setAdapter(mAdapter);
         rView.setLayoutManager(linearLayoutManager);
 
-
-        rView.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+        listener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public synchronized void onLoadMore(final int page, int totalItemsCount) {
-                    iFragmentPresenter.loadMoreDatas(page);
+                iFragmentPresenter.loadMoreDatas(page);
                 return;
             }
-        });
+        };
 
         TextView tryAgain = (TextView) view.findViewById(R.id.exploreTryAgain);
         tryAgain.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +162,7 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
                 model = getDatasEvent.getDatas();
                 mAdapter.setDatas(model);
                 mAdapter.notifyDataSetChanged();
+                rView.addOnScrollListener(listener);
                 loadingFrame.setVisibility(View.GONE);
                 FrameLayout fl = (FrameLayout) view.findViewById(R.id.explorConnectionError);
                 fl.setVisibility(View.GONE);
@@ -186,7 +187,6 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
             modelForFilter = model;
             Log.i("LOG", "Expecting " + model.size() + " displaying");
             mAdapter.setDatas(model);
-//            mAdapter.notifyItemRangeInserted(curSize, model.size() - 1);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -247,6 +247,7 @@ public class ExploreFragment extends AbstractTabFragment implements IFragmentVie
     public boolean onQueryTextChange(String newText) {
         List<Product> filteredModelList = filter(modelForFilter, newText);
         mAdapter.animateTo(filteredModelList);
+        rView.removeOnScrollListener(listener);
         rView.scrollToPosition(0);
         return true;
 

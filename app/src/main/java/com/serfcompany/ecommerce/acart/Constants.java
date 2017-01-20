@@ -3,7 +3,8 @@ package com.serfcompany.ecommerce.acart;
 public class Constants {
 
     // ---------------- Change Application URL here -------------------------
-    public static final String APP_URI = "http://woocommerce.serfcompany.com/";
+    //public static final String APP_URI = "http://woocommerce.serfcompany.com/";
+    public static final String APP_URI = "http://ribotech.net/jalapenos";
 
 
 

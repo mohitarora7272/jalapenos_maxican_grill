@@ -37,7 +37,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="AmazingCart Ios"
                         android:layout_marginTop="1dp"
                         android:id="@+id/cartItemProductName" />
                     <LinearLayout
@@ -52,23 +51,20 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="$8.99"
                                 android:id="@+id/cartItemProductCost" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" x "/>
+                                android:text="@string/x"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3"
                                 android:id="@+id/cartItemItemAmount" />
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:text="$27.97"
                                 android:id="@+id/cartItemTotalCost" />
                         </LinearLayout>
                     </LinearLayout>

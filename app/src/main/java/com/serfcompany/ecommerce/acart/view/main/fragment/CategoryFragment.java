@@ -147,7 +147,7 @@ public class CategoryFragment extends AbstractTabFragment implements IFragmentVi
             divider2.setVisibility(View.VISIBLE);
 
             if (event.getCategories().size() > 0) {
-                divider2.setText("Subcategories (click here to show)");пш
+                divider2.setText("Subcategories (click here to show)");
                 mAdapter.setDatas(event.getCategories());
                 mAdapter.notifyDataSetChanged();
             } else {
